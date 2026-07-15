@@ -6,8 +6,9 @@ __pycache__/
 .venv/
 .DS_Store
 
-# explorer runtime cache (written under whatever --repo it serves, incl. examples/)
-cache/model_explorer/
+# explorer runtime cache (written under whatever --repo it serves, incl. examples/ — so
+# match at any depth, not just the repo root)
+**/cache/model_explorer/
 .compare_cache/
 
 # demo video is embedded via GitHub's web upload (user-attachments CDN), not committed
