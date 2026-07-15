@@ -122,7 +122,7 @@ seed_deps = true                     # seed SUNDIALS/yaml-cpp _deps/*-src from a
 
 [paths]
 template = "resources/cpp/param_all.xml"     # required
-priors_csv = "parameters/pdac_priors.csv"    # required
+priors_csv = "parameters/priors.csv"         # required
 model_structure = "model_structure.json"     # required
 drug_metadata = "resources/cpp/drug_metadata.yaml"     # optional -> --drug-metadata
 healthy_state = "resources/cpp/healthy_state.yaml"     # optional -> --evolve-to-diagnosis
@@ -132,14 +132,14 @@ submodel_priors = "notes/calibration/submodel_priors.yaml"   # optional -> "subm
 extra_args = ["--min-cadence-hours", "12"]   # appended to every qsp_sim call
 
 [[scenarios]]                        # one or more
-id = "baseline_no_treatment"
-yaml = "scenarios/baseline_no_treatment.yaml"
+id = "baseline"
+yaml = "scenarios/baseline.yaml"
 t_end = 1.0
-target_dirs = ["calibration_targets/baseline_no_treatment"]
+target_dirs = ["calibration_targets/baseline"]
 
 [views]                              # all optional; omitted keys fall back to defaults
 curated = ["k_C1_growth", "k_C1_death"]   # default slider set (else first 12 params)
-traj_species = ["V_T.C1", "V_T.CD8"]      # trajectory panel (else first 12 species)
+traj_species = ["V_T.C1", "V_T.T1"]       # trajectory panel (else first 12 species)
 glossary = "glossary.json"                # UI content, relative to this file
 interventions = "interventions.json"
 
@@ -149,7 +149,7 @@ label = "submodel medians"
 desc = "the SBI-faithful prior center"
 
 [views.modules]                      # named "lenses" over subsets of species
-"Overview" = ["V_T.C1", "V_T.CD8", "V_T.Treg"]
+"Overview" = ["V_T.C1", "V_T.T1", "V_T.MDSC"]
 ```
 
 Unknown species or param names in `[views]` are filtered against the live model at load,
