@@ -235,7 +235,10 @@ def load_slider_meta(src: SRC.ModelSource, theta: dict) -> dict:
     out = {}
     for _, row in df.iterrows():
         name = row["name"]
-        units = str(row.get("units", "") or "")
+        # A blank units cell reads back from pandas as float NaN (which is truthy),
+        # so `x or ""` would keep it and str() it to the literal "nan". Guard with isna.
+        u = row.get("units", "")
+        units = "" if pd.isna(u) else str(u)
         center = float(params.get(name, row["median"]))
         m = marg.get(name, {})
         dist = str(m.get("distribution") or row["distribution"])
@@ -276,7 +279,7 @@ def load_targets(src: SRC.ModelSource) -> dict:
                 "median": float(r["median"]),
                 "ci_lo": float(r["ci95_lower"]),
                 "ci_hi": float(r["ci95_upper"]),
-                "units": str(r["units"] or ""),
+                "units": "" if pd.isna(r["units"]) else str(r["units"]),
             })
         by_scenario[scen] = compiled
         src.say(f"scenario {scen}: {len(compiled)} targets")

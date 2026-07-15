@@ -320,8 +320,10 @@ let SRC=null, BASE_SRC=null, SOURCES=[];
 // which is what isolates an equation change from a prior refresh.
 // BASE_THETA is the Δ-baseline's θ: same branch + different θ answers "what did the
 // submodel-prior refresh change vs the CSV prior center?"
-let THETA="submodel", THETA_SRC=null, BASE_THETA=null;
-function thetaReq(){ return {theta:THETA, theta_src:THETA_SRC||SRC}; }
+// THETA starts null = "let the server pick the model's default flavor" (submodel if it
+// has submodel priors, else csv, else template). Pinned to a real id once /meta returns.
+let THETA=null, THETA_SRC=null, BASE_THETA=null;
+function thetaReq(){ const r={theta_src:THETA_SRC||SRC}; if(THETA) r.theta=THETA; return r; }
 // The comparison branch's parameter table. A commit can move the model in two ways:
 // change the EQUATIONS, or change where θ SITS (a submodel-prior refresh moves medians).
 // The diagram only shows the first. This shows the second.
@@ -1330,7 +1332,8 @@ function fillThetaSelects(){
   const th=$("#theta"); th.innerHTML="";
   flav.forEach(f=>{ const o=document.createElement("option");
     o.value=f.id; o.textContent=f.label; o.title=f.desc||""; th.appendChild(o); });
-  th.value = flav.some(f=>f.id===THETA) ? THETA : "submodel";
+  th.value = flav.some(f=>f.id===THETA) ? THETA
+             : ((META.theta&&META.theta.flavor) || (flav[0]&&flav[0].id) || "template");
   THETA=th.value;
 
   // θ may be taken from another branch — that's the equations-vs-θ isolation
@@ -1547,18 +1550,22 @@ async function boot(){
   SOURCES=sl.sources;
   SRC = (qp.get("src") && SOURCES.some(s=>s.id===qp.get("src"))) ? qp.get("src") : sl.default;
   BASE_SRC = (qp.get("base") && SOURCES.some(s=>s.id===qp.get("base"))) ? qp.get("base") : SRC;
-  THETA = qp.get("theta") || "submodel";
+  THETA = qp.get("theta") || null;   // null → server default (resolved after /meta)
   THETA_SRC = (qp.get("theta_src") && SOURCES.some(s=>s.id===qp.get("theta_src"))) ? qp.get("theta_src") : SRC;
-  BASE_THETA = qp.get("basetheta") || THETA;
+  BASE_THETA = qp.get("basetheta") || null;
   fillSourceSelects();
   setStatus("preparing model…");
   if(!await ensureSource(SRC)){ setStatus("model source failed to load", "var(--bad)"); return; }
   if(BASE_SRC!==SRC && !await ensureSource(BASE_SRC)){ BASE_SRC=SRC; }
   if(THETA_SRC!==SRC && !await ensureSource(THETA_SRC)){ THETA_SRC=SRC; }
 
-  const tq=new URLSearchParams({src:SRC, theta:THETA, theta_src:THETA_SRC});
+  const tq=new URLSearchParams({src:SRC, theta_src:THETA_SRC});
+  if(THETA) tq.set("theta", THETA);   // omit → server uses the model's default flavor
   META=await (await fetch("/meta?"+tq)).json();
   if(META.error){ setStatus("meta: "+META.error, "var(--bad)"); return; }
+  // Pin θ to what the server actually ran (its default) now that we know the flavors.
+  if(!THETA) THETA = (META.theta && META.theta.flavor) || "template";
+  if(!BASE_THETA) BASE_THETA = THETA;
   SOURCES=(await (await fetch("/sources")).json()).sources;  // statuses moved on
   fillThetaSelects();
   fillSourceSelects();
