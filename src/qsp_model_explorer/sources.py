@@ -1,7 +1,7 @@
 """Model sources — one per git checkout of the QSP model.
 
 The model is *fully described by git-tracked files*: every model-change commit
-ships the regenerated ``cpp/qsp/ode/ODE_system.cpp``, ``PDAC_model.sbml`` and
+ships the regenerated ``cpp/qsp/ode/ODE_system.cpp``, the model SBML and
 ``model_structure.json`` alongside the ``.m`` sources. So pointing the explorer
 at a different branch needs **no MATLAB and no codegen** — only a checkout and a
 C++ compile (~10-20 s with ccache warm; the SUNDIALS deps are seeded from an
