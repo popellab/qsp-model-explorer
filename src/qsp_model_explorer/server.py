@@ -116,7 +116,7 @@ DEFAULT_SRC = ""
 def refresh_registry() -> None:
     """Re-scan git worktrees. Keeps already-loaded sources (and their state)."""
     with REGISTRY_LOCK:
-        for s in SRC.discover_worktrees(HOME, CFG, SCRATCH_ROOT):
+        for s in SRC.discover_sources(HOME, CFG, SCRATCH_ROOT):
             old = SOURCES.get(s.id)
             if old is None:
                 SOURCES[s.id] = s
@@ -256,6 +256,10 @@ def load_targets(src: SRC.ModelSource) -> dict:
     by_scenario = {}
     for scen, cfg in src.state["scenarios"].items():
         dirs = [d for d in cfg["target_dirs"] if d.exists()]
+        if not dirs:
+            by_scenario[scen] = []   # a scenario may declare no calibration targets
+            src.say(f"scenario {scen}: 0 targets (no target dirs)")
+            continue
         tdf = load_calibration_targets(dirs)
         compiled = []
         for _, r in tdf.iterrows():
@@ -398,7 +402,10 @@ def build_signs(src: SRC.ModelSource) -> dict:
     recomputing when you switch θ flavor."""
     try:
         theta = src.state["theta"]
-        base = run_sim(src, "baseline_no_treatment", {}, theta)
+        # Signs are structural (rate-law based), so any scenario's operating point
+        # works — use the first declared scenario rather than a fixed name.
+        scen = next(iter(src.state["scenarios"]))
+        base = run_sim(src, scen, {}, theta)
         if base.get("error") or not base.get("species"):
             src.say(f"sign baseline sim failed: {base.get('error')}")
             return {}
@@ -650,7 +657,9 @@ def resolve_theta(src: SRC.ModelSource, req: dict) -> dict:
     """θ for a request. Defaults to the source's own submodel medians — i.e. the
     behaviour before θ was selectable. `theta_src` may name ANOTHER branch, which is
     the whole point: branch B's equations at branch A's θ."""
-    flavor = req.get("theta") or "submodel"
+    # Default to the source's own default flavor (submodel if it ships submodel
+    # priors, else csv, else template) rather than assuming "submodel".
+    flavor = req.get("theta") or src.state["theta"]["flavor"]
     tsid = req.get("theta_src") or src.id
     tsrc = get_source(tsid)
     if tsrc.status != "ready":

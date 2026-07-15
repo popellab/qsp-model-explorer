@@ -215,6 +215,38 @@ def discover_worktrees(home: Path, cfg: ExplorerConfig,
     return out
 
 
+def worktree_root(home: Path) -> Path | None:
+    """Top-level of the git worktree containing `home`, or None if `home` is not
+    inside a git repo (or git is unavailable)."""
+    try:
+        out = git(["rev-parse", "--show-toplevel"], home).strip()
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return None
+    return Path(out).resolve() if out else None
+
+
+def local_source(home: Path, cfg: ExplorerConfig) -> ModelSource:
+    """A single non-git source rooted at `home`, for model directories that are not
+    themselves a git-worktree root — a plain unpacked model, or an example bundled
+    inside another repo. Branch-diffing is unavailable; the rest of the UI works."""
+    return ModelSource(id=home.name, repo=home, kind="local", branch="local",
+                       sha="", subject="", cfg=cfg)
+
+
+def discover_sources(home: Path, cfg: ExplorerConfig,
+                     scratch_root: Path | None = None) -> list[ModelSource]:
+    """Model sources to register for the served `home`.
+
+    If `home` is the root of a git worktree, every worktree of that repo becomes a
+    source (this is what enables branch-diffing). Otherwise — `home` is a subdirectory
+    of some repo, or not under git at all — serve it as one local source, so a config's
+    repo-relative paths resolve against `home` and not an enclosing repo root."""
+    root = worktree_root(home)
+    if root is not None and root == home.resolve():
+        return discover_worktrees(home, cfg, scratch_root)
+    return [local_source(home, cfg)]
+
+
 def list_refs(home: Path) -> list[dict]:
     """Branches (local + remote) the user can point the explorer at."""
     fmt = "%(refname:short)%09%(objectname:short)%09%(committerdate:relative)%09%(contents:subject)"
