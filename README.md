@@ -9,6 +9,16 @@ between them.
 It works with any model checkout that includes an `explorer.toml` (below), so it isn't
 tied to one model.
 
+## Demo
+
+<!--
+  To embed the video player: open this file on GitHub, click the pencil (Edit), and drag
+  docs/demo.mp4 onto the line below. GitHub uploads it and inserts a
+  https://github.com/user-attachments/assets/... URL that renders as an inline player.
+  Then delete this comment.
+-->
+_A walkthrough is on the way — drag `docs/demo.mp4` in here (see the comment above)._
+
 ## What's in the UI
 
 - Sliders for the model parameters, with the reaction diagram redrawn on each change and

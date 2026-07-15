@@ -9,3 +9,7 @@ __pycache__/
 # explorer runtime cache (written under whatever --repo it serves, incl. examples/)
 cache/model_explorer/
 .compare_cache/
+
+# demo video is embedded via GitHub's web upload (user-attachments CDN), not committed
+docs/*.mp4
+docs/*.mov
