@@ -1,7 +1,11 @@
 __pycache__/
 *.pyc
 *.egg-info/
-build/
-dist/
+/build/
+/dist/
 .venv/
 .DS_Store
+
+# explorer runtime cache (written under whatever --repo it serves, incl. examples/)
+cache/model_explorer/
+.compare_cache/

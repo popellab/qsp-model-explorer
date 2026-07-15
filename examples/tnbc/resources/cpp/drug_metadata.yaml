@@ -1,0 +1,4 @@
+# Minimal drug metadata. The baseline scenario declares no dosing, so this file's
+# contents are never read — but qsp_sim loads it whenever a --scenario is passed, so
+# it must exist and parse. Add drug entries here to enable dosing scenarios.
+drugs: {}

@@ -1,0 +1,4 @@
+# Baseline (no treatment) natural-history run for the QSPIO-TNBC model.
+# Integrates from the param template's initial conditions; no dosing.
+sim_config:
+  stop_time: 400   # days

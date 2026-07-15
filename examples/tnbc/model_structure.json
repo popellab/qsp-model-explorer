@@ -1,0 +1,6023 @@
+{
+  "species": [
+    {
+      "name": "V_C.nT0",
+      "compartment": "V_C",
+      "base_name": "nT0",
+      "units": "cell",
+      "description": "Number of naive T0 cells in the central compartment"
+    },
+    {
+      "name": "V_C.T0",
+      "compartment": "V_C",
+      "base_name": "T0",
+      "units": "cell",
+      "description": "Number of T0 cells in the central compartment"
+    },
+    {
+      "name": "V_C.nT1",
+      "compartment": "V_C",
+      "base_name": "nT1",
+      "units": "cell",
+      "description": "Number of naive T1 cells in the central compartment"
+    },
+    {
+      "name": "V_C.T1",
+      "compartment": "V_C",
+      "base_name": "T1",
+      "units": "cell",
+      "description": "Number of T1 cells in the central compartment"
+    },
+    {
+      "name": "V_C.aPD1",
+      "compartment": "V_C",
+      "base_name": "aPD1",
+      "units": "nanomolarity",
+      "description": "Concentration of aPD1 in central compartment"
+    },
+    {
+      "name": "V_C.aPDL1",
+      "compartment": "V_C",
+      "base_name": "aPDL1",
+      "units": "nanomolarity",
+      "description": "Concentration of aPDL1 in central compartment"
+    },
+    {
+      "name": "V_C.aCTLA4",
+      "compartment": "V_C",
+      "base_name": "aCTLA4",
+      "units": "nanomolarity",
+      "description": "Concentration of aCTLA4 in central compartment"
+    },
+    {
+      "name": "V_C.Th",
+      "compartment": "V_C",
+      "base_name": "Th",
+      "units": "cell",
+      "description": "Number of Th cells in the central compartment"
+    },
+    {
+      "name": "V_P.nT0",
+      "compartment": "V_P",
+      "base_name": "nT0",
+      "units": "cell",
+      "description": "Number of naive T0 cells in the peripheral compartment"
+    },
+    {
+      "name": "V_P.T0",
+      "compartment": "V_P",
+      "base_name": "T0",
+      "units": "cell",
+      "description": "Number of T0 cells in the peripheral compartment"
+    },
+    {
+      "name": "V_P.nT1",
+      "compartment": "V_P",
+      "base_name": "nT1",
+      "units": "cell",
+      "description": "Number of naive T1 cells in the peripheral compartment"
+    },
+    {
+      "name": "V_P.T1",
+      "compartment": "V_P",
+      "base_name": "T1",
+      "units": "cell",
+      "description": "Number of T1 cells in the peripheral compartment"
+    },
+    {
+      "name": "V_P.aPD1",
+      "compartment": "V_P",
+      "base_name": "aPD1",
+      "units": "nanomolarity",
+      "description": "Concentration of aPD1 in peripheral compartment"
+    },
+    {
+      "name": "V_P.aPDL1",
+      "compartment": "V_P",
+      "base_name": "aPDL1",
+      "units": "nanomolarity",
+      "description": "Concentration of aPDL1 in peripheral compartment"
+    },
+    {
+      "name": "V_P.aCTLA4",
+      "compartment": "V_P",
+      "base_name": "aCTLA4",
+      "units": "nanomolarity",
+      "description": "Concentration of aCTLA4 in peripheral compartment"
+    },
+    {
+      "name": "V_P.Th",
+      "compartment": "V_P",
+      "base_name": "Th",
+      "units": "cell",
+      "description": "Number of Th cells in the peripheral compartment"
+    },
+    {
+      "name": "V_T.C_x",
+      "compartment": "V_T",
+      "base_name": "C_x",
+      "units": "cell",
+      "description": "Dead cancer cells in the tumour compartment"
+    },
+    {
+      "name": "V_T.T1_exh",
+      "compartment": "V_T",
+      "base_name": "T1_exh",
+      "units": "cell",
+      "description": "Exhausted CD8 effector T cells"
+    },
+    {
+      "name": "V_T.Th_exh",
+      "compartment": "V_T",
+      "base_name": "Th_exh",
+      "units": "cell",
+      "description": "Exhausted CD4 effector T cells"
+    },
+    {
+      "name": "V_T.C1",
+      "compartment": "V_T",
+      "base_name": "C1",
+      "units": "cell",
+      "description": "Number of cancer cells in tumour"
+    },
+    {
+      "name": "V_T.K",
+      "compartment": "V_T",
+      "base_name": "K",
+      "units": "cell",
+      "description": "Maximal tumor capacity (Desai 2006, PMID: 16489089)"
+    },
+    {
+      "name": "V_T.c_vas",
+      "compartment": "V_T",
+      "base_name": "c_vas",
+      "units": "picogram/milliliter",
+      "description": "Angiogenic factors "
+    },
+    {
+      "name": "V_T.C2",
+      "compartment": "V_T",
+      "base_name": "C2",
+      "units": "cell",
+      "description": "Number of cancer cells in tumour"
+    },
+    {
+      "name": "V_T.T0",
+      "compartment": "V_T",
+      "base_name": "T0",
+      "units": "cell",
+      "description": "Number of T0 cells in the tumor compartment"
+    },
+    {
+      "name": "V_T.T1",
+      "compartment": "V_T",
+      "base_name": "T1",
+      "units": "cell",
+      "description": "Number of T1 cells in the tumor compartment"
+    },
+    {
+      "name": "V_T.IFNg",
+      "compartment": "V_T",
+      "base_name": "IFNg",
+      "units": "nanomolarity",
+      "description": "IFNg in the tumor comparment"
+    },
+    {
+      "name": "V_T.APC",
+      "compartment": "V_T",
+      "base_name": "APC",
+      "units": "cell",
+      "description": "Number of naive antigen presenting cells in the tumour"
+    },
+    {
+      "name": "V_T.mAPC",
+      "compartment": "V_T",
+      "base_name": "mAPC",
+      "units": "cell",
+      "description": "Number of mature antigen presenting cells in the tumour"
+    },
+    {
+      "name": "V_T.P0",
+      "compartment": "V_T",
+      "base_name": "P0",
+      "units": "molarity",
+      "description": "Concentration of  free antigen (P0) in the LN compartment"
+    },
+    {
+      "name": "V_T.P1",
+      "compartment": "V_T",
+      "base_name": "P1",
+      "units": "molarity",
+      "description": "Concentration of  free antigen (P1) in the LN compartment"
+    },
+    {
+      "name": "V_T.aPD1",
+      "compartment": "V_T",
+      "base_name": "aPD1",
+      "units": "nanomolarity",
+      "description": "Concentration of aPD1 in tumour compartment"
+    },
+    {
+      "name": "V_T.aPDL1",
+      "compartment": "V_T",
+      "base_name": "aPDL1",
+      "units": "nanomolarity",
+      "description": "Concentration of aPDL1 in tumour compartment"
+    },
+    {
+      "name": "V_T.aCTLA4",
+      "compartment": "V_T",
+      "base_name": "aCTLA4",
+      "units": "nanomolarity",
+      "description": "Concentration of aCTLA4 in tumour compartment"
+    },
+    {
+      "name": "V_T.Th",
+      "compartment": "V_T",
+      "base_name": "Th",
+      "units": "cell",
+      "description": "Number of Th cells in the tumor compartment"
+    },
+    {
+      "name": "V_T.TGFb",
+      "compartment": "V_T",
+      "base_name": "TGFb",
+      "units": "nanomolarity",
+      "description": "TGFb in the tumor comparment"
+    },
+    {
+      "name": "V_T.MDSC",
+      "compartment": "V_T",
+      "base_name": "MDSC",
+      "units": "cell",
+      "description": "Number of MDSCs in the tumour compartment"
+    },
+    {
+      "name": "V_T.NO",
+      "compartment": "V_T",
+      "base_name": "NO",
+      "units": "nanomolarity",
+      "description": "Concentration of NO in the tumor compartment"
+    },
+    {
+      "name": "V_T.ArgI",
+      "compartment": "V_T",
+      "base_name": "ArgI",
+      "units": "mU",
+      "description": "Concentration of Arg I in the tumor compartment"
+    },
+    {
+      "name": "V_T.CCL2",
+      "compartment": "V_T",
+      "base_name": "CCL2",
+      "units": "nanomolarity",
+      "description": "Concentration of CCL2 in the tumor compartment"
+    },
+    {
+      "name": "V_T.NabP",
+      "compartment": "V_T",
+      "base_name": "NabP",
+      "units": "nanomolarity",
+      "description": "Nab-paclitaxel concentration in tumour "
+    },
+    {
+      "name": "V_T.Mac_M1",
+      "compartment": "V_T",
+      "base_name": "Mac_M1",
+      "units": "cell",
+      "description": "Number of M1 macrophage in the tumor compartment"
+    },
+    {
+      "name": "V_T.Mac_M2",
+      "compartment": "V_T",
+      "base_name": "Mac_M2",
+      "units": "cell",
+      "description": "Number of M2 macrophage in the tumor compartment"
+    },
+    {
+      "name": "V_T.IL12",
+      "compartment": "V_T",
+      "base_name": "IL12",
+      "units": "nanomolarity",
+      "description": "Concentration of IL-12 in tumor"
+    },
+    {
+      "name": "V_T.IL10",
+      "compartment": "V_T",
+      "base_name": "IL10",
+      "units": "nanomolarity",
+      "description": "Concentration of IL-10 in tumor"
+    },
+    {
+      "name": "V_LN.nT0",
+      "compartment": "V_LN",
+      "base_name": "nT0",
+      "units": "cell",
+      "description": "Number of naive T0 cells in the lymph node"
+    },
+    {
+      "name": "V_LN.aT0",
+      "compartment": "V_LN",
+      "base_name": "aT0",
+      "units": "cell",
+      "description": "Number of activated T0 cells in the lymph node"
+    },
+    {
+      "name": "V_LN.T0",
+      "compartment": "V_LN",
+      "base_name": "T0",
+      "units": "cell",
+      "description": "Number of T0 cells in the lymph node compartment"
+    },
+    {
+      "name": "V_LN.IL2",
+      "compartment": "V_LN",
+      "base_name": "IL2",
+      "units": "nanomolarity",
+      "description": "Concentration of IL2 in the lymph node compartment"
+    },
+    {
+      "name": "V_LN.nT1",
+      "compartment": "V_LN",
+      "base_name": "nT1",
+      "units": "cell",
+      "description": "Number of naive T1 cells in the lymph node"
+    },
+    {
+      "name": "V_LN.aT1",
+      "compartment": "V_LN",
+      "base_name": "aT1",
+      "units": "cell",
+      "description": "Number of activated T1 cells in the lymph node"
+    },
+    {
+      "name": "V_LN.T1",
+      "compartment": "V_LN",
+      "base_name": "T1",
+      "units": "cell",
+      "description": "Number of T1 cells in the lymph node compartment"
+    },
+    {
+      "name": "V_LN.APC",
+      "compartment": "V_LN",
+      "base_name": "APC",
+      "units": "cell",
+      "description": "Number of naive antigen presenting cells in the lymph node"
+    },
+    {
+      "name": "V_LN.mAPC",
+      "compartment": "V_LN",
+      "base_name": "mAPC",
+      "units": "cell",
+      "description": "Number of mature antigen presenting cells in the lymph node"
+    },
+    {
+      "name": "V_LN.aPD1",
+      "compartment": "V_LN",
+      "base_name": "aPD1",
+      "units": "nanomolarity",
+      "description": "Concentration of aPD1 in lymph node compartment"
+    },
+    {
+      "name": "V_LN.aPDL1",
+      "compartment": "V_LN",
+      "base_name": "aPDL1",
+      "units": "nanomolarity",
+      "description": "Concentration of aPDL1 in lymph node compartment"
+    },
+    {
+      "name": "V_LN.aCTLA4",
+      "compartment": "V_LN",
+      "base_name": "aCTLA4",
+      "units": "nanomolarity",
+      "description": "Concentration of aCTLA4 in lymph node compartment"
+    },
+    {
+      "name": "V_LN.aTh",
+      "compartment": "V_LN",
+      "base_name": "aTh",
+      "units": "cell",
+      "description": "Number of activated Th cells in the lymph node"
+    },
+    {
+      "name": "V_LN.Th",
+      "compartment": "V_LN",
+      "base_name": "Th",
+      "units": "cell",
+      "description": "Number of Th cells in the lymph node compartment"
+    },
+    {
+      "name": "V_e.P0",
+      "compartment": "V_e",
+      "base_name": "P0",
+      "units": "molarity",
+      "description": "Concentration of antigen P0 in the APC endosomes"
+    },
+    {
+      "name": "V_e.p0",
+      "compartment": "V_e",
+      "base_name": "p0",
+      "units": "molarity",
+      "description": "Concentration of epitope P0 in the APC endosomes"
+    },
+    {
+      "name": "V_e.P1",
+      "compartment": "V_e",
+      "base_name": "P1",
+      "units": "molarity",
+      "description": "Concentration of antigen P1 in the APC endosomes"
+    },
+    {
+      "name": "V_e.p1",
+      "compartment": "V_e",
+      "base_name": "p1",
+      "units": "molarity",
+      "description": "Concentration of epitope P1 in the APC endosomes"
+    },
+    {
+      "name": "A_e.M1",
+      "compartment": "A_e",
+      "base_name": "M1",
+      "units": "molecule/micrometer^2",
+      "description": "Amount of MHC per area on the endosomal surface"
+    },
+    {
+      "name": "A_e.M1p0",
+      "compartment": "A_e",
+      "base_name": "M1p0",
+      "units": "molecule/micrometer^2",
+      "description": "Antigen-MHC complex"
+    },
+    {
+      "name": "A_e.M1p1",
+      "compartment": "A_e",
+      "base_name": "M1p1",
+      "units": "molecule/micrometer^2",
+      "description": "Antigen-MHC complex"
+    },
+    {
+      "name": "A_s.M1",
+      "compartment": "A_s",
+      "base_name": "M1",
+      "units": "molecule/micrometer^2",
+      "description": "Amount of MHC per area on the cell surface"
+    },
+    {
+      "name": "A_s.M1p0",
+      "compartment": "A_s",
+      "base_name": "M1p0",
+      "units": "molecule/micrometer^2",
+      "description": "Antigen-MHC complex"
+    },
+    {
+      "name": "A_s.M1p1",
+      "compartment": "A_s",
+      "base_name": "M1p1",
+      "units": "molecule/micrometer^2",
+      "description": "Antigen-MHC complex"
+    },
+    {
+      "name": "syn_T_C1.PDL1_total",
+      "compartment": "syn_T_C1",
+      "base_name": "PDL1_total",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of bound and unbound PDL1 molecules "
+    },
+    {
+      "name": "syn_T_C1.PDL2_total",
+      "compartment": "syn_T_C1",
+      "base_name": "PDL2_total",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of bound and unbound PDL2 molecules "
+    },
+    {
+      "name": "syn_T_C1.PD1_PDL1",
+      "compartment": "syn_T_C1",
+      "base_name": "PD1_PDL1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PD1-PDL1 complex"
+    },
+    {
+      "name": "syn_T_C1.PD1_PDL2",
+      "compartment": "syn_T_C1",
+      "base_name": "PD1_PDL2",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PD1-PDL2 complex"
+    },
+    {
+      "name": "syn_T_C1.PD1",
+      "compartment": "syn_T_C1",
+      "base_name": "PD1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PD1 in synapse"
+    },
+    {
+      "name": "syn_T_C1.PDL1",
+      "compartment": "syn_T_C1",
+      "base_name": "PDL1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL1 in synapse"
+    },
+    {
+      "name": "syn_T_C1.PDL2",
+      "compartment": "syn_T_C1",
+      "base_name": "PDL2",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL2 in synapse"
+    },
+    {
+      "name": "syn_T_C1.PD1_aPD1",
+      "compartment": "syn_T_C1",
+      "base_name": "PD1_aPD1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PD1-aPD1 complex"
+    },
+    {
+      "name": "syn_T_C1.PD1_aPD1_PD1",
+      "compartment": "syn_T_C1",
+      "base_name": "PD1_aPD1_PD1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PD1-aPD1-PD1 complex"
+    },
+    {
+      "name": "syn_T_C1.PDL1_aPDL1",
+      "compartment": "syn_T_C1",
+      "base_name": "PDL1_aPDL1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL1-aPDL1 complex"
+    },
+    {
+      "name": "syn_T_C1.PDL1_aPDL1_PDL1",
+      "compartment": "syn_T_C1",
+      "base_name": "PDL1_aPDL1_PDL1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL1-aPDL1-PDL1 complex"
+    },
+    {
+      "name": "syn_T_C1.TPDL1",
+      "compartment": "syn_T_C1",
+      "base_name": "TPDL1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL1 in synapse of T cell"
+    },
+    {
+      "name": "syn_T_C1.TPDL1_aPDL1",
+      "compartment": "syn_T_C1",
+      "base_name": "TPDL1_aPDL1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of TPDL1-aPDL1 complex"
+    },
+    {
+      "name": "syn_T_C1.TPDL1_aPDL1_TPDL1",
+      "compartment": "syn_T_C1",
+      "base_name": "TPDL1_aPDL1_TPDL1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of TPDL1-aPDL1-TPDL1 complex"
+    },
+    {
+      "name": "syn_T_C1.CD28_CD80",
+      "compartment": "syn_T_C1",
+      "base_name": "CD28_CD80",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD28-CD80 complex"
+    },
+    {
+      "name": "syn_T_C1.CD28_CD80_CD28",
+      "compartment": "syn_T_C1",
+      "base_name": "CD28_CD80_CD28",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD28-CD80-CD28 complex"
+    },
+    {
+      "name": "syn_T_C1.CD28_CD86",
+      "compartment": "syn_T_C1",
+      "base_name": "CD28_CD86",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD28-CD86 complex"
+    },
+    {
+      "name": "syn_T_C1.CD80_CTLA4",
+      "compartment": "syn_T_C1",
+      "base_name": "CD80_CTLA4",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD80-CTLA4 complex"
+    },
+    {
+      "name": "syn_T_C1.CD80_CTLA4_CD80",
+      "compartment": "syn_T_C1",
+      "base_name": "CD80_CTLA4_CD80",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD80-CTLA4-CD80 complex"
+    },
+    {
+      "name": "syn_T_C1.CTLA4_CD80_CTLA4",
+      "compartment": "syn_T_C1",
+      "base_name": "CTLA4_CD80_CTLA4",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CTLA4-CD80-CTLA4 complex"
+    },
+    {
+      "name": "syn_T_C1.CD80_CTLA4_CD80_CTLA4",
+      "compartment": "syn_T_C1",
+      "base_name": "CD80_CTLA4_CD80_CTLA4",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD80-CTLA4-CD80-CTLA4 complex"
+    },
+    {
+      "name": "syn_T_C1.CD86_CTLA4",
+      "compartment": "syn_T_C1",
+      "base_name": "CD86_CTLA4",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD86-CTLA4 complex"
+    },
+    {
+      "name": "syn_T_C1.CD86_CTLA4_CD86",
+      "compartment": "syn_T_C1",
+      "base_name": "CD86_CTLA4_CD86",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD86-CTLA4-CD86 complex"
+    },
+    {
+      "name": "syn_T_C1.PDL1_CD80",
+      "compartment": "syn_T_C1",
+      "base_name": "PDL1_CD80",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL1-CD80 complex"
+    },
+    {
+      "name": "syn_T_C1.PDL1_CD80_CD28",
+      "compartment": "syn_T_C1",
+      "base_name": "PDL1_CD80_CD28",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL1-CD80-CD28 complex"
+    },
+    {
+      "name": "syn_T_C1.PDL1_CD80_CTLA4",
+      "compartment": "syn_T_C1",
+      "base_name": "PDL1_CD80_CTLA4",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL1-CD80-CTLA4 complex"
+    },
+    {
+      "name": "syn_T_C1.CD28",
+      "compartment": "syn_T_C1",
+      "base_name": "CD28",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD28 in synapse"
+    },
+    {
+      "name": "syn_T_C1.CTLA4",
+      "compartment": "syn_T_C1",
+      "base_name": "CTLA4",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CTLA4 in synapse"
+    },
+    {
+      "name": "syn_T_C1.CD80",
+      "compartment": "syn_T_C1",
+      "base_name": "CD80",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD80 dimer in synapse"
+    },
+    {
+      "name": "syn_T_C1.CD80m",
+      "compartment": "syn_T_C1",
+      "base_name": "CD80m",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD80 monomer in synapse"
+    },
+    {
+      "name": "syn_T_C1.CD86",
+      "compartment": "syn_T_C1",
+      "base_name": "CD86",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD86 in synapse"
+    },
+    {
+      "name": "syn_T_C1.CTLA4_aCTLA4",
+      "compartment": "syn_T_C1",
+      "base_name": "CTLA4_aCTLA4",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CTLA4-aCTLA4 complex"
+    },
+    {
+      "name": "syn_T_C1.CTLA4_aCTLA4_CTLA4",
+      "compartment": "syn_T_C1",
+      "base_name": "CTLA4_aCTLA4_CTLA4",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CTLA4-aCTLA4-CTLA4 complex"
+    },
+    {
+      "name": "syn_T_APC.PDL1_total",
+      "compartment": "syn_T_APC",
+      "base_name": "PDL1_total",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of bound and unbound PDL1 molecules "
+    },
+    {
+      "name": "syn_T_APC.PDL2_total",
+      "compartment": "syn_T_APC",
+      "base_name": "PDL2_total",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of bound and unbound PDL2 molecules "
+    },
+    {
+      "name": "syn_T_APC.PD1_PDL1",
+      "compartment": "syn_T_APC",
+      "base_name": "PD1_PDL1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PD1-PDL1 complex"
+    },
+    {
+      "name": "syn_T_APC.PD1_PDL2",
+      "compartment": "syn_T_APC",
+      "base_name": "PD1_PDL2",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PD1-PDL2 complex"
+    },
+    {
+      "name": "syn_T_APC.PD1",
+      "compartment": "syn_T_APC",
+      "base_name": "PD1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PD1 in synapse"
+    },
+    {
+      "name": "syn_T_APC.PDL1",
+      "compartment": "syn_T_APC",
+      "base_name": "PDL1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL1 in synapse"
+    },
+    {
+      "name": "syn_T_APC.PDL2",
+      "compartment": "syn_T_APC",
+      "base_name": "PDL2",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL2 in synapse"
+    },
+    {
+      "name": "syn_T_APC.PD1_aPD1",
+      "compartment": "syn_T_APC",
+      "base_name": "PD1_aPD1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PD1-aPD1 complex"
+    },
+    {
+      "name": "syn_T_APC.PD1_aPD1_PD1",
+      "compartment": "syn_T_APC",
+      "base_name": "PD1_aPD1_PD1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PD1-aPD1-PD1 complex"
+    },
+    {
+      "name": "syn_T_APC.PDL1_aPDL1",
+      "compartment": "syn_T_APC",
+      "base_name": "PDL1_aPDL1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL1-aPDL1 complex"
+    },
+    {
+      "name": "syn_T_APC.PDL1_aPDL1_PDL1",
+      "compartment": "syn_T_APC",
+      "base_name": "PDL1_aPDL1_PDL1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL1-aPDL1-PDL1 complex"
+    },
+    {
+      "name": "syn_T_APC.TPDL1",
+      "compartment": "syn_T_APC",
+      "base_name": "TPDL1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL1 in synapse of T cell"
+    },
+    {
+      "name": "syn_T_APC.TPDL1_aPDL1",
+      "compartment": "syn_T_APC",
+      "base_name": "TPDL1_aPDL1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of TPDL1-aPDL1 complex"
+    },
+    {
+      "name": "syn_T_APC.TPDL1_aPDL1_TPDL1",
+      "compartment": "syn_T_APC",
+      "base_name": "TPDL1_aPDL1_TPDL1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of TPDL1-aPDL1-TPDL1 complex"
+    },
+    {
+      "name": "syn_T_APC.CD28_CD80",
+      "compartment": "syn_T_APC",
+      "base_name": "CD28_CD80",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD28-CD80 complex"
+    },
+    {
+      "name": "syn_T_APC.CD28_CD80_CD28",
+      "compartment": "syn_T_APC",
+      "base_name": "CD28_CD80_CD28",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD28-CD80-CD28 complex"
+    },
+    {
+      "name": "syn_T_APC.CD28_CD86",
+      "compartment": "syn_T_APC",
+      "base_name": "CD28_CD86",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD28-CD86 complex"
+    },
+    {
+      "name": "syn_T_APC.CD80_CTLA4",
+      "compartment": "syn_T_APC",
+      "base_name": "CD80_CTLA4",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD80-CTLA4 complex"
+    },
+    {
+      "name": "syn_T_APC.CD80_CTLA4_CD80",
+      "compartment": "syn_T_APC",
+      "base_name": "CD80_CTLA4_CD80",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD80-CTLA4-CD80 complex"
+    },
+    {
+      "name": "syn_T_APC.CTLA4_CD80_CTLA4",
+      "compartment": "syn_T_APC",
+      "base_name": "CTLA4_CD80_CTLA4",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CTLA4-CD80-CTLA4 complex"
+    },
+    {
+      "name": "syn_T_APC.CD80_CTLA4_CD80_CTLA4",
+      "compartment": "syn_T_APC",
+      "base_name": "CD80_CTLA4_CD80_CTLA4",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD80-CTLA4-CD80-CTLA4 complex"
+    },
+    {
+      "name": "syn_T_APC.CD86_CTLA4",
+      "compartment": "syn_T_APC",
+      "base_name": "CD86_CTLA4",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD86-CTLA4 complex"
+    },
+    {
+      "name": "syn_T_APC.CD86_CTLA4_CD86",
+      "compartment": "syn_T_APC",
+      "base_name": "CD86_CTLA4_CD86",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD86-CTLA4-CD86 complex"
+    },
+    {
+      "name": "syn_T_APC.PDL1_CD80",
+      "compartment": "syn_T_APC",
+      "base_name": "PDL1_CD80",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL1-CD80 complex"
+    },
+    {
+      "name": "syn_T_APC.PDL1_CD80_CD28",
+      "compartment": "syn_T_APC",
+      "base_name": "PDL1_CD80_CD28",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL1-CD80-CD28 complex"
+    },
+    {
+      "name": "syn_T_APC.PDL1_CD80_CTLA4",
+      "compartment": "syn_T_APC",
+      "base_name": "PDL1_CD80_CTLA4",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL1-CD80-CTLA4 complex"
+    },
+    {
+      "name": "syn_T_APC.CD28",
+      "compartment": "syn_T_APC",
+      "base_name": "CD28",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD28 in synapse"
+    },
+    {
+      "name": "syn_T_APC.CTLA4",
+      "compartment": "syn_T_APC",
+      "base_name": "CTLA4",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CTLA4 in synapse"
+    },
+    {
+      "name": "syn_T_APC.CD80",
+      "compartment": "syn_T_APC",
+      "base_name": "CD80",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD80 dimer in synapse"
+    },
+    {
+      "name": "syn_T_APC.CD80m",
+      "compartment": "syn_T_APC",
+      "base_name": "CD80m",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD80 monomer in synapse"
+    },
+    {
+      "name": "syn_T_APC.CD86",
+      "compartment": "syn_T_APC",
+      "base_name": "CD86",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD86 in synapse"
+    },
+    {
+      "name": "syn_T_APC.CTLA4_aCTLA4",
+      "compartment": "syn_T_APC",
+      "base_name": "CTLA4_aCTLA4",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CTLA4-aCTLA4 complex"
+    },
+    {
+      "name": "syn_T_APC.CTLA4_aCTLA4_CTLA4",
+      "compartment": "syn_T_APC",
+      "base_name": "CTLA4_aCTLA4_CTLA4",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CTLA4-aCTLA4-CTLA4 complex"
+    },
+    {
+      "name": "V_1.NabP",
+      "compartment": "V_1",
+      "base_name": "NabP",
+      "units": "nanogram/milliliter",
+      "description": "Nab-paclitaxel in the central compartment V1"
+    },
+    {
+      "name": "V_2.NabP",
+      "compartment": "V_2",
+      "base_name": "NabP",
+      "units": "nanogram/milliliter",
+      "description": "Nab-paclitaxel in the peripheral compartment V2"
+    },
+    {
+      "name": "V_3.NabP",
+      "compartment": "V_3",
+      "base_name": "NabP",
+      "units": "nanogram/milliliter",
+      "description": "Nab-paclitaxel in the peripheral compartment V3"
+    },
+    {
+      "name": "syn_M_C.CD47",
+      "compartment": "syn_M_C",
+      "base_name": "CD47",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD47 on cancer cell in the synapse"
+    },
+    {
+      "name": "syn_M_C.SIRPa",
+      "compartment": "syn_M_C",
+      "base_name": "SIRPa",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of SIRPa on macrophage in the synapse"
+    },
+    {
+      "name": "syn_M_C.CD47_SIRPa",
+      "compartment": "syn_M_C",
+      "base_name": "CD47_SIRPa",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD47-SIRPa complex in synapse"
+    },
+    {
+      "name": "syn_M_C.PDL1_total",
+      "compartment": "syn_M_C",
+      "base_name": "PDL1_total",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of bound and unbound PDL1 molecules "
+    },
+    {
+      "name": "syn_M_C.PDL2_total",
+      "compartment": "syn_M_C",
+      "base_name": "PDL2_total",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of bound and unbound PDL2 molecules "
+    },
+    {
+      "name": "syn_M_C.PD1_PDL1",
+      "compartment": "syn_M_C",
+      "base_name": "PD1_PDL1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PD1-PDL1 complex"
+    },
+    {
+      "name": "syn_M_C.PD1_PDL2",
+      "compartment": "syn_M_C",
+      "base_name": "PD1_PDL2",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PD1-PDL2 complex"
+    },
+    {
+      "name": "syn_M_C.PD1",
+      "compartment": "syn_M_C",
+      "base_name": "PD1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PD1 in synapse"
+    },
+    {
+      "name": "syn_M_C.PDL1",
+      "compartment": "syn_M_C",
+      "base_name": "PDL1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL1 in synapse"
+    },
+    {
+      "name": "syn_M_C.PDL2",
+      "compartment": "syn_M_C",
+      "base_name": "PDL2",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL2 in synapse"
+    },
+    {
+      "name": "syn_M_C.PD1_aPD1",
+      "compartment": "syn_M_C",
+      "base_name": "PD1_aPD1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PD1-aPD1 complex"
+    },
+    {
+      "name": "syn_M_C.PD1_aPD1_PD1",
+      "compartment": "syn_M_C",
+      "base_name": "PD1_aPD1_PD1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PD1-aPD1-PD1 complex"
+    },
+    {
+      "name": "syn_M_C.PDL1_aPDL1",
+      "compartment": "syn_M_C",
+      "base_name": "PDL1_aPDL1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL1-aPDL1 complex"
+    },
+    {
+      "name": "syn_M_C.PDL1_aPDL1_PDL1",
+      "compartment": "syn_M_C",
+      "base_name": "PDL1_aPDL1_PDL1",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL1-aPDL1-PDL1 complex"
+    },
+    {
+      "name": "syn_M_C.PDL1_CD80",
+      "compartment": "syn_M_C",
+      "base_name": "PDL1_CD80",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of PDL1-CD80 complex"
+    },
+    {
+      "name": "syn_M_C.CD80",
+      "compartment": "syn_M_C",
+      "base_name": "CD80",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD80 in synapse"
+    },
+    {
+      "name": "syn_M_C.CD80m",
+      "compartment": "syn_M_C",
+      "base_name": "CD80m",
+      "units": "molecule/micrometer^2",
+      "description": "concentration of CD80 monomer in synapse"
+    }
+  ],
+  "compartments": [
+    {
+      "name": "V_C",
+      "volume": 5,
+      "volume_units": "liter",
+      "description": "Central compartment (C) (estimated)"
+    },
+    {
+      "name": "V_P",
+      "volume": 60,
+      "volume_units": "liter",
+      "description": "Peripheral compartment (P) (estimated)"
+    },
+    {
+      "name": "V_T",
+      "volume": 1E-6,
+      "volume_units": "milliliter",
+      "description": "Tumor compartment (T) (estimated)"
+    },
+    {
+      "name": "V_LN",
+      "volume": 1112.6473981463851,
+      "volume_units": "millimeter^3",
+      "description": "Lymph node (LN) compartment volume Volume of lumped tumor-draining lymph nodes calculated based on number of LNs (estimated) and average LN diameter (Schmidt 2007, PMID: 17724531)"
+    },
+    {
+      "name": "V_e",
+      "volume": 4.0000000000000004E-16,
+      "volume_units": "litre",
+      "description": "APC endosomal comparment calculated based on the volume of a single endosome (Agrawal and Linderman 1996, PMID: 8944895) and the number of endosomes per cell (Agrawal and Linderman 1996, PMID: 8944895)"
+    },
+    {
+      "name": "A_e",
+      "volume": 15,
+      "volume_units": "micrometer^2",
+      "description": "APC endosomal surface comparment calculated based on the surface area of a single endosome (Agrawal and Linderman 1996, PMID: 8944895) and the number of endosomes per cell (Agrawal and Linderman 1996, PMID: 8944895)"
+    },
+    {
+      "name": "A_s",
+      "volume": 900,
+      "volume_units": "micrometer^2",
+      "description": "APC surface comparment (Agrawal and Linderman 1996, PMID: 8944895)"
+    },
+    {
+      "name": "syn_T_C1",
+      "volume": 37.8,
+      "volume_units": "micrometer^2",
+      "description": "synapse comparment between T and C1 (Jansson 2005, PMID: 16034096)"
+    },
+    {
+      "name": "syn_T_APC",
+      "volume": 37.8,
+      "volume_units": "micrometer^2",
+      "description": "synapse comparment between T and APC (Jansson 2005, PMID: 16034096)"
+    },
+    {
+      "name": "V_1",
+      "volume": 15.8,
+      "volume_units": "liter",
+      "description": "Central compartment (V1) for nab-paclitaxel PK"
+    },
+    {
+      "name": "V_2",
+      "volume": 1650,
+      "volume_units": "liter",
+      "description": "Peripheral compartment (V2) for nab-paclitaxel PK"
+    },
+    {
+      "name": "V_3",
+      "volume": 75.4,
+      "volume_units": "liter",
+      "description": "Peripheral compartment (V3) for nab-paclitaxel PK"
+    },
+    {
+      "name": "syn_M_C",
+      "volume": 37.8,
+      "volume_units": "micrometer^2",
+      "description": "synapse comparment between macrophage and cancer cell (Jansson 2005, PMID: 16034096)"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "k_cell_clear",
+      "value": 0.1,
+      "units": "1/day",
+      "description": "Rate of dead cell clearance from tumour compartment (estimated)"
+    },
+    {
+      "name": "cell",
+      "value": 1,
+      "units": "cell",
+      "description": "unit parameter for calculation"
+    },
+    {
+      "name": "day",
+      "value": 1,
+      "units": "day",
+      "description": "unit parameter for calculation"
+    },
+    {
+      "name": "vol_cell",
+      "value": 2572.4407845144424,
+      "units": "micrometer^3/cell",
+      "description": "Average volume of cancer cell Volume of a cancer cell calculated based on cancer cell diameter (Abramczyk 2015, PMID: 25730442)"
+    },
+    {
+      "name": "vol_Tcell",
+      "value": 175.01570979953922,
+      "units": "micrometer^3/cell",
+      "description": "Average volume of T cells Volume of a T cell calculated based on the average T cell diameter (Chapman 1981, PMID: 6975780)"
+    },
+    {
+      "name": "Ve_T",
+      "value": 0.37,
+      "units": "dimensionless",
+      "description": "Void fraction of the tumor (Finley 2012, PMID: 22547351)"
+    },
+    {
+      "name": "C_total",
+      "value": 0,
+      "units": "cell",
+      "description": "Total number of cancer cells"
+    },
+    {
+      "name": "T_total",
+      "value": 0,
+      "units": "cell",
+      "description": "Total number of activated T cells in tumor"
+    },
+    {
+      "name": "T_total_LN",
+      "value": 0,
+      "units": "cell",
+      "description": "Total number of activated T cells in TDLNs"
+    },
+    {
+      "name": "R_Tcell",
+      "value": 1,
+      "units": "cell/day",
+      "description": "Rate of cancer cell death"
+    },
+    {
+      "name": "Tregs_",
+      "value": 0,
+      "units": "cell",
+      "description": "Total number of activated T cells in TDLNs"
+    },
+    {
+      "name": "H_APC",
+      "value": 0.5,
+      "units": "dimensionless",
+      "description": "Hill function of mAPC for self-antigen-specific Treg activation"
+    },
+    {
+      "name": "H_mAPC",
+      "value": 1,
+      "units": "dimensionless",
+      "description": "Hill function of mAPC for CD8 T cell activation"
+    },
+    {
+      "name": "H_APCh",
+      "value": 1,
+      "units": "dimensionless",
+      "description": "Hill function of mAPC for neoantigen-specific helper T cell activation"
+    },
+    {
+      "name": "H_PD1_C1",
+      "value": 0.9,
+      "units": "dimensionless",
+      "description": "Hill function of PDL1 on tumor cells for T cell exhaustion"
+    },
+    {
+      "name": "H_PD1_APC",
+      "value": 0.9,
+      "units": "dimensionless",
+      "description": "Hill function of PDL1 on APC for T cell exhaustion"
+    },
+    {
+      "name": "H_CD28_C1",
+      "value": 0.1,
+      "units": "dimensionless",
+      "description": "Hill function of CD28 on tumor cells"
+    },
+    {
+      "name": "H_CD28_APC",
+      "value": 0.1,
+      "units": "dimensionless",
+      "description": "Hill function of CD28 on APCs for T cell activation"
+    },
+    {
+      "name": "k_C1_growth",
+      "value": 0.0072,
+      "units": "1/day",
+      "description": "Cancer cell growth rate (Ryu 2014, PMID: 24895040; Desai 2006, PMID: 16489089)"
+    },
+    {
+      "name": "C_max",
+      "value": 27000,
+      "units": "cell",
+      "description": "Cancer cell capacity (Desai 2006, PMID: 16489089)"
+    },
+    {
+      "name": "k_C1_death",
+      "value": 0.0001,
+      "units": "1/day",
+      "description": "Cancer cell death rate from innate immune cells (Palsson 2013, PMID: 24074340)"
+    },
+    {
+      "name": "k_C1_therapy",
+      "value": 0,
+      "units": "1/day",
+      "description": "Rate of C1 killing by therapy (see Rules)"
+    },
+    {
+      "name": "initial_tumour_diameter",
+      "value": 2.5,
+      "units": "centimeter",
+      "description": "Pre-treatment tumor diameter"
+    },
+    {
+      "name": "k_K_g",
+      "value": 4.12,
+      "units": "1/day",
+      "description": "Tumour vasculature growth rate (Desai 2006, PMID: 16489089)"
+    },
+    {
+      "name": "k_K_d",
+      "value": 0.0034,
+      "units": "1/day",
+      "description": "Tumour vasculature inhibition rate (Desai 2006, PMID: 16489089; Hahnfeldt 1999, PMID: 10519381)"
+    },
+    {
+      "name": "k_vas_Csec",
+      "value": 0.00011,
+      "units": "picogram/cell/day",
+      "description": "Secretion rate of angiogenic factors by cancer cells (Volk 2008, PMID: 18516298)"
+    },
+    {
+      "name": "k_vas_deg",
+      "value": 16.6,
+      "units": "1/day",
+      "description": "Degradation rate of angiogenic factors (Finley 2011, PMID: 22104283)"
+    },
+    {
+      "name": "c_vas_50",
+      "value": 1070,
+      "units": "picogram/milliliter",
+      "description": "Half-maximal conc. of angiogenic factor on tumor capacity growth (Desai 2006, PMID: 16489089)"
+    },
+    {
+      "name": "k_C2_growth",
+      "value": 0.0072,
+      "units": "1/day",
+      "description": "Cancer cell growth rate (Ryu 2014, PMID: 24895040; Desai 2006, PMID: 16489089)"
+    },
+    {
+      "name": "k_C2_death",
+      "value": 0.0001,
+      "units": "1/day",
+      "description": "Cancer cell death rate from innate immune cells (Palsson 2013, PMID: 24074340)"
+    },
+    {
+      "name": "k_C2_therapy",
+      "value": 0,
+      "units": "1/day",
+      "description": "Rate of C2 killing by therapy (see Rules)"
+    },
+    {
+      "name": "div_T0",
+      "value": 1.16E+6,
+      "units": "dimensionless",
+      "description": "T Cell Diversity (Robins 2009, PMID: 19706884)"
+    },
+    {
+      "name": "n_T0_clones",
+      "value": 63,
+      "units": "dimensionless",
+      "description": "Number of T cell clones (estimated)"
+    },
+    {
+      "name": "q_nT0_LN_in",
+      "value": 0.1,
+      "units": "1/day",
+      "description": "Rate of naive T cell transport into the LN  calculated based on the steady-state naive T cell level in healthy individuals (Autissier 2010, PMID: 20099249)"
+    },
+    {
+      "name": "q_T0_LN_out",
+      "value": 24,
+      "units": "1/day",
+      "description": "Rate of activated T cell transport out of the LN (De Boer and Perelson 1995, PMID: 7475092)"
+    },
+    {
+      "name": "q_nT0_LN_out",
+      "value": 2.88,
+      "units": "1/day",
+      "description": "Rate of naive T cell transport out of the LN (Mandl 2012, PMID: 23071319)"
+    },
+    {
+      "name": "k_T0_act",
+      "value": 5,
+      "units": "1/day",
+      "description": "T0 activation rate (De Boer and Perelson 1995, PMID: 7475092; Robertson-Tessi 2012, PMID: 22051568)"
+    },
+    {
+      "name": "k_T0_pro",
+      "value": 1,
+      "units": "1/day",
+      "description": "T0 proliferation rate (Marchingo 2014, PMID: 25430770)"
+    },
+    {
+      "name": "k_T0_death",
+      "value": 0.01,
+      "units": "1/day",
+      "description": "T0 death rate (De Boer and Perelson 1995, PMID: 7475092)"
+    },
+    {
+      "name": "q_T0_P_in",
+      "value": 2.436,
+      "units": "1/minute",
+      "description": "rate of T0 transport into the peripheral compartment calculated based on T cell transmigration rate (Zhu 1996, PMID: 8706023) and T cell adhesion density (Zhu 1996, PMID: 8706023)"
+    },
+    {
+      "name": "q_T0_P_out",
+      "value": 24,
+      "units": "1/day",
+      "description": "rate of T0 transport out of the peripheral compartment (De Boer and Perelson 1995, PMID: 7475092)"
+    },
+    {
+      "name": "q_T0_T_in",
+      "value": 5.8E-5,
+      "units": "1/(centimeter^3*minute)",
+      "description": "rate of T0 transport into the tumor compartment calculated based on T cell transmigration rate (Zhu 1996, PMID: 8706023) and T cell adhesion density (Zhu 1996, PMID: 8706023)"
+    },
+    {
+      "name": "q_nT0_P_in",
+      "value": 0.1764,
+      "units": "1/minute",
+      "description": "rate of nT0 transport into the peripheral compartment calculated based on T cell transmigration rate (Zhu 1996, PMID: 8706023) and T cell adhesion density (Zhu 1996, PMID: 8706023)"
+    },
+    {
+      "name": "q_nT0_P_out",
+      "value": 5.1,
+      "units": "1/day",
+      "description": "rate of nT0 transport out of the peripheral compartment  calculated based on steady-state naive T cell density in healthy individuals (Autissier 2010, PMID: 20099249)"
+    },
+    {
+      "name": "Q_nT0_thym",
+      "value": 7.0E+7,
+      "units": "cell/day",
+      "description": "Thymic output of nT0 (Bains 2009, PMID: 19179300; Yeh 2017, PMID: 28912973)"
+    },
+    {
+      "name": "k_nT0_pro",
+      "value": 3.2E+8,
+      "units": "cell/day",
+      "description": "rate of nT0 proliferation (Braber 2012, PMID: 22365666)"
+    },
+    {
+      "name": "K_nT0_pro",
+      "value": 1.0E+9,
+      "units": "cell",
+      "description": "half-maximal peripheral proliferation of of nT0 (Braber 2012, PMID: 22365666)"
+    },
+    {
+      "name": "k_nT0_death",
+      "value": 0.002,
+      "units": "1/day",
+      "description": "rate of nT0 death (Braber 2012, PMID: 22365666)"
+    },
+    {
+      "name": "k_IL2_deg",
+      "value": 0.2,
+      "units": "1/minute",
+      "description": "rate of IL2 degradation (Lotze 1985, PMID: 3871099)"
+    },
+    {
+      "name": "k_IL2_cons",
+      "value": 6E-6,
+      "units": "nanomole/cell/hour",
+      "description": "rate of IL2 consumption by T cells (Lotze 1985, PMID: 3871099)"
+    },
+    {
+      "name": "k_IL2_sec",
+      "value": 3E-5,
+      "units": "nanomole/cell/hour",
+      "description": "rate of IL2 secretion from T cells (Han 2012, PMID: 22160692; Thurley 2015, PMID: 25923703; Liu 2001)"
+    },
+    {
+      "name": "IL2_50",
+      "value": 0.32,
+      "units": "nanomolarity",
+      "description": "T cell activation half-maximal IL2 concentration (Marchingo 2014, PMID: 25430770)"
+    },
+    {
+      "name": "IL2_50_Treg",
+      "value": 0.32,
+      "units": "nanomolarity",
+      "description": "Treg activation half-maximal IL2 concentration (Wang and Smith 1987, PMID: 3116143)"
+    },
+    {
+      "name": "N0",
+      "value": 2,
+      "units": "dimensionless",
+      "description": "numer of activated T cell generation by TCR signaling only(Marchingo 2014, PMID: 25430770)"
+    },
+    {
+      "name": "N_costim",
+      "value": 3,
+      "units": "dimensionless",
+      "description": "numer of activated T cell generation by co-stimulatory signaling only (Marchingo 2014, PMID: 25430770)"
+    },
+    {
+      "name": "N_IL2_CD8",
+      "value": 11,
+      "units": "dimensionless",
+      "description": "maximum number of activated T cell generations due to IL2 (Marchingo 2014, PMID: 25430770)"
+    },
+    {
+      "name": "N_IL2_CD4",
+      "value": 8.5,
+      "units": "dimensionless",
+      "description": "maximum number of activated T cell generations due to IL2 (Marchingo 2014, PMID: 25430770)"
+    },
+    {
+      "name": "k_Treg",
+      "value": 0.1,
+      "units": "1/day",
+      "description": "Rate of T cell death by Tregs (estimated)"
+    },
+    {
+      "name": "H_P0",
+      "value": 1,
+      "units": "dimensionless",
+      "description": "Hill function of tumor antigenP0"
+    },
+    {
+      "name": "N_aT",
+      "value": 1,
+      "units": "dimensionless",
+      "description": "Number of Activated CD8+ T Cell Generations"
+    },
+    {
+      "name": "N_aT0",
+      "value": 1,
+      "units": "dimensionless",
+      "description": "Number of Activated Treg Generations"
+    },
+    {
+      "name": "div_T1",
+      "value": 1.11E+6,
+      "units": "dimensionless",
+      "description": "T Cell Diversity (Robins 2009, PMID: 19706884)"
+    },
+    {
+      "name": "n_T1_clones",
+      "value": 63,
+      "units": "dimensionless",
+      "description": "Number of T cell clones (Morisaki 2021 PMID: 34193879; Narang 2019, PMID: 30832597)"
+    },
+    {
+      "name": "q_nT1_LN_in",
+      "value": 0.076,
+      "units": "1/day",
+      "description": "Rate of naive T cell transport into the LN  calculated based on the steady-state naive T cell level in healthy individuals (Autissier 2010, PMID: 20099249)"
+    },
+    {
+      "name": "q_T1_LN_out",
+      "value": 24,
+      "units": "1/day",
+      "description": "Rate of activated T cell transport out of the LN (De Boer and Perelson 1995, PMID: 7475092)"
+    },
+    {
+      "name": "q_nT1_LN_out",
+      "value": 1.8,
+      "units": "1/day",
+      "description": "Rate of naive T cell transport out of the LN (Mandl 2012, PMID: 23071319)"
+    },
+    {
+      "name": "k_T1_act",
+      "value": 23,
+      "units": "1/day",
+      "description": "T1 activation rate (De Boer and Perelson 1995, PMID: 7475092; Robertson-Tessi 2012, PMID: 22051568)"
+    },
+    {
+      "name": "k_T1_pro",
+      "value": 1,
+      "units": "1/day",
+      "description": "T1 proliferation rate (Marchingo 2014, PMID: 25430770)"
+    },
+    {
+      "name": "k_T1_death",
+      "value": 0.01,
+      "units": "1/day",
+      "description": "T1 death rate (De Boer and Perelson 1995, PMID: 7475092)"
+    },
+    {
+      "name": "q_T1_P_in",
+      "value": 2.436,
+      "units": "1/minute",
+      "description": "rate of T1 transport into the peripheral compartment calculated based on T cell transmigration rate (Zhu 1996, PMID: 8706023) and T cell adhesion density (Zhu 1996, PMID: 8706023)"
+    },
+    {
+      "name": "q_T1_P_out",
+      "value": 24,
+      "units": "1/day",
+      "description": "rate of T1 transport out of the peripheral compartment (De Boer and Perelson 1995, PMID: 7475092)"
+    },
+    {
+      "name": "q_T1_T_in",
+      "value": 5.8E-5,
+      "units": "1/(centimeter^3*minute)",
+      "description": "rate of T1 transport into the tumor compartment calculated based on T cell transmigration rate (Zhu 1996, PMID: 8706023) and T cell adhesion density (Zhu 1996, PMID: 8706023)"
+    },
+    {
+      "name": "q_nT1_P_in",
+      "value": 0.1764,
+      "units": "1/minute",
+      "description": "rate of nT1 transport into the peripheral compartment calculated based on T cell transmigration rate (Zhu 1996, PMID: 8706023) and T cell adhesion density (Zhu 1996, PMID: 8706023)"
+    },
+    {
+      "name": "q_nT1_P_out",
+      "value": 5.1,
+      "units": "1/day",
+      "description": "rate of nT1 transport out of the peripheral compartment  calculated based on steady-state naive T cell density in healthy individuals (Autissier 2010, PMID: 20099249)"
+    },
+    {
+      "name": "Q_nT1_thym",
+      "value": 3.5E+7,
+      "units": "cell/day",
+      "description": "Thymic output of nT1 (Bains 2009, PMID: 19179300; Ye 2002, PMID: 11994448)"
+    },
+    {
+      "name": "k_nT1_pro",
+      "value": 3.2E+8,
+      "units": "cell/day",
+      "description": "rate of nT1 proliferation (Braber 2012, PMID: 22365666)"
+    },
+    {
+      "name": "K_nT1_pro",
+      "value": 1.0E+9,
+      "units": "cell",
+      "description": "half-maximal peripheral proliferation of of nT1 (Braber 2012, PMID: 22365666)"
+    },
+    {
+      "name": "k_nT1_death",
+      "value": 0.002,
+      "units": "1/day",
+      "description": "rate of nT1 death (Braber 2012, PMID: 22365666)"
+    },
+    {
+      "name": "k_T1",
+      "value": 0.1,
+      "units": "1/day",
+      "description": "Rate of T cell exhaustion by cancer cells (estimated)"
+    },
+    {
+      "name": "k_C_T1",
+      "value": 0.9,
+      "units": "1/day",
+      "description": "Rate of cancer cell death by T cells (Robertson-Tessi 2012, PMID: 22051568)"
+    },
+    {
+      "name": "k_IFNg_Tsec",
+      "value": 4E-13,
+      "units": "nanomole/cell/day",
+      "description": "rate of IFNg secretion from CD8 T cells (Autenshlyus 2021, PMID: 34059727; Borj 2017, doi:10.15171/ijbms.2017.05)"
+    },
+    {
+      "name": "H_P1",
+      "value": 1,
+      "units": "dimensionless",
+      "description": "Hill function of tumor antigen P1"
+    },
+    {
+      "name": "K_T_C",
+      "value": 1.2,
+      "units": "dimensionless",
+      "description": "Dependence of Teff killing rate on Teff/C ratio (Robertson-Tessi 2012, PMID: 22051568)"
+    },
+    {
+      "name": "K_T_Treg",
+      "value": 11,
+      "units": "dimensionless",
+      "description": "Dependence of Teff killing rate on Teff/Treg ratio (Robertson-Tessi 2012, PMID: 22051568)"
+    },
+    {
+      "name": "k_APC_mat",
+      "value": 1.5,
+      "units": "1/day",
+      "description": "Maximum rate of APC maturation (Chen 2014, PMID: 25184733)"
+    },
+    {
+      "name": "k_APC_mig",
+      "value": 4,
+      "units": "1/day",
+      "description": "Rate of APC migration (Russo Halin 2016, PMID: 26876174)"
+    },
+    {
+      "name": "k_APC_death",
+      "value": 0.01,
+      "units": "1/day",
+      "description": "Rate of APC death (Marino and Kirschner 2004, PMID: 15038983)"
+    },
+    {
+      "name": "k_mAPC_death",
+      "value": 0.02,
+      "units": "1/day",
+      "description": "Rate of mAPC death(Marino and Kirschner 2004, PMID: 15038983)"
+    },
+    {
+      "name": "APC0_T",
+      "value": 400000,
+      "units": "cell/milliliter",
+      "description": "Steady state density of CD103+ APCs in the tumor, calculated to fit basal APC equal to 26000/cm^3 from (Lavin 2017, PMID: 28475900)"
+    },
+    {
+      "name": "APC0_LN",
+      "value": 1.2E+6,
+      "units": "cell/milliliter",
+      "description": "Steady state density of all APC subtypes in the LN (Catron 2004, PMID: 15357945)- divided by 10 to only take CD103+ based on (Lavin 2017, PMID: 28475900)"
+    },
+    {
+      "name": "n_sites_APC",
+      "value": 10,
+      "units": "dimensionless",
+      "description": "Maxium number of T Cells an APC can interact with (De Boer and Perelson 1995, PMID: 7475092)"
+    },
+    {
+      "name": "kin",
+      "value": 14.4,
+      "units": "1/day",
+      "description": "Rate of MHC internalization (Chen 2014, PMID: 25184733)"
+    },
+    {
+      "name": "kout",
+      "value": 28.8,
+      "units": "1/day",
+      "description": "Rate of MHC externalization (Chen 2014, PMID: 25184733)"
+    },
+    {
+      "name": "k_P0_up",
+      "value": 14.4,
+      "units": "1/day/cell",
+      "description": "Rate of antigen uptake by APCs (Chen 2014, PMID: 25184733)"
+    },
+    {
+      "name": "k_xP0_deg",
+      "value": 2,
+      "units": "1/day",
+      "description": "Rate of extracellular antigen degradation (Palsson 2013, PMID: 24074340)"
+    },
+    {
+      "name": "k_P0_deg",
+      "value": 17.28,
+      "units": "1/day",
+      "description": "Rate of endosomal antigen degradation (Chen 2014, PMID: 25184733)"
+    },
+    {
+      "name": "k_p0_deg",
+      "value": 144,
+      "units": "1/day",
+      "description": "Rate of endosomal epitope degradation (Chen 2014, PMID: 25184733)"
+    },
+    {
+      "name": "k_P0_on",
+      "value": 144000,
+      "units": "1/day/molarity",
+      "description": "Rate of antigen-MHC binding (Agrawal and Linderman 1996, PMID: 8944895)"
+    },
+    {
+      "name": "k_P0_d1",
+      "value": 1E-7,
+      "units": "molarity",
+      "description": "Antigen-MHC kd (Stone 2015, PMID: 25618219)"
+    },
+    {
+      "name": "p0_50",
+      "value": 2.6455026455026456E-5,
+      "units": "molecule/micrometer^2",
+      "description": "calculated based on the number of molecules for half-maximal T cell activation (Kimachi 1997, PMID: 9464819) and synapse surface area"
+    },
+    {
+      "name": "P0_C1",
+      "value": 5.4E-13,
+      "units": "mole/cell",
+      "description": "Concentration of P0 in C1 (estimated by 2.7e6 proteins/um^3 in a cancer cell (Milo 2013, PMID: 24114984) * cancer cell volume / Avogadro constant)"
+    },
+    {
+      "name": "P0_C2",
+      "value": 5.4E-13,
+      "units": "mole/cell",
+      "description": "Concentration of P0 in C2 (estimated by 2.7e6 proteins/um^3 in a cancer cell (Milo 2013, PMID: 24114984) * cancer cell volume / Avogadro constant)"
+    },
+    {
+      "name": "A_syn",
+      "value": 37.8,
+      "units": "micrometer^2",
+      "description": "Surface area of the synapse (Jansson 2005, PMID: 16034096)"
+    },
+    {
+      "name": "A_Tcell",
+      "value": 151.31041193043737,
+      "units": "micrometer^2",
+      "description": "Surface area of the T cell calculated based on the average T cell diameter (Chapman 1981, PMID: 6975780)"
+    },
+    {
+      "name": "A_cell",
+      "value": 907.9202768874502,
+      "units": "micrometer^2",
+      "description": "Surface area of the Cancer cell calculated based on the average cancer cell diameter (Abramczyk 2015, PMID: 25730442)"
+    },
+    {
+      "name": "A_APC",
+      "value": 900,
+      "units": "micrometer^2",
+      "description": "Surface area of the APC (Agrawal and Linderman 1996, PMID: 8944895)"
+    },
+    {
+      "name": "d_syn",
+      "value": 3,
+      "units": "nanometer",
+      "description": "The synapse gap distance (kd2D = kd3D*d_syn) (Jansson 2005, PMID: 16034096)"
+    },
+    {
+      "name": "k_M1p0_TCR_on",
+      "value": 1,
+      "units": "1/(second*molecule/micrometer^2)",
+      "description": "Rate of TCR binding to MHC-peptide complex (Lever 2014, PMID: 25145757)"
+    },
+    {
+      "name": "k_M1p0_TCR_off",
+      "value": 1,
+      "units": "1/second",
+      "description": "Rate of TCR unbinding from MHC-peptide complex (Lever 2014, PMID: 25145757)"
+    },
+    {
+      "name": "k_M1p0_TCR_p",
+      "value": 1,
+      "units": "1/second",
+      "description": "Rate of MHC-peptide-TCR complex modification (Lever 2014, PMID: 25145757)"
+    },
+    {
+      "name": "phi_M1p0_TCR",
+      "value": 0.09,
+      "units": "1/second",
+      "description": "Rate of MHC-peptide-TCR complex with maximal modification that leads to non-signaling(Lever 2014, PMID: 25145757)"
+    },
+    {
+      "name": "N_M1p0_TCR",
+      "value": 10,
+      "units": "dimensionless",
+      "description": "Number of modifcation steps for MHC-peptide-TCR complex (Lever 2014, PMID: 25145757)"
+    },
+    {
+      "name": "TCR_p0_tot",
+      "value": 103.81308067036068,
+      "units": "molecule/micrometer^2",
+      "description": "Total number of TCR molecules per naive T cell calculated based on the number of molecules for TCR (Lever 2014, PMID: 25145757) and T cell surface area"
+    },
+    {
+      "name": "pTCR_p0_MHC_tot",
+      "value": 0,
+      "units": "molecule/micrometer^2",
+      "description": "Total number of MHC-p0-TCR complexes of all different activation levels (see Rules)"
+    },
+    {
+      "name": "k_P1_up",
+      "value": 14.4,
+      "units": "1/day/cell",
+      "description": "Rate of antigen uptake by APCs (Chen 2014, PMID: 25184733)"
+    },
+    {
+      "name": "k_xP1_deg",
+      "value": 2,
+      "units": "1/day",
+      "description": "Rate of extracellular antigen degradation (Palsson 2013, PMID: 24074340)"
+    },
+    {
+      "name": "k_P1_deg",
+      "value": 17.28,
+      "units": "1/day",
+      "description": "Rate of endosomal antigen degradation (Chen 2014, PMID: 25184733)"
+    },
+    {
+      "name": "k_p1_deg",
+      "value": 144,
+      "units": "1/day",
+      "description": "Rate of endosomal epitope degradation (Chen 2014, PMID: 25184733)"
+    },
+    {
+      "name": "k_P1_on",
+      "value": 144000,
+      "units": "1/day/molarity",
+      "description": "Rate of antigen-MHC binding (Agrawal and Linderman 1996, PMID: 8944895)"
+    },
+    {
+      "name": "k_P1_d1",
+      "value": 1E-8,
+      "units": "molarity",
+      "description": "Antigen-MHC kd (Stone 2015, PMID: 25618219)"
+    },
+    {
+      "name": "p1_50",
+      "value": 2.6455026455026456E-5,
+      "units": "molecule/micrometer^2",
+      "description": "calculated based on the number of molecules for half-maximal T cell activation (Kimachi 1997, PMID: 9464819) and synapse surface area"
+    },
+    {
+      "name": "P1_C1",
+      "value": 5.4E-13,
+      "units": "mole/cell",
+      "description": "Concentration of P1 in C1 (estimated by 2.7e6 proteins/um^3 in a cancer cell (Milo 2013, PMID: 24114984) * cancer cell volume / Avogadro constant)"
+    },
+    {
+      "name": "P1_C2",
+      "value": 5.4E-13,
+      "units": "mole/cell",
+      "description": "Concentration of P1 in C2 (estimated by 2.7e6 proteins/um^3 in a cancer cell (Milo 2013, PMID: 24114984) * cancer cell volume / Avogadro constant)"
+    },
+    {
+      "name": "k_M1p1_TCR_on",
+      "value": 1,
+      "units": "1/(second*molecule/micrometer^2)",
+      "description": "Rate of TCR binding to MHC-peptide complex (Lever 2014, PMID: 25145757)"
+    },
+    {
+      "name": "k_M1p1_TCR_off",
+      "value": 1,
+      "units": "1/second",
+      "description": "Rate of TCR unbinding from MHC-peptide complex (Lever 2014, PMID: 25145757)"
+    },
+    {
+      "name": "k_M1p1_TCR_p",
+      "value": 1,
+      "units": "1/second",
+      "description": "Rate of MHC-peptide-TCR complex modification (Lever 2014, PMID: 25145757)"
+    },
+    {
+      "name": "phi_M1p1_TCR",
+      "value": 0.09,
+      "units": "1/second",
+      "description": "Rate of MHC-peptide-TCR complex with maximal modification that leads to non-signaling(Lever 2014, PMID: 25145757)"
+    },
+    {
+      "name": "N_M1p1_TCR",
+      "value": 10,
+      "units": "dimensionless",
+      "description": "Number of modifcation steps for MHC-peptide-TCR complex (Lever 2014, PMID: 25145757)"
+    },
+    {
+      "name": "TCR_p1_tot",
+      "value": 103.81308067036068,
+      "units": "molecule/micrometer^2",
+      "description": "Total number of TCR molecules per naive T cell calculated based on the number of molecules for TCR (Lever 2014, PMID: 25145757) and T cell surface area"
+    },
+    {
+      "name": "pTCR_p1_MHC_tot",
+      "value": 0,
+      "units": "molecule/micrometer^2",
+      "description": "Total number of MHC-p1-TCR complexes of all different activation levels (see Rules)"
+    },
+    {
+      "name": "q_P_aPD1",
+      "value": 9.16E-6,
+      "units": "liter/second",
+      "description": "Capillary filtration rate of aPD1 between central and peripheral compartment(Ahamadi 2016, PMID: 27863186)"
+    },
+    {
+      "name": "q_T_aPD1",
+      "value": 8.52E-5,
+      "units": "milliliter/second",
+      "description": "Capillary filtration rate of aPD1 between central and tumor compartment(Wang 2019, PMID: 31218069)"
+    },
+    {
+      "name": "q_LN_aPD1",
+      "value": 3.25E-6,
+      "units": "milliliter/second",
+      "description": "Capillary filtration rate of aPD1 between central and TDLN compartment(Meijer 2017, PMID: 28510992)"
+    },
+    {
+      "name": "q_LD_aPD1",
+      "value": 0.0015,
+      "units": "1/minute",
+      "description": "Rate of lymphatic drainage of aPD1 from TDLN to central compartment(Zhu 1996, PMID: 8706023)"
+    },
+    {
+      "name": "k_cl_aPD1",
+      "value": 0.315,
+      "units": "liter/day",
+      "description": "Clearance rate of aPD1 from central compartment(Ahamadi 2016, PMID: 27863186)"
+    },
+    {
+      "name": "gamma_C_aPD1",
+      "value": 0.698,
+      "units": "dimensionless",
+      "description": "Volume fraction of interstitial space available to aPD1 in central compartment(Ahamadi 2016, PMID: 27863186)"
+    },
+    {
+      "name": "gamma_P_aPD1",
+      "value": 0.0789,
+      "units": "dimensionless",
+      "description": "Volume fraction of interstitial space available to aPD1 in peripheral compartment(Ahamadi 2016, PMID: 27863186)"
+    },
+    {
+      "name": "gamma_T_aPD1",
+      "value": 0.522,
+      "units": "dimensionless",
+      "description": "Volume fraction of interstitial space available to aPD1 in tumor compartment(Coughlin 2010, PMID: 20125040; Finley 2015, PMID: 26783500)"
+    },
+    {
+      "name": "gamma_LN_aPD1",
+      "value": 0.2,
+      "units": "dimensionless",
+      "description": "Volume fraction of interstitial space available to aPD1 in TDLN compartment(Wang 2019, PMID: 31218069)"
+    },
+    {
+      "name": "q_P_aPDL1",
+      "value": 8.7E-6,
+      "units": "liter/second",
+      "description": "Capillary filtration rate of aPDL1 between central and peripheral compartment(Stroh 2017, PMID: 27981577)"
+    },
+    {
+      "name": "q_T_aPDL1",
+      "value": 8.52E-5,
+      "units": "milliliter/second",
+      "description": "Capillary filtration rate of aPDL1 between central and tumor compartment(Wang 2019, PMID: 31218069)"
+    },
+    {
+      "name": "q_LN_aPDL1",
+      "value": 3.25E-6,
+      "units": "milliliter/second",
+      "description": "Capillary filtration rate of aPDL1 between central and TDLN compartment(Meijer 2017, PMID: 28510992)"
+    },
+    {
+      "name": "q_LD_aPDL1",
+      "value": 0.0015,
+      "units": "1/minute",
+      "description": "Rate of lymphatic drainage of aPDL1 from TDLN to central compartment(Zhu 1996, PMID: 8706023)"
+    },
+    {
+      "name": "k_cl_aPDL1",
+      "value": 0.324,
+      "units": "liter/day",
+      "description": "Clearance rate of aPDL1 from central compartment(Stroh 2017, PMID: 27981577)"
+    },
+    {
+      "name": "gamma_C_aPDL1",
+      "value": 0.61,
+      "units": "dimensionless",
+      "description": "Volume fraction of interstitial space available to aPDL1 in central compartment(Stroh 2017, PMID: 27981577)"
+    },
+    {
+      "name": "gamma_P_aPDL1",
+      "value": 0.068,
+      "units": "dimensionless",
+      "description": "Volume fraction of interstitial space available to aPDL1 in peripheral compartment(Stroh 2017, PMID: 27981577)"
+    },
+    {
+      "name": "gamma_T_aPDL1",
+      "value": 0.522,
+      "units": "dimensionless",
+      "description": "Volume fraction of interstitial space available to aPDL1 in tumor compartment(Coughlin 2010, PMID: 20125040; Finley 2015, PMID: 26783500)"
+    },
+    {
+      "name": "gamma_LN_aPDL1",
+      "value": 0.2,
+      "units": "dimensionless",
+      "description": "Volume fraction of interstitial space available to aPDL1 in TDLN compartment(Wang 2019, PMID: 31218069)"
+    },
+    {
+      "name": "q_P_aCTLA4",
+      "value": 5.331E-6,
+      "units": "liter/second",
+      "description": "Capillary filtration rate of aCTLA4 between central and peripheral compartment(Wang 2014, PMID: 24737343)"
+    },
+    {
+      "name": "q_T_aCTLA4",
+      "value": 8.52E-5,
+      "units": "milliliter/second",
+      "description": "Capillary filtration rate of aCTLA4 between central and tumor compartment(Wang 2019, PMID: 31218069)"
+    },
+    {
+      "name": "q_LN_aCTLA4",
+      "value": 3.25E-6,
+      "units": "milliliter/second",
+      "description": "Capillary filtration rate of aCTLA4 between central and TDLN compartment(Meijer 2017, PMID: 28510992)"
+    },
+    {
+      "name": "q_LD_aCTLA4",
+      "value": 0.0015,
+      "units": "1/minute",
+      "description": "Rate of lymphatic drainage of aCTLA4 from TDLN to central compartment(Zhu 1996, PMID: 8706023)"
+    },
+    {
+      "name": "k_cl_aCTLA4",
+      "value": 0.3276,
+      "units": "liter/day",
+      "description": "Clearance rate of aCTLA4 from central compartment(Wang 2014, PMID: 24737343)"
+    },
+    {
+      "name": "gamma_C_aCTLA4",
+      "value": 0.794,
+      "units": "dimensionless",
+      "description": "Volume fraction of interstitial space available to aCTLA4 in central compartment(Wang 2014, PMID: 24737343)"
+    },
+    {
+      "name": "gamma_P_aCTLA4",
+      "value": 0.062,
+      "units": "dimensionless",
+      "description": "Volume fraction of interstitial space available to aCTLA4 in peripheral compartment(Wang 2014, PMID: 24737343)"
+    },
+    {
+      "name": "gamma_T_aCTLA4",
+      "value": 0.522,
+      "units": "dimensionless",
+      "description": "Volume fraction of interstitial space available to aCTLA4 in tumor compartment(Coughlin 2010, PMID: 20125040; Finley 2015, PMID: 26783500)"
+    },
+    {
+      "name": "gamma_LN_aCTLA4",
+      "value": 0.2,
+      "units": "dimensionless",
+      "description": "Volume fraction of interstitial space available to aCTLA4 in TDLN compartment(Wang 2019, PMID: 31218069)"
+    },
+    {
+      "name": "kon_PD1_PDL1",
+      "value": 0.06,
+      "units": "1/(micromolarity*nanometer*second)",
+      "description": "kon of PD1-PDL1 binding kon for PD1-PDL1 (Cheng 2013, PMID: 23417675)"
+    },
+    {
+      "name": "k_out_PDL1",
+      "value": 50000,
+      "units": "molecule/day",
+      "description": "Expression rate of PDL1 on tumor cells (Mimura 2018, PMID: 29034543)"
+    },
+    {
+      "name": "k_in_PDL1",
+      "value": 1,
+      "units": "1/day",
+      "description": "Degradation rate of PDL1 on tumor cells (Hsu 2018, PMID: 30442814)"
+    },
+    {
+      "name": "r_PDL1_IFNg",
+      "value": 6,
+      "units": "dimensionless",
+      "description": "Number of folds increase of PDL1 expression by IFNg (Shin 2017, PMID: 27903500)"
+    },
+    {
+      "name": "kon_PD1_PDL2",
+      "value": 0.08,
+      "units": "1/(micromolarity*nanometer*second)",
+      "description": "kon of PD1-PDL2 binding (Cheng 2013, PMID: 23417675)"
+    },
+    {
+      "name": "kon_PD1_aPD1",
+      "value": 670000,
+      "units": "1/(molarity*second)",
+      "description": "kon of PD1-aPD1 binding (Wang 2014, PMID: 24872026; Brown 2020, PMID: 32134960)"
+    },
+    {
+      "name": "kon_PDL1_aPDL1",
+      "value": 430000,
+      "units": "1/(molarity*second)",
+      "description": "kon of PDL1-aPDL1 binding (Wang 2014, PMID: 24872026)"
+    },
+    {
+      "name": "kon_CD28_CD80",
+      "value": 0.13333333333333333,
+      "units": "1/(micromolarity*nanometer*second)",
+      "description": "kon of CD28-CD80 binding (van der Merwe 1997, PMID: 9053440)"
+    },
+    {
+      "name": "kon_CD28_CD86",
+      "value": 0.46666666666666667,
+      "units": "1/(micromolarity*nanometer*second)",
+      "description": "kon of CD28-CD86 binding (Collins 2002, PMID: 12196291)"
+    },
+    {
+      "name": "kon_CTLA4_CD80",
+      "value": 0.33333333333333331,
+      "units": "1/(micromolarity*nanometer*second)",
+      "description": "kon of CTLA4-CD80 binding (van der Merwe 1997, PMID: 9053440)"
+    },
+    {
+      "name": "kon_CTLA4_CD86",
+      "value": 0.66666666666666663,
+      "units": "1/(micromolarity*nanometer*second)",
+      "description": "kon of CTLA4-CD86 binding (Jansson 2005, PMID: 16034096; Collins 2002, PMID: 12196291)"
+    },
+    {
+      "name": "kon_CD80_PDL1",
+      "value": 0.10666666666666667,
+      "units": "1/(micromolarity*nanometer*second)",
+      "description": "kon of CD80-PDL1 binding (Cheng 2014, PMID: 23417675)"
+    },
+    {
+      "name": "kon_CTLA4_aCTLA4",
+      "value": 383000,
+      "units": "1/(molarity*second)",
+      "description": "kon of CTLA4-aCTLA4 binding (Wang 2014, PMID: 24872026)"
+    },
+    {
+      "name": "kon_CD80_CD80",
+      "value": 0.00019666666666666669,
+      "units": "1/(micromolarity*nanometer*second)",
+      "description": "kon of CD80 self-association (Ikemizu 2000, PMID: 10661405)"
+    },
+    {
+      "name": "koff_PD1_PDL1",
+      "value": 1.476,
+      "units": "1/second",
+      "description": "koff of PD1-PDL1 binding calculated based on the measured kd and kon (Cheng 2013, PMID: 23417675)"
+    },
+    {
+      "name": "koff_PD1_PDL2",
+      "value": 0.552,
+      "units": "1/second",
+      "description": "koff of PD1-PDL2 binding calculated based on the measured kd and kon (Cheng 2013, PMID: 23417675)"
+    },
+    {
+      "name": "koff_PD1_aPD1",
+      "value": 0.00268,
+      "units": "1/second",
+      "description": "koff of PD1-aPD1 binding calculated based on the measured kd and kon (Wang 2014, PMID: 24872026; Brown 2020, PMID: 32134960)"
+    },
+    {
+      "name": "koff_PDL1_aPDL1",
+      "value": 0.000172,
+      "units": "1/second",
+      "description": "koff of PDL1-aPDL1 binding calculated based on the measured kd and kon (Wang 2014, PMID: 24872026)"
+    },
+    {
+      "name": "koff_CD28_CD80",
+      "value": 1.6,
+      "units": "1/second",
+      "description": "koff of CD28-CD80 binding calculated based on the measured kd and kon (van der Merwe 1997, PMID: 9053440)"
+    },
+    {
+      "name": "koff_CD28_CD86",
+      "value": 28,
+      "units": "1/second",
+      "description": "koff of CD28-CD86 binding calculated based on the measured kd and kon (Collins 2002, PMID: 12196291)"
+    },
+    {
+      "name": "koff_CTLA4_CD80",
+      "value": 0.42,
+      "units": "1/second",
+      "description": "koff of CTLA4-CD80 binding calculated based on the measured kd and kon (van der Merwe 1997, PMID: 9053440)"
+    },
+    {
+      "name": "koff_CTLA4_CD86",
+      "value": 5.2,
+      "units": "1/second",
+      "description": "koff of CTLA4-CD86 binding calculated based on the measured kd and kon (Jansson 2005, PMID: 16034096; Collins 2002, PMID: 12196291)"
+    },
+    {
+      "name": "koff_CD80_PDL1",
+      "value": 6.016,
+      "units": "1/second",
+      "description": "koff of CD80-PDL1 binding calculated based on the measured kd and kon (Cheng 2014, PMID: 23417675; Butte 2008, PMID: 18585785)"
+    },
+    {
+      "name": "koff_CTLA4_aCTLA4",
+      "value": 0.0069706,
+      "units": "1/second",
+      "description": "koff of CTLA4-aCTLA4 binding calculated based on the measured kd and kon (Wang 2014, PMID: 24872026)"
+    },
+    {
+      "name": "koff_CD80_CD80",
+      "value": 0.01003,
+      "units": "1/second",
+      "description": "koff of CD80 self-association calculated based on the measured kd and kon (Ikemizu 2000, PMID: 10661405)"
+    },
+    {
+      "name": "Chi_PD1_aPD1",
+      "value": 33.333333095322743,
+      "units": "1/nanometer",
+      "description": "Antibody cross-arm binding efficiency that also includes the conversion of kon from 3D to 2D (estimated based on Wang 2014, PMID: 24872026)"
+    },
+    {
+      "name": "Chi_PDL1_aPDL1",
+      "value": 33.333333095322743,
+      "units": "1/nanometer",
+      "description": "Antibody cross-arm binding efficiency that also includes the conversion of kon from 3D to 2D (Wang 2014, PMID: 24872026)"
+    },
+    {
+      "name": "Chi_CTLA4_aCTLA4",
+      "value": 33.333333095322743,
+      "units": "1/nanometer",
+      "description": "Antibody cross-arm binding efficiency that also includes the conversion of kon from 3D to 2D (estimated)"
+    },
+    {
+      "name": "PD1_50",
+      "value": 6,
+      "units": "molecule/micrometer^2",
+      "description": "PD1/PDL1 concentration for half-maximal T cell inactivation (Jafarnejad 2019, PMID: 31236847)"
+    },
+    {
+      "name": "n_PD1",
+      "value": 2,
+      "units": "dimensionless",
+      "description": "Hill coefficient for PD1/PDL1 half-maximal T cell inactivation (estimated)"
+    },
+    {
+      "name": "CD28_CD8X_50",
+      "value": 200,
+      "units": "molecule/micrometer^2",
+      "description": "CD28-CD80/CD28-CD86 concentration for half-maximal T cell co-estimulation estimated assuming T cell activation is inhibited by 70% at baseline CTLA-4 expression (Parry 2005, PMID: 16227604)"
+    },
+    {
+      "name": "n_CD28_CD8X",
+      "value": 2,
+      "units": "dimensionless",
+      "description": "Hill coefficient for CD28-CD80/CD28-CD86 half-maximal T cell co-estimulation (estimated)"
+    },
+    {
+      "name": "T_PD1_total",
+      "value": 27900,
+      "units": "molecule",
+      "description": "concentration of PD1 on T cells (Cheng 2014, PMID: 23417675; Mkrtichyan 2012, PMID: 22837483; Gatalica 2014, PMID: 25392179)"
+    },
+    {
+      "name": "T_CD28_total",
+      "value": 184000,
+      "units": "molecule",
+      "description": "concentration of CD28 on T cells (Jansson 2005, PMID: 16034096)"
+    },
+    {
+      "name": "T_CTLA4_syn",
+      "value": 8000,
+      "units": "molecule",
+      "description": "concentration of CTLA4 on T cells (Jansson 2005, PMID: 16034096)"
+    },
+    {
+      "name": "T_PDL1_total",
+      "value": 83700,
+      "units": "molecule",
+      "description": "concentration of PDL1 on T cells (Cheng 2014, PMID: 23417675; Mkrtichyan 2012, PMID: 22837483; Gatalica 2014, PMID: 25392179)"
+    },
+    {
+      "name": "C1_PDL1_base",
+      "value": 120000.00000000001,
+      "units": "molecule",
+      "description": "baseline number of PDL1 molecules per C1 cell (Cheng 2014, PMID: 23417675; Mkrtichyan 2012, PMID: 22837483; Shin 2017, PMID: 27903500; Gatalica 2014, PMID: 25392179)"
+    },
+    {
+      "name": "r_PDL2C1",
+      "value": 0.07,
+      "units": "dimensionless",
+      "description": "PDL2/PDL1 molecule ratio on C1 cell (Cheng 2014, PMID: 23417675)"
+    },
+    {
+      "name": "C1_CD80_total",
+      "value": 80000,
+      "units": "molecule",
+      "description": "number of CD80 molecules per C1 cell (Jansson 2005, PMID: 16034096)"
+    },
+    {
+      "name": "C1_CD86_total",
+      "value": 860000,
+      "units": "molecule",
+      "description": "number of CD86 molecules per C1 cell (Jansson 2005, PMID: 16034096)"
+    },
+    {
+      "name": "APC_PDL1_base",
+      "value": 120000.00000000001,
+      "units": "molecule",
+      "description": "baseline number of PDL1 molecules per APC cell (Cheng 2014, PMID: 23417675; Mkrtichyan 2012, PMID: 22837483; Shin 2017, PMID: 27903500; Gatalica 2014, PMID: 25392179)"
+    },
+    {
+      "name": "r_PDL2APC",
+      "value": 0.07,
+      "units": "dimensionless",
+      "description": "PDL2/PDL1 molecule ratio on APC cell (Cheng 2014, PMID: 23417675)"
+    },
+    {
+      "name": "APC_CD80_total",
+      "value": 80000,
+      "units": "molecule",
+      "description": "number of CD80 molecules per APC cell (Jansson 2005, PMID: 16034096)"
+    },
+    {
+      "name": "APC_CD86_total",
+      "value": 860000,
+      "units": "molecule",
+      "description": "number of CD86 molecules per APC cell (Jansson 2005, PMID: 16034096)"
+    },
+    {
+      "name": "k_Th_act",
+      "value": 10,
+      "units": "1/day",
+      "description": "Rate of T helper cell activation (Robertson-Tessi 2012, PMID: 22051568)"
+    },
+    {
+      "name": "k_Th_Treg",
+      "value": 0.022,
+      "units": "1/day",
+      "description": "Th differentiation rate to Treg (Robertson-Tessi 2012, PMID: 22051568)"
+    },
+    {
+      "name": "k_TGFb_Tsec",
+      "value": 1.2E-10,
+      "units": "nanomole/cell/day",
+      "description": "TGF secretion rate by Treg (Liyanage 2002, PMID: 12193750)"
+    },
+    {
+      "name": "k_TGFb_deg",
+      "value": 14.3,
+      "units": "1/day",
+      "description": "TGF degradtion rate (Robertson-Tessi 2012, PMID: 22051568)"
+    },
+    {
+      "name": "TGFb_50",
+      "value": 0.07,
+      "units": "nanomolarity",
+      "description": "Half-Maximal TGFb level for Th-to-Treg differentiation / chemoresistance development / M1-to-M2 polarization (Robertson-Tessi 2012, PMID: 22051568)"
+    },
+    {
+      "name": "TGFb_50_Teff",
+      "value": 0.14,
+      "units": "nanomolarity",
+      "description": "Half-Maximal TGFb level for CD8 T cell inhibition (Robertson-Tessi 2012, PMID: 22051568)"
+    },
+    {
+      "name": "Kc_rec",
+      "value": 2.02E+7,
+      "units": "cell^2",
+      "description": "Half-Maximal cancer cell number for T cell recruitment (Phillis 2006, PMID: 16153659)"
+    },
+    {
+      "name": "TGFbase",
+      "value": 0.016,
+      "units": "nanomolarity",
+      "description": "Baseline TGFb level in breast tumor (Ivanović 2003, PMID: 12751375; Manuyakorn 2008, PMID: 19317336; Panis 2013, PMID: 23393376)"
+    },
+    {
+      "name": "k_IFNg_Thsec",
+      "value": 80.295211426666668,
+      "units": "1/day",
+      "description": "IFNg secretion rate by T helper cell estimated assuming IFNg secretion is 3 times lower in CD4 than CD8 T cells (Kasahara 1983, PMID: 6403613)"
+    },
+    {
+      "name": "k_IFNg_deg",
+      "value": 7.68,
+      "units": "1/day",
+      "description": "IFNg degradation rate (Hofstra 1998, PMID: 9806748)"
+    },
+    {
+      "name": "IFNg_50_ind",
+      "value": 2.96,
+      "units": "picomolarity",
+      "description": "Half-Maximal IFNg level for PD-L1 induction (Shin 2017, PMID: 27903500)"
+    },
+    {
+      "name": "H_TGFb",
+      "value": 1,
+      "units": "dimensionless",
+      "description": "Hill function of TGFb for Th-to-Treg differentiation / chemoresistance development / M1-to-M2 polarization"
+    },
+    {
+      "name": "H_TGFb_Teff",
+      "value": 1,
+      "units": "dimensionless",
+      "description": "Hill function of TGFb for Teff inhibition and chemoresistance development"
+    },
+    {
+      "name": "N_aTh",
+      "value": 1,
+      "units": "dimensionless",
+      "description": "Number of Activated T Helper Cell Generations (see Rules)"
+    },
+    {
+      "name": "k_CCL2_sec",
+      "value": 1.7E-12,
+      "units": "nanomole/cell/day",
+      "description": "rate of CCL2 secretion (Huang 2007, PMID: 17257744; Dutta 2018, PMID: 29594759)"
+    },
+    {
+      "name": "k_CCL2_deg",
+      "value": 0.06,
+      "units": "1/hour",
+      "description": "rate of CCL2 degradation (Tanimoto 2007, PMID: 18089573)"
+    },
+    {
+      "name": "CCL2_50",
+      "value": 0.23,
+      "units": "nanomolarity",
+      "description": "Half-maximal CCL2 level of MDSC recruitment (Opalek 2007, PMID: 17888174; Ernst 1994, PMID: 8144933)"
+    },
+    {
+      "name": "k_MDSC_rec",
+      "value": 11000,
+      "units": "cell/(milliliter*day)",
+      "description": "Rate of MDSC recruitment into the tumor (Diaz-Montero 2009, PMID: 18446337; Huang 2006, PMID: 17257744)"
+    },
+    {
+      "name": "k_MDSC_death",
+      "value": 0.015,
+      "units": "1/day",
+      "description": "Rate of MDSC death (Lai 2018, PMID: 29735668)"
+    },
+    {
+      "name": "k_NO_deg",
+      "value": 135,
+      "units": "1/day",
+      "description": "rate of NO degradation (Hakim 1996, PMID: 8953625)"
+    },
+    {
+      "name": "k_ArgI_deg",
+      "value": 0.173,
+      "units": "1/day",
+      "description": "rate of ArgI degradation (Schimke 1964, PMID: 14257612)"
+    },
+    {
+      "name": "k_NO_sec",
+      "value": 4.8E-7,
+      "units": "nanomole/cell/day",
+      "description": "rate of NO secretion from MDSCs (Serafini 2008, PMID: 18593947)"
+    },
+    {
+      "name": "k_ArgI_sec",
+      "value": 0.014,
+      "units": "(mU*microliter)/cell/day",
+      "description": "rate of ArgI secretion (Serafini 2008, PMID: 18593947)"
+    },
+    {
+      "name": "ArgI_50_Teff",
+      "value": 61.7,
+      "units": "mU",
+      "description": "rate of ArgI-induced T cell death (Serafini 2008, PMID: 18593947)"
+    },
+    {
+      "name": "NO_50_Teff",
+      "value": 0.75,
+      "units": "nanomolarity",
+      "description": "rate of NO-induced T cell death (Serafini 2008, PMID: 18593947)"
+    },
+    {
+      "name": "ArgI_50_Treg",
+      "value": 22.1,
+      "units": "mU",
+      "description": "Half-maximal ArgI level of Treg expansion (estimated based on Serafini 2008, PMID: 18593947)"
+    },
+    {
+      "name": "H_NO",
+      "value": 1,
+      "units": "dimensionless",
+      "description": "Hill function for NO-mediated inhibition on Teff"
+    },
+    {
+      "name": "H_ArgI_Teff",
+      "value": 1,
+      "units": "dimensionless",
+      "description": "Hill function for ariginase I-mediated inhibition on Teff"
+    },
+    {
+      "name": "H_ArgI_Treg",
+      "value": 1,
+      "units": "dimensionless",
+      "description": "Hill function for ariginase I-mediated Th-to-Treg transdifferentiation"
+    },
+    {
+      "name": "H_MDSC",
+      "value": 1,
+      "units": "dimensionless",
+      "description": "Hill function for overall effect of MDSC-mediated effect on Teff"
+    },
+    {
+      "name": "Vmcl",
+      "value": 8070,
+      "units": "microgram/hour",
+      "description": "Maximum elimination rate of nab-paclitaxel from the central compartment V1"
+    },
+    {
+      "name": "Kcl",
+      "value": 40.2,
+      "units": "microgram/liter",
+      "description": "Nab-paclitaxel concentration in the central compartment V1 at 50% Vmcl"
+    },
+    {
+      "name": "Q2",
+      "value": 41.6,
+      "units": "liter/hour",
+      "description": "Intercompartmental clearance between the central compartment V1 and the second peripheral compartment V3"
+    },
+    {
+      "name": "Vmt",
+      "value": 325000,
+      "units": "microgram/hour",
+      "description": "Maximum intercompartmental distribution rate between the central compartment V1 and the first peripheral compartment V2"
+    },
+    {
+      "name": "Kt",
+      "value": 4260,
+      "units": "microgram/liter",
+      "description": "Nab-paclitaxel concentration in the central compartment V1 at 50% Vmt"
+    },
+    {
+      "name": "BSA",
+      "value": 1.9,
+      "units": "meter^2",
+      "description": "Body surface area"
+    },
+    {
+      "name": "r_nabp",
+      "value": 1.5,
+      "units": "dimensionless",
+      "description": "Tumour to plasma concentration ratio of nab-paclitaxel (Yang 2007, PMID: 17828616; Rajeshkumar 2016, PMID: 27441498)"
+    },
+    {
+      "name": "k_C_nabp",
+      "value": 0.06,
+      "units": "1/hour",
+      "description": "Cancer cell killing rate by nab-paclitaxel (Choi 2012, PMID: 23023313; Volk 2008, PMID: 18516298; Kozłowska 2018, PMID: 29769198)"
+    },
+    {
+      "name": "IC50_nabp",
+      "value": 92,
+      "units": "nanomolarity",
+      "description": "Half-maximal nab-paclitaxel concentration for cancer cell killing (Yang 2013, PMID: 23180760)"
+    },
+    {
+      "name": "MW_nabp",
+      "value": 853.9,
+      "units": "gram/mole",
+      "description": "Molecular weight of nab-paclitaxel (calculated)"
+    },
+    {
+      "name": "Kc_nabp",
+      "value": 8.0E+7,
+      "units": "cell",
+      "description": "Half-Maximal cancer cell number for cytotoxic drug diffusion (estimated based on Kyle 2007, PMID: 17473214)"
+    },
+    {
+      "name": "k_C_resist",
+      "value": 0.0001,
+      "units": "1/day",
+      "description": "Cancer resistance to nab-paclitaxel (estimated)"
+    },
+    {
+      "name": "r_resist",
+      "value": 100,
+      "units": "dimensionless",
+      "description": "Number of folds increase of nab-paclitaxel EC50 in resistant cancer clones (Nemcova-Furstova 2016, PMID: 27664577)"
+    },
+    {
+      "name": "k_vas_nabp",
+      "value": 0.00028,
+      "units": "picogram/cell/day",
+      "description": "Secretion rate of angiogenic factors induced by nab-paclitaxel (Volk 2008, PMID: 18516298)"
+    },
+    {
+      "name": "IC50_nabp_vas",
+      "value": 5.2,
+      "units": "nanomolarity",
+      "description": "Half-maximal conc. of nab-paclitaxel on angiogenic factor induction (Volk 2008, PMID: 18516298)"
+    },
+    {
+      "name": "k_K_nabp",
+      "value": 17.8,
+      "units": "1/hour/molarity",
+      "description": "Inhibition rate of maximal tumor capacity by nab-paclitaxel (Mollard 2017, PMID: 28416742)"
+    },
+    {
+      "name": "k_Mac_rec",
+      "value": 170000,
+      "units": "cell/(milliliter*day)",
+      "description": "Recruitment rate of macrophage into tumor compartment (Yang 2018, PMID: 30026826)"
+    },
+    {
+      "name": "k_Mac_death",
+      "value": 0.02,
+      "units": "1/day",
+      "description": "Death rate of macrophages into tumor compartment (Ginhoux 2016, PMID: 26982352)"
+    },
+    {
+      "name": "k_TGFb_Msec",
+      "value": 2E-11,
+      "units": "nanomole/cell/day",
+      "description": "Secretion rate of TGFb by macrophage in tumor compartment (Matsuo 2000, PMID: 10652049)"
+    },
+    {
+      "name": "k_IL12_sec",
+      "value": 8.5E-12,
+      "units": "nanomole/cell/day",
+      "description": "Secretion rate of IL-12 by mAPC in tumor compartment (Heufler 1996, PMID: 8605935)"
+    },
+    {
+      "name": "k_IL12_Msec",
+      "value": 5E-13,
+      "units": "nanomole/cell/day",
+      "description": "Secretion rate of IL-12 by macrophage in tumor compartment (Clough 2007, PMID: 17597818; Sica 2000, PMID: 10623821)"
+    },
+    {
+      "name": "k_IL12_deg",
+      "value": 0.0231,
+      "units": "1/hour",
+      "description": "Degradation rate of IL-12 in tumor compartment (Carreño 2000, PMID: 10707873)"
+    },
+    {
+      "name": "k_IL10_sec",
+      "value": 3E-12,
+      "units": "nanomole/cell/day",
+      "description": "Secretion rate of IL-10 by macrophage in tumor compartment (Autenshlyus 2021, PMID: 34059727)"
+    },
+    {
+      "name": "k_IL10_deg",
+      "value": 4,
+      "units": "1/day",
+      "description": "Degradation rate of IL-10 in tumor compartment (Saxena 2015, PMID: 25481648)"
+    },
+    {
+      "name": "k_M2_pol",
+      "value": 0.25,
+      "units": "1/day",
+      "description": "Rate of M1 to M2 macrophage polarization (estimated assuming that polarization takes roughly 2-3 days)"
+    },
+    {
+      "name": "k_M1_pol",
+      "value": 0.045,
+      "units": "1/day",
+      "description": "Rate of M2 to M1 macrophage polarization (estimated based on the M1/M2 ratio)"
+    },
+    {
+      "name": "IL10_50",
+      "value": 8,
+      "units": "picomolarity",
+      "description": "Half-maximal IL10 level for M1 to M2 polarization / maintaining Treg function / mAPC inhibition (*STAT6 related) (Altan-Bonnet 2019, PMID: 30770905)"
+    },
+    {
+      "name": "IL12_50",
+      "value": 0.14,
+      "units": "picomolarity",
+      "description": "Half-maximal IL-12 level for M2 to M1 macrophage polarization (Altan-Bonnet 2019, PMID: 30770905)"
+    },
+    {
+      "name": "IFNg_50",
+      "value": 2.9,
+      "units": "picomolarity",
+      "description": "Half-maximal IFNg level for M2 to M1 macrophage polarization (Altan-Bonnet 2019, PMID: 30770905)"
+    },
+    {
+      "name": "k_M1_phago",
+      "value": 0.33,
+      "units": "1/day",
+      "description": "Rate of M1 macrophage-mediated killing of cancer cell (Pan 2020, PMID: 33365025)"
+    },
+    {
+      "name": "vol_Mcell",
+      "value": 4849.0482608158454,
+      "units": "micrometer^3/cell",
+      "description": "Volume of a single macrophage cell Volume of a macrophage calculated based on the average macrophage diameter (Krombach 1997, PMID: 9400735)"
+    },
+    {
+      "name": "k_vas_Msec",
+      "value": 1.7E-5,
+      "units": "picogram/cell/day",
+      "description": "Secretion rate of angiogenic factor by macrophage in tumor compartment (Wu 2010, PMID: 20692534)"
+    },
+    {
+      "name": "kdeg_CD47",
+      "value": 0.125,
+      "units": "1/day",
+      "description": "Degradation rate of free CD47 on RBCs (fitted)"
+    },
+    {
+      "name": "kon_CD47_SIRPa",
+      "value": 0.0625,
+      "units": "1/(micromolarity*minute*nanometer)",
+      "description": "kon of CD47-SIRPa binding (Hayes 2020, PMID: 31964705)"
+    },
+    {
+      "name": "koff_CD47_SIRPa",
+      "value": 0.3,
+      "units": "1/minute",
+      "description": "koff of CD47-SIRPa binding (Hayes 2020, PMID: 31964705)"
+    },
+    {
+      "name": "SIRPa_50",
+      "value": 37,
+      "units": "molecule/micrometer^2",
+      "description": "SIRPa occupancy for half-maximal CD47/SIRPa inhibition on phagocytosis of cancer cells by macrophages (Willingham 2012, PMID: 22451913)"
+    },
+    {
+      "name": "n_SIRPa",
+      "value": 2,
+      "units": "dimensionless",
+      "description": "Hill coefficient for CD47/SIRPa inhibition on phagocytosis of cancer cells by macrophages (estimated)"
+    },
+    {
+      "name": "H_Mac_C",
+      "value": 0,
+      "units": "dimensionless",
+      "description": "Hill function for overall checkpoint inhibition on phagocytosis of cancer cell by macrophage "
+    },
+    {
+      "name": "H_PD1_M",
+      "value": 0,
+      "units": "dimensionless",
+      "description": "Hill function for PD1-mediated inhibition on phagocytosis of cancer cell by macrophage "
+    },
+    {
+      "name": "H_SIRPa",
+      "value": 0,
+      "units": "dimensionless",
+      "description": "Hill function for SIRPa-mediated inhibition on phagocytosis of cancer cell by macrophage "
+    },
+    {
+      "name": "C_CD47",
+      "value": 400,
+      "units": "molecule/micrometer^2",
+      "description": "CD47 expression on cancer cells (Morrissey 2020, PMID: 32768386)"
+    },
+    {
+      "name": "M_PD1_total",
+      "value": 12500,
+      "units": "molecule",
+      "description": "PD-1 expression on macrophages estimated based on PD-1 expression on T cell (Cheng 2014, PMID: 23417675; Mkrtichyan 2012, PMID: 22837483) and adjusted to fit its inhibitory effect on phagocytosis (Gordon 2017, PMID: 28514441)"
+    },
+    {
+      "name": "M_SIRPa",
+      "value": 100,
+      "units": "molecule/micrometer^2",
+      "description": "SIRPa expression on macrophages (Subramanian 2006, PMID: 16291597)"
+    },
+    {
+      "name": "A_Mcell",
+      "value": 1385.4423602330987,
+      "units": "micrometer^2",
+      "description": "Surface area of the macrophage calculated based on the average macrophage diameter (Krombach 1997, PMID: 9400735)"
+    },
+    {
+      "name": "IL10_50_phago",
+      "value": 270,
+      "units": "picomolarity",
+      "description": "Half-maximal IL-10 level for phagocytosis by macrophage (Bian 2016, PMID: 27578867)"
+    },
+    {
+      "name": "K_Mac_C",
+      "value": 2,
+      "units": "dimensionless",
+      "description": "Association coefficient for macrophage and cancer cell (estimated)"
+    },
+    {
+      "name": "M_total",
+      "value": 0,
+      "units": "cell",
+      "description": "Total number of macrophages "
+    },
+    {
+      "name": "H_IL10",
+      "value": 1,
+      "units": "dimensionless",
+      "description": "Hill function for IL10-mediated M2-like macrophage polarization / Treg functionality / inhibition on Ag presentaion "
+    },
+    {
+      "name": "H_IL10_phago",
+      "value": 1,
+      "units": "dimensionless",
+      "description": "Hill function for IL10-mediated inhibition on phagocytosis "
+    },
+    {
+      "name": "H_IL12",
+      "value": 1,
+      "units": "dimensionless",
+      "description": "Hill function for IL12 "
+    }
+  ],
+  "reactions": [
+    {
+      "name": "Reaction_1",
+      "reactants": [
+        "V_T.C_x"
+      ],
+      "products": [],
+      "rate_law": "k_cell_clear*V_T.C_x",
+      "parameters": [
+        "k_cell_clear"
+      ]
+    },
+    {
+      "name": "Reaction_2",
+      "reactants": [
+        "V_T.T1_exh"
+      ],
+      "products": [],
+      "rate_law": "k_cell_clear*V_T.T1_exh",
+      "parameters": [
+        "k_cell_clear"
+      ]
+    },
+    {
+      "name": "Reaction_3",
+      "reactants": [
+        "V_T.Th_exh"
+      ],
+      "products": [],
+      "rate_law": "k_cell_clear*V_T.Th_exh",
+      "parameters": [
+        "k_cell_clear"
+      ]
+    },
+    {
+      "name": "Reaction_4",
+      "reactants": [],
+      "products": [
+        "V_T.C1"
+      ],
+      "rate_law": "k_C1_growth*V_T.C1*log(max(C_max/(C_total+cell),1))",
+      "parameters": [
+        "cell",
+        "C_total",
+        "k_C1_growth",
+        "C_max"
+      ]
+    },
+    {
+      "name": "Reaction_5",
+      "reactants": [
+        "V_T.C1"
+      ],
+      "products": [
+        "V_T.C_x"
+      ],
+      "rate_law": "k_C1_death*V_T.C1",
+      "parameters": [
+        "k_C1_death"
+      ]
+    },
+    {
+      "name": "Reaction_6",
+      "reactants": [],
+      "products": [
+        "V_T.c_vas"
+      ],
+      "rate_law": "k_vas_Csec*C_total",
+      "parameters": [
+        "C_total",
+        "k_vas_Csec"
+      ]
+    },
+    {
+      "name": "Reaction_7",
+      "reactants": [
+        "V_T.c_vas"
+      ],
+      "products": [],
+      "rate_law": "k_vas_deg*V_T.c_vas",
+      "parameters": [
+        "k_vas_deg"
+      ]
+    },
+    {
+      "name": "Reaction_8",
+      "reactants": [],
+      "products": [
+        "V_T.K"
+      ],
+      "rate_law": "k_K_g*C_total*V_T.c_vas/(V_T.c_vas+c_vas_50)",
+      "parameters": [
+        "C_total",
+        "k_K_g",
+        "c_vas_50"
+      ]
+    },
+    {
+      "name": "Reaction_9",
+      "reactants": [
+        "V_T.K"
+      ],
+      "products": [],
+      "rate_law": "k_K_d*V_T.K*(nthroot(C_total/cell*2.57e-6,3))^2",
+      "parameters": [
+        "cell",
+        "C_total",
+        "k_K_d"
+      ]
+    },
+    {
+      "name": "Reaction_10",
+      "reactants": [],
+      "products": [
+        "V_T.C2"
+      ],
+      "rate_law": "k_C2_growth*V_T.C2*log(max(C_max/(C_total+cell),1))",
+      "parameters": [
+        "cell",
+        "C_total",
+        "C_max",
+        "k_C2_growth"
+      ]
+    },
+    {
+      "name": "Reaction_11",
+      "reactants": [
+        "V_T.C2"
+      ],
+      "products": [
+        "V_T.C_x"
+      ],
+      "rate_law": "k_C2_death*V_T.C2",
+      "parameters": [
+        "k_C2_death"
+      ]
+    },
+    {
+      "name": "Reaction_12",
+      "reactants": [],
+      "products": [
+        "V_C.nT0"
+      ],
+      "rate_law": "Q_nT0_thym/div_T0",
+      "parameters": [
+        "div_T0",
+        "Q_nT0_thym"
+      ]
+    },
+    {
+      "name": "Reaction_13",
+      "reactants": [],
+      "products": [
+        "V_P.nT0"
+      ],
+      "rate_law": "k_nT0_pro/div_T0*V_P.nT0/(K_nT0_pro/div_T0+V_P.nT0)",
+      "parameters": [
+        "div_T0",
+        "k_nT0_pro",
+        "K_nT0_pro"
+      ]
+    },
+    {
+      "name": "Reaction_14",
+      "reactants": [],
+      "products": [
+        "V_LN.nT0"
+      ],
+      "rate_law": "k_nT0_pro/div_T0*V_LN.nT0/(K_nT0_pro/div_T0+V_LN.nT0)",
+      "parameters": [
+        "div_T0",
+        "k_nT0_pro",
+        "K_nT0_pro"
+      ]
+    },
+    {
+      "name": "Reaction_15",
+      "reactants": [
+        "V_P.nT0"
+      ],
+      "products": [],
+      "rate_law": "k_nT0_death*V_P.nT0",
+      "parameters": [
+        "k_nT0_death"
+      ]
+    },
+    {
+      "name": "Reaction_16",
+      "reactants": [
+        "V_C.nT0"
+      ],
+      "products": [],
+      "rate_law": "k_nT0_death*V_C.nT0",
+      "parameters": [
+        "k_nT0_death"
+      ]
+    },
+    {
+      "name": "Reaction_17",
+      "reactants": [
+        "V_LN.nT0"
+      ],
+      "products": [],
+      "rate_law": "k_nT0_death*V_LN.nT0",
+      "parameters": [
+        "k_nT0_death"
+      ]
+    },
+    {
+      "name": "Reaction_18",
+      "reactants": [
+        "V_C.nT0"
+      ],
+      "products": [
+        "V_P.nT0"
+      ],
+      "rate_law": "q_nT0_P_in*V_C.nT0",
+      "parameters": [
+        "q_nT0_P_in"
+      ]
+    },
+    {
+      "name": "Reaction_19",
+      "reactants": [
+        "V_P.nT0"
+      ],
+      "products": [
+        "V_C.nT0"
+      ],
+      "rate_law": "q_nT0_P_out*V_P.nT0",
+      "parameters": [
+        "q_nT0_P_out"
+      ]
+    },
+    {
+      "name": "Reaction_20",
+      "reactants": [
+        "V_C.nT0"
+      ],
+      "products": [
+        "V_LN.nT0"
+      ],
+      "rate_law": "q_nT0_LN_in*V_C.nT0",
+      "parameters": [
+        "q_nT0_LN_in"
+      ]
+    },
+    {
+      "name": "Reaction_21",
+      "reactants": [
+        "V_LN.nT0"
+      ],
+      "products": [
+        "V_C.nT0"
+      ],
+      "rate_law": "q_nT0_LN_out*V_LN.nT0",
+      "parameters": [
+        "q_nT0_LN_out"
+      ]
+    },
+    {
+      "name": "Reaction_22",
+      "reactants": [
+        "V_LN.nT0"
+      ],
+      "products": [],
+      "rate_law": "k_T0_act*H_APC*H_P0*V_LN.nT0",
+      "parameters": [
+        "H_APC",
+        "k_T0_act",
+        "H_P0"
+      ]
+    },
+    {
+      "name": "Reaction_23",
+      "reactants": [],
+      "products": [
+        "V_LN.aT0"
+      ],
+      "rate_law": "k_T0_act*H_APC*H_P0*V_LN.nT0*n_T0_clones",
+      "parameters": [
+        "H_APC",
+        "n_T0_clones",
+        "k_T0_act",
+        "H_P0"
+      ]
+    },
+    {
+      "name": "Reaction_24",
+      "reactants": [
+        "V_LN.aT0"
+      ],
+      "products": [],
+      "rate_law": "k_T0_pro/N_aT0*V_LN.aT0",
+      "parameters": [
+        "k_T0_pro",
+        "N_aT0"
+      ]
+    },
+    {
+      "name": "Reaction_25",
+      "reactants": [],
+      "products": [
+        "V_LN.T0"
+      ],
+      "rate_law": "k_T0_pro/N_aT0*2^(N_aT0)*V_LN.aT0",
+      "parameters": [
+        "k_T0_pro",
+        "N_aT0"
+      ]
+    },
+    {
+      "name": "Reaction_26",
+      "reactants": [
+        "V_C.T0"
+      ],
+      "products": [],
+      "rate_law": "k_T0_death*V_C.T0",
+      "parameters": [
+        "k_T0_death"
+      ]
+    },
+    {
+      "name": "Reaction_27",
+      "reactants": [
+        "V_P.T0"
+      ],
+      "products": [],
+      "rate_law": "k_T0_death*V_P.T0",
+      "parameters": [
+        "k_T0_death"
+      ]
+    },
+    {
+      "name": "Reaction_28",
+      "reactants": [
+        "V_LN.T0"
+      ],
+      "products": [],
+      "rate_law": "k_T0_death*V_LN.T0",
+      "parameters": [
+        "k_T0_death"
+      ]
+    },
+    {
+      "name": "Reaction_29",
+      "reactants": [
+        "V_T.T0"
+      ],
+      "products": [],
+      "rate_law": "k_T0_death*V_T.T0",
+      "parameters": [
+        "k_T0_death"
+      ]
+    },
+    {
+      "name": "Reaction_30",
+      "reactants": [
+        "V_T.T0"
+      ],
+      "products": [],
+      "rate_law": "k_cell_clear*V_T.T0*(Kc_rec/(C_total^2+Kc_rec))",
+      "parameters": [
+        "k_cell_clear",
+        "C_total",
+        "Kc_rec"
+      ]
+    },
+    {
+      "name": "Reaction_31",
+      "reactants": [
+        "V_C.T0"
+      ],
+      "products": [
+        "V_P.T0"
+      ],
+      "rate_law": "q_T0_P_in*V_C.T0",
+      "parameters": [
+        "q_T0_P_in"
+      ]
+    },
+    {
+      "name": "Reaction_32",
+      "reactants": [
+        "V_P.T0"
+      ],
+      "products": [
+        "V_C.T0"
+      ],
+      "rate_law": "q_T0_P_out*V_P.T0",
+      "parameters": [
+        "q_T0_P_out"
+      ]
+    },
+    {
+      "name": "Reaction_33",
+      "reactants": [
+        "V_C.T0"
+      ],
+      "products": [
+        "V_T.T0"
+      ],
+      "rate_law": "q_T0_T_in*V_T*V_C.T0*(C_total^2/(C_total^2+Kc_rec))",
+      "parameters": [
+        "C_total",
+        "q_T0_T_in",
+        "Kc_rec"
+      ]
+    },
+    {
+      "name": "Reaction_34",
+      "reactants": [
+        "V_LN.T0"
+      ],
+      "products": [
+        "V_C.T0"
+      ],
+      "rate_law": "q_T0_LN_out*V_LN.T0",
+      "parameters": [
+        "q_T0_LN_out"
+      ]
+    },
+    {
+      "name": "Reaction_35",
+      "reactants": [
+        "V_LN.IL2"
+      ],
+      "products": [],
+      "rate_law": "k_IL2_deg*V_LN.IL2*V_LN",
+      "parameters": [
+        "k_IL2_deg"
+      ]
+    },
+    {
+      "name": "Reaction_36",
+      "reactants": [
+        "V_LN.IL2"
+      ],
+      "products": [],
+      "rate_law": "k_IL2_cons*V_LN.T1*V_LN.IL2/(IL2_50+V_LN.IL2)",
+      "parameters": [
+        "k_IL2_cons",
+        "IL2_50"
+      ]
+    },
+    {
+      "name": "Reaction_37",
+      "reactants": [
+        "V_LN.IL2"
+      ],
+      "products": [],
+      "rate_law": "k_IL2_cons*V_LN.T0*V_LN.IL2/(IL2_50_Treg+V_LN.IL2)",
+      "parameters": [
+        "k_IL2_cons",
+        "IL2_50_Treg"
+      ]
+    },
+    {
+      "name": "Reaction_38",
+      "reactants": [],
+      "products": [
+        "V_C.nT1"
+      ],
+      "rate_law": "Q_nT1_thym/div_T1",
+      "parameters": [
+        "div_T1",
+        "Q_nT1_thym"
+      ]
+    },
+    {
+      "name": "Reaction_39",
+      "reactants": [],
+      "products": [
+        "V_P.nT1"
+      ],
+      "rate_law": "k_nT1_pro/div_T1*V_P.nT1/(K_nT1_pro/div_T1+V_P.nT1)",
+      "parameters": [
+        "div_T1",
+        "k_nT1_pro",
+        "K_nT1_pro"
+      ]
+    },
+    {
+      "name": "Reaction_40",
+      "reactants": [],
+      "products": [
+        "V_LN.nT1"
+      ],
+      "rate_law": "k_nT1_pro/div_T1*V_LN.nT1/(K_nT1_pro/div_T1+V_LN.nT1)",
+      "parameters": [
+        "div_T1",
+        "k_nT1_pro",
+        "K_nT1_pro"
+      ]
+    },
+    {
+      "name": "Reaction_41",
+      "reactants": [
+        "V_P.nT1"
+      ],
+      "products": [],
+      "rate_law": "k_nT1_death*V_P.nT1",
+      "parameters": [
+        "k_nT1_death"
+      ]
+    },
+    {
+      "name": "Reaction_42",
+      "reactants": [
+        "V_C.nT1"
+      ],
+      "products": [],
+      "rate_law": "k_nT1_death*V_C.nT1",
+      "parameters": [
+        "k_nT1_death"
+      ]
+    },
+    {
+      "name": "Reaction_43",
+      "reactants": [
+        "V_LN.nT1"
+      ],
+      "products": [],
+      "rate_law": "k_nT1_death*V_LN.nT1",
+      "parameters": [
+        "k_nT1_death"
+      ]
+    },
+    {
+      "name": "Reaction_44",
+      "reactants": [
+        "V_C.nT1"
+      ],
+      "products": [
+        "V_P.nT1"
+      ],
+      "rate_law": "q_nT1_P_in*V_C.nT1",
+      "parameters": [
+        "q_nT1_P_in"
+      ]
+    },
+    {
+      "name": "Reaction_45",
+      "reactants": [
+        "V_P.nT1"
+      ],
+      "products": [
+        "V_C.nT1"
+      ],
+      "rate_law": "q_nT1_P_out*V_P.nT1",
+      "parameters": [
+        "q_nT1_P_out"
+      ]
+    },
+    {
+      "name": "Reaction_46",
+      "reactants": [
+        "V_C.nT1"
+      ],
+      "products": [
+        "V_LN.nT1"
+      ],
+      "rate_law": "q_nT1_LN_in*V_C.nT1",
+      "parameters": [
+        "q_nT1_LN_in"
+      ]
+    },
+    {
+      "name": "Reaction_47",
+      "reactants": [
+        "V_LN.nT1"
+      ],
+      "products": [
+        "V_C.nT1"
+      ],
+      "rate_law": "q_nT1_LN_out*V_LN.nT1",
+      "parameters": [
+        "q_nT1_LN_out"
+      ]
+    },
+    {
+      "name": "Reaction_48",
+      "reactants": [
+        "V_LN.nT1"
+      ],
+      "products": [],
+      "rate_law": "k_T1_act*H_mAPC*H_P1*V_LN.nT1",
+      "parameters": [
+        "H_mAPC",
+        "k_T1_act",
+        "H_P1"
+      ]
+    },
+    {
+      "name": "Reaction_49",
+      "reactants": [],
+      "products": [
+        "V_LN.aT1"
+      ],
+      "rate_law": "k_T1_act*H_mAPC*H_P1*V_LN.nT1*n_T1_clones",
+      "parameters": [
+        "H_mAPC",
+        "n_T1_clones",
+        "k_T1_act",
+        "H_P1"
+      ]
+    },
+    {
+      "name": "Reaction_50",
+      "reactants": [
+        "V_LN.aT1"
+      ],
+      "products": [],
+      "rate_law": "k_T1_pro/N_aT*V_LN.aT1",
+      "parameters": [
+        "N_aT",
+        "k_T1_pro"
+      ]
+    },
+    {
+      "name": "Reaction_51",
+      "reactants": [],
+      "products": [
+        "V_LN.T1"
+      ],
+      "rate_law": "k_T1_pro/N_aT*2^(N_aT)*V_LN.aT1",
+      "parameters": [
+        "N_aT",
+        "k_T1_pro"
+      ]
+    },
+    {
+      "name": "Reaction_52",
+      "reactants": [
+        "V_C.T1"
+      ],
+      "products": [],
+      "rate_law": "k_T1_death*V_C.T1",
+      "parameters": [
+        "k_T1_death"
+      ]
+    },
+    {
+      "name": "Reaction_53",
+      "reactants": [
+        "V_P.T1"
+      ],
+      "products": [],
+      "rate_law": "k_T1_death*V_P.T1",
+      "parameters": [
+        "k_T1_death"
+      ]
+    },
+    {
+      "name": "Reaction_54",
+      "reactants": [
+        "V_LN.T1"
+      ],
+      "products": [],
+      "rate_law": "k_T1_death*V_LN.T1",
+      "parameters": [
+        "k_T1_death"
+      ]
+    },
+    {
+      "name": "Reaction_55",
+      "reactants": [
+        "V_T.T1"
+      ],
+      "products": [
+        "V_T.T1_exh"
+      ],
+      "rate_law": "k_T1_death*V_T.T1",
+      "parameters": [
+        "k_T1_death"
+      ]
+    },
+    {
+      "name": "Reaction_56",
+      "reactants": [
+        "V_T.T1"
+      ],
+      "products": [
+        "V_T.T1_exh"
+      ],
+      "rate_law": "k_cell_clear*V_T.T1*(Kc_rec/(C_total^2+Kc_rec))",
+      "parameters": [
+        "k_cell_clear",
+        "C_total",
+        "Kc_rec"
+      ]
+    },
+    {
+      "name": "Reaction_57",
+      "reactants": [
+        "V_T.T1"
+      ],
+      "products": [
+        "V_T.T1_exh"
+      ],
+      "rate_law": "k_Treg*V_T.T1*Tregs_/(V_T.T1+Tregs_+cell)*H_IL10",
+      "parameters": [
+        "cell",
+        "Tregs_",
+        "k_Treg",
+        "H_IL10"
+      ]
+    },
+    {
+      "name": "Reaction_58",
+      "reactants": [
+        "V_T.T1"
+      ],
+      "products": [
+        "V_T.T1_exh"
+      ],
+      "rate_law": "k_T1*V_T.T1*C_total/(C_total+V_T.T1+cell)*H_PD1_C1",
+      "parameters": [
+        "cell",
+        "C_total",
+        "H_PD1_C1",
+        "k_T1"
+      ]
+    },
+    {
+      "name": "Reaction_59",
+      "reactants": [
+        "V_C.T1"
+      ],
+      "products": [
+        "V_P.T1"
+      ],
+      "rate_law": "q_T1_P_in*V_C.T1",
+      "parameters": [
+        "q_T1_P_in"
+      ]
+    },
+    {
+      "name": "Reaction_60",
+      "reactants": [
+        "V_P.T1"
+      ],
+      "products": [
+        "V_C.T1"
+      ],
+      "rate_law": "q_T1_P_out*V_P.T1",
+      "parameters": [
+        "q_T1_P_out"
+      ]
+    },
+    {
+      "name": "Reaction_61",
+      "reactants": [
+        "V_C.T1"
+      ],
+      "products": [
+        "V_T.T1"
+      ],
+      "rate_law": "q_T1_T_in*V_T*V_C.T1*(C_total^2/(C_total^2+Kc_rec))",
+      "parameters": [
+        "C_total",
+        "q_T1_T_in",
+        "Kc_rec"
+      ]
+    },
+    {
+      "name": "Reaction_62",
+      "reactants": [
+        "V_LN.T1"
+      ],
+      "products": [
+        "V_C.T1"
+      ],
+      "rate_law": "q_T1_LN_out*V_LN.T1",
+      "parameters": [
+        "q_T1_LN_out"
+      ]
+    },
+    {
+      "name": "Reaction_63",
+      "reactants": [],
+      "products": [
+        "V_LN.IL2"
+      ],
+      "rate_law": "k_IL2_sec*V_LN.aT1",
+      "parameters": [
+        "k_IL2_sec"
+      ]
+    },
+    {
+      "name": "Reaction_64",
+      "reactants": [],
+      "products": [
+        "V_T.IFNg"
+      ],
+      "rate_law": "k_IFNg_Tsec*V_T.T1",
+      "parameters": [
+        "k_IFNg_Tsec"
+      ]
+    },
+    {
+      "name": "Reaction_65",
+      "reactants": [
+        "V_T.C1"
+      ],
+      "products": [
+        "V_T.C_x"
+      ],
+      "rate_law": "k_C_T1*V_T.C1*V_T.T1/(K_T_C*V_T.C1+V_T.T1+cell)*V_T.T1/(V_T.T1+K_T_Treg*Tregs_+cell)*(1-H_TGFb_Teff)*(1-H_PD1_C1)*(1-H_MDSC)",
+      "parameters": [
+        "cell",
+        "Tregs_",
+        "H_PD1_C1",
+        "k_C_T1",
+        "K_T_C",
+        "K_T_Treg",
+        "H_TGFb_Teff",
+        "H_MDSC"
+      ]
+    },
+    {
+      "name": "Reaction_66",
+      "reactants": [
+        "V_T.C2"
+      ],
+      "products": [
+        "V_T.C_x"
+      ],
+      "rate_law": "k_C_T1*V_T.C2*V_T.T1/(K_T_C*V_T.C2+V_T.T1+cell)*V_T.T1/(V_T.T1+K_T_Treg*Tregs_+cell)*(1-H_TGFb_Teff)*(1-H_PD1_C1)*(1-H_MDSC)",
+      "parameters": [
+        "cell",
+        "Tregs_",
+        "H_PD1_C1",
+        "k_C_T1",
+        "K_T_C",
+        "K_T_Treg",
+        "H_TGFb_Teff",
+        "H_MDSC"
+      ]
+    },
+    {
+      "name": "Reaction_67",
+      "reactants": [],
+      "products": [
+        "V_T.APC"
+      ],
+      "rate_law": "k_APC_death*(APC0_T*V_T-V_T.APC)",
+      "parameters": [
+        "k_APC_death",
+        "APC0_T"
+      ]
+    },
+    {
+      "name": "Reaction_68",
+      "reactants": [],
+      "products": [
+        "V_LN.APC"
+      ],
+      "rate_law": "k_APC_death*(APC0_LN*V_LN-V_LN.APC)",
+      "parameters": [
+        "k_APC_death",
+        "APC0_LN"
+      ]
+    },
+    {
+      "name": "Reaction_69",
+      "reactants": [
+        "V_T.APC"
+      ],
+      "products": [
+        "V_T.mAPC"
+      ],
+      "rate_law": "k_APC_mat*V_T.APC*H_IL12*(1-H_IL10)",
+      "parameters": [
+        "k_APC_mat",
+        "H_IL10",
+        "H_IL12"
+      ]
+    },
+    {
+      "name": "Reaction_70",
+      "reactants": [
+        "V_T.mAPC"
+      ],
+      "products": [
+        "V_LN.mAPC"
+      ],
+      "rate_law": "k_APC_mig*V_T.mAPC",
+      "parameters": [
+        "k_APC_mig"
+      ]
+    },
+    {
+      "name": "Reaction_71",
+      "reactants": [
+        "V_T.mAPC"
+      ],
+      "products": [],
+      "rate_law": "k_mAPC_death*V_T.mAPC",
+      "parameters": [
+        "k_mAPC_death"
+      ]
+    },
+    {
+      "name": "Reaction_72",
+      "reactants": [
+        "V_LN.mAPC"
+      ],
+      "products": [],
+      "rate_law": "k_mAPC_death*V_LN.mAPC",
+      "parameters": [
+        "k_mAPC_death"
+      ]
+    },
+    {
+      "name": "Reaction_75",
+      "reactants": [
+        "A_e.M1"
+      ],
+      "products": [
+        "A_s.M1"
+      ],
+      "rate_law": "kout*A_e.M1*A_e-kin*A_s.M1*A_s",
+      "parameters": [
+        "kin",
+        "kout"
+      ]
+    },
+    {
+      "name": "Reaction_76",
+      "reactants": [],
+      "products": [
+        "V_T.P0"
+      ],
+      "rate_law": "n_T0_clones*(P0_C1*(k_C1_death+k_C1_therapy)*C1+P0_C1*k_C_T1*V_T.C1*V_T.T1/(K_T_C*V_T.C1+V_T.T1+cell)*V_T.T1/(V_T.T1+K_T_Treg*Tregs_+cell)*(1-H_TGFb_Teff)*(1-H_PD1_C1)*(1-H_MDSC)+P0_C2*(k_C2_death+k_C2_therapy)*C2+P0_C2*k_C_T1*V_T.C2*V_T.T1/(K_T_C*V_T.C2+V_T.T1+cell)*V_T.T1/(V_T.T1+K_T_Treg*Tregs_+cell)*(1-H_TGFb_Teff)*(1-H_PD1_C1)*(1-H_MDSC))",
+      "parameters": [
+        "cell",
+        "Tregs_",
+        "H_PD1_C1",
+        "k_C1_death",
+        "k_C1_therapy",
+        "k_C2_death",
+        "k_C2_therapy",
+        "n_T0_clones",
+        "k_C_T1",
+        "K_T_C",
+        "K_T_Treg",
+        "P0_C1",
+        "P0_C2",
+        "H_TGFb_Teff",
+        "H_MDSC"
+      ]
+    },
+    {
+      "name": "Reaction_77",
+      "reactants": [
+        "V_T.P0"
+      ],
+      "products": [],
+      "rate_law": "k_xP0_deg*V_T.P0*V_T",
+      "parameters": [
+        "k_xP0_deg"
+      ]
+    },
+    {
+      "name": "Reaction_78",
+      "reactants": [
+        "V_T.P0"
+      ],
+      "products": [],
+      "rate_law": "k_P0_up*V_T.APC*V_T.P0*V_T",
+      "parameters": [
+        "k_P0_up"
+      ]
+    },
+    {
+      "name": "Reaction_79",
+      "reactants": [],
+      "products": [
+        "V_e.P0"
+      ],
+      "rate_law": "k_P0_up*cell*V_T.P0*V_e",
+      "parameters": [
+        "cell",
+        "k_P0_up"
+      ]
+    },
+    {
+      "name": "Reaction_80",
+      "reactants": [
+        "V_e.P0"
+      ],
+      "products": [
+        "V_e.p0"
+      ],
+      "rate_law": "k_P0_deg*V_e.P0*V_e",
+      "parameters": [
+        "k_P0_deg"
+      ]
+    },
+    {
+      "name": "Reaction_81",
+      "reactants": [
+        "V_e.p0"
+      ],
+      "products": [],
+      "rate_law": "k_p0_deg*V_e.p0*V_e",
+      "parameters": [
+        "k_p0_deg"
+      ]
+    },
+    {
+      "name": "Reaction_82",
+      "reactants": [
+        "V_e.p0",
+        "A_e.M1"
+      ],
+      "products": [
+        "A_e.M1p0"
+      ],
+      "rate_law": "k_P0_on*V_e.p0*A_e.M1*A_e",
+      "parameters": [
+        "k_P0_on"
+      ]
+    },
+    {
+      "name": "Reaction_83",
+      "reactants": [
+        "A_e.M1p0"
+      ],
+      "products": [
+        "V_e.p0",
+        "A_e.M1"
+      ],
+      "rate_law": "k_P0_d1*k_P0_on*A_e.M1p0*A_e",
+      "parameters": [
+        "k_P0_on",
+        "k_P0_d1"
+      ]
+    },
+    {
+      "name": "Reaction_84",
+      "reactants": [
+        "A_s.M1p0"
+      ],
+      "products": [
+        "A_s.M1"
+      ],
+      "rate_law": "k_P0_d1*k_P0_on*A_s.M1p0*A_s",
+      "parameters": [
+        "k_P0_on",
+        "k_P0_d1"
+      ]
+    },
+    {
+      "name": "Reaction_85",
+      "reactants": [
+        "A_e.M1p0"
+      ],
+      "products": [
+        "A_s.M1p0"
+      ],
+      "rate_law": "kout*A_e.M1p0*A_e",
+      "parameters": [
+        "kout"
+      ]
+    },
+    {
+      "name": "Reaction_86",
+      "reactants": [],
+      "products": [
+        "V_T.P1"
+      ],
+      "rate_law": "n_T1_clones*(P1_C1*(k_C1_death+k_C1_therapy)*C1+P1_C1*k_C_T1*V_T.C1*V_T.T1/(K_T_C*V_T.C1+V_T.T1+cell)*V_T.T1/(V_T.T1+K_T_Treg*Tregs_+cell)*(1-H_TGFb_Teff)*(1-H_PD1_C1)*(1-H_MDSC)+P1_C2*(k_C2_death+k_C2_therapy)*C2+P1_C2*k_C_T1*V_T.C2*V_T.T1/(K_T_C*V_T.C2+V_T.T1+cell)*V_T.T1/(V_T.T1+K_T_Treg*Tregs_+cell)*(1-H_TGFb_Teff)*(1-H_PD1_C1)*(1-H_MDSC))",
+      "parameters": [
+        "cell",
+        "Tregs_",
+        "H_PD1_C1",
+        "k_C1_death",
+        "k_C1_therapy",
+        "k_C2_death",
+        "k_C2_therapy",
+        "n_T1_clones",
+        "k_C_T1",
+        "K_T_C",
+        "K_T_Treg",
+        "P1_C1",
+        "P1_C2",
+        "H_TGFb_Teff",
+        "H_MDSC"
+      ]
+    },
+    {
+      "name": "Reaction_87",
+      "reactants": [
+        "V_T.P1"
+      ],
+      "products": [],
+      "rate_law": "k_xP1_deg*V_T.P1*V_T",
+      "parameters": [
+        "k_xP1_deg"
+      ]
+    },
+    {
+      "name": "Reaction_88",
+      "reactants": [
+        "V_T.P1"
+      ],
+      "products": [],
+      "rate_law": "k_P1_up*V_T.APC*V_T.P1*V_T",
+      "parameters": [
+        "k_P1_up"
+      ]
+    },
+    {
+      "name": "Reaction_89",
+      "reactants": [],
+      "products": [
+        "V_e.P1"
+      ],
+      "rate_law": "k_P1_up*cell*V_T.P1*V_e",
+      "parameters": [
+        "cell",
+        "k_P1_up"
+      ]
+    },
+    {
+      "name": "Reaction_90",
+      "reactants": [
+        "V_e.P1"
+      ],
+      "products": [
+        "V_e.p1"
+      ],
+      "rate_law": "k_P1_deg*V_e.P1*V_e",
+      "parameters": [
+        "k_P1_deg"
+      ]
+    },
+    {
+      "name": "Reaction_91",
+      "reactants": [
+        "V_e.p1"
+      ],
+      "products": [],
+      "rate_law": "k_p1_deg*V_e.p1*V_e",
+      "parameters": [
+        "k_p1_deg"
+      ]
+    },
+    {
+      "name": "Reaction_92",
+      "reactants": [
+        "V_e.p1",
+        "A_e.M1"
+      ],
+      "products": [
+        "A_e.M1p1"
+      ],
+      "rate_law": "k_P1_on*V_e.p1*A_e.M1*A_e",
+      "parameters": [
+        "k_P1_on"
+      ]
+    },
+    {
+      "name": "Reaction_93",
+      "reactants": [
+        "A_e.M1p1"
+      ],
+      "products": [
+        "V_e.p1",
+        "A_e.M1"
+      ],
+      "rate_law": "k_P1_d1*k_P1_on*A_e.M1p1*A_e",
+      "parameters": [
+        "k_P1_on",
+        "k_P1_d1"
+      ]
+    },
+    {
+      "name": "Reaction_94",
+      "reactants": [
+        "A_s.M1p1"
+      ],
+      "products": [
+        "A_s.M1"
+      ],
+      "rate_law": "k_P1_d1*k_P1_on*A_s.M1p1*A_s",
+      "parameters": [
+        "k_P1_on",
+        "k_P1_d1"
+      ]
+    },
+    {
+      "name": "Reaction_95",
+      "reactants": [
+        "A_e.M1p1"
+      ],
+      "products": [
+        "A_s.M1p1"
+      ],
+      "rate_law": "kout*A_e.M1p1*A_e",
+      "parameters": [
+        "kout"
+      ]
+    },
+    {
+      "name": "Reaction_96",
+      "reactants": [
+        "V_C.aPD1"
+      ],
+      "products": [
+        "V_P.aPD1"
+      ],
+      "rate_law": "q_P_aPD1*(V_C.aPD1/gamma_C_aPD1-V_P.aPD1/gamma_P_aPD1)",
+      "parameters": [
+        "q_P_aPD1",
+        "gamma_C_aPD1",
+        "gamma_P_aPD1"
+      ]
+    },
+    {
+      "name": "Reaction_97",
+      "reactants": [
+        "V_C.aPD1"
+      ],
+      "products": [
+        "V_T.aPD1"
+      ],
+      "rate_law": "q_T_aPD1*(V_C.aPD1/gamma_C_aPD1-V_T.aPD1/gamma_T_aPD1)",
+      "parameters": [
+        "q_T_aPD1",
+        "gamma_C_aPD1",
+        "gamma_T_aPD1"
+      ]
+    },
+    {
+      "name": "Reaction_98",
+      "reactants": [
+        "V_C.aPD1"
+      ],
+      "products": [
+        "V_LN.aPD1"
+      ],
+      "rate_law": "q_LN_aPD1*(V_C.aPD1/gamma_C_aPD1-V_LN.aPD1/gamma_LN_aPD1)",
+      "parameters": [
+        "q_LN_aPD1",
+        "gamma_C_aPD1",
+        "gamma_LN_aPD1"
+      ]
+    },
+    {
+      "name": "Reaction_99",
+      "reactants": [
+        "V_T.aPD1"
+      ],
+      "products": [
+        "V_LN.aPD1"
+      ],
+      "rate_law": "q_LD_aPD1*V_T*V_T.aPD1/gamma_T_aPD1",
+      "parameters": [
+        "q_LD_aPD1",
+        "gamma_T_aPD1"
+      ]
+    },
+    {
+      "name": "Reaction_100",
+      "reactants": [
+        "V_LN.aPD1"
+      ],
+      "products": [
+        "V_C.aPD1"
+      ],
+      "rate_law": "q_LD_aPD1*V_T*V_LN.aPD1/gamma_LN_aPD1",
+      "parameters": [
+        "q_LD_aPD1",
+        "gamma_LN_aPD1"
+      ]
+    },
+    {
+      "name": "Reaction_101",
+      "reactants": [
+        "V_C.aPD1"
+      ],
+      "products": [],
+      "rate_law": "k_cl_aPD1*V_C.aPD1",
+      "parameters": [
+        "k_cl_aPD1"
+      ]
+    },
+    {
+      "name": "Reaction_102",
+      "reactants": [
+        "V_C.aPDL1"
+      ],
+      "products": [
+        "V_P.aPDL1"
+      ],
+      "rate_law": "q_P_aPDL1*(V_C.aPDL1/gamma_C_aPDL1-V_P.aPDL1/gamma_P_aPDL1)",
+      "parameters": [
+        "q_P_aPDL1",
+        "gamma_C_aPDL1",
+        "gamma_P_aPDL1"
+      ]
+    },
+    {
+      "name": "Reaction_103",
+      "reactants": [
+        "V_C.aPDL1"
+      ],
+      "products": [
+        "V_T.aPDL1"
+      ],
+      "rate_law": "q_T_aPDL1*(V_C.aPDL1/gamma_C_aPDL1-V_T.aPDL1/gamma_T_aPDL1)",
+      "parameters": [
+        "q_T_aPDL1",
+        "gamma_C_aPDL1",
+        "gamma_T_aPDL1"
+      ]
+    },
+    {
+      "name": "Reaction_104",
+      "reactants": [
+        "V_C.aPDL1"
+      ],
+      "products": [
+        "V_LN.aPDL1"
+      ],
+      "rate_law": "q_LN_aPDL1*(V_C.aPDL1/gamma_C_aPDL1-V_LN.aPDL1/gamma_LN_aPDL1)",
+      "parameters": [
+        "q_LN_aPDL1",
+        "gamma_C_aPDL1",
+        "gamma_LN_aPDL1"
+      ]
+    },
+    {
+      "name": "Reaction_105",
+      "reactants": [
+        "V_T.aPDL1"
+      ],
+      "products": [
+        "V_LN.aPDL1"
+      ],
+      "rate_law": "q_LD_aPDL1*V_T*V_T.aPDL1/gamma_T_aPDL1",
+      "parameters": [
+        "q_LD_aPDL1",
+        "gamma_T_aPDL1"
+      ]
+    },
+    {
+      "name": "Reaction_106",
+      "reactants": [
+        "V_LN.aPDL1"
+      ],
+      "products": [
+        "V_C.aPDL1"
+      ],
+      "rate_law": "q_LD_aPDL1*V_T*V_LN.aPDL1/gamma_LN_aPDL1",
+      "parameters": [
+        "q_LD_aPDL1",
+        "gamma_LN_aPDL1"
+      ]
+    },
+    {
+      "name": "Reaction_107",
+      "reactants": [
+        "V_C.aPDL1"
+      ],
+      "products": [],
+      "rate_law": "k_cl_aPDL1*V_C.aPDL1",
+      "parameters": [
+        "k_cl_aPDL1"
+      ]
+    },
+    {
+      "name": "Reaction_108",
+      "reactants": [
+        "V_C.aCTLA4"
+      ],
+      "products": [
+        "V_P.aCTLA4"
+      ],
+      "rate_law": "q_P_aCTLA4*(V_C.aCTLA4/gamma_C_aCTLA4-V_P.aCTLA4/gamma_P_aCTLA4)",
+      "parameters": [
+        "q_P_aCTLA4",
+        "gamma_C_aCTLA4",
+        "gamma_P_aCTLA4"
+      ]
+    },
+    {
+      "name": "Reaction_109",
+      "reactants": [
+        "V_C.aCTLA4"
+      ],
+      "products": [
+        "V_T.aCTLA4"
+      ],
+      "rate_law": "q_T_aCTLA4*(V_C.aCTLA4/gamma_C_aCTLA4-V_T.aCTLA4/gamma_T_aCTLA4)",
+      "parameters": [
+        "q_T_aCTLA4",
+        "gamma_C_aCTLA4",
+        "gamma_T_aCTLA4"
+      ]
+    },
+    {
+      "name": "Reaction_110",
+      "reactants": [
+        "V_C.aCTLA4"
+      ],
+      "products": [
+        "V_LN.aCTLA4"
+      ],
+      "rate_law": "q_LN_aCTLA4*(V_C.aCTLA4/gamma_C_aCTLA4-V_LN.aCTLA4/gamma_LN_aCTLA4)",
+      "parameters": [
+        "q_LN_aCTLA4",
+        "gamma_C_aCTLA4",
+        "gamma_LN_aCTLA4"
+      ]
+    },
+    {
+      "name": "Reaction_111",
+      "reactants": [
+        "V_T.aCTLA4"
+      ],
+      "products": [
+        "V_LN.aCTLA4"
+      ],
+      "rate_law": "q_LD_aCTLA4*V_T*V_T.aCTLA4/gamma_T_aCTLA4",
+      "parameters": [
+        "q_LD_aCTLA4",
+        "gamma_T_aCTLA4"
+      ]
+    },
+    {
+      "name": "Reaction_112",
+      "reactants": [
+        "V_LN.aCTLA4"
+      ],
+      "products": [
+        "V_C.aCTLA4"
+      ],
+      "rate_law": "q_LD_aCTLA4*V_T*V_LN.aCTLA4/gamma_LN_aCTLA4",
+      "parameters": [
+        "q_LD_aCTLA4",
+        "gamma_LN_aCTLA4"
+      ]
+    },
+    {
+      "name": "Reaction_113",
+      "reactants": [
+        "V_C.aCTLA4"
+      ],
+      "products": [],
+      "rate_law": "k_cl_aCTLA4*V_C.aCTLA4",
+      "parameters": [
+        "k_cl_aCTLA4"
+      ]
+    },
+    {
+      "name": "Reaction_114",
+      "reactants": [],
+      "products": [
+        "syn_T_C1.PDL1"
+      ],
+      "rate_law": "k_out_PDL1*V_T.IFNg/(V_T.IFNg+IFNg_50_ind)*(1-syn_T_C1.PDL1_total/(C1_PDL1_base*r_PDL1_IFNg/A_cell))",
+      "parameters": [
+        "A_cell",
+        "k_out_PDL1",
+        "r_PDL1_IFNg",
+        "C1_PDL1_base",
+        "IFNg_50_ind"
+      ]
+    },
+    {
+      "name": "Reaction_115",
+      "reactants": [],
+      "products": [
+        "syn_T_C1.PDL2"
+      ],
+      "rate_law": "k_out_PDL1*r_PDL2C1*V_T.IFNg/(V_T.IFNg+IFNg_50_ind)*(1-syn_T_C1.PDL2_total/(C1_PDL1_base*r_PDL1_IFNg/A_cell*r_PDL2C1))",
+      "parameters": [
+        "A_cell",
+        "k_out_PDL1",
+        "r_PDL1_IFNg",
+        "C1_PDL1_base",
+        "r_PDL2C1",
+        "IFNg_50_ind"
+      ]
+    },
+    {
+      "name": "Reaction_116",
+      "reactants": [],
+      "products": [
+        "syn_T_C1.PDL1"
+      ],
+      "rate_law": "k_in_PDL1*(C1_PDL1_base/A_cell-syn_T_C1.PDL1_total)",
+      "parameters": [
+        "A_cell",
+        "k_in_PDL1",
+        "C1_PDL1_base"
+      ]
+    },
+    {
+      "name": "Reaction_117",
+      "reactants": [],
+      "products": [
+        "syn_T_C1.PDL2"
+      ],
+      "rate_law": "k_in_PDL1*(C1_PDL1_base/A_cell*r_PDL2C1-syn_T_C1.PDL2_total)",
+      "parameters": [
+        "A_cell",
+        "k_in_PDL1",
+        "C1_PDL1_base",
+        "r_PDL2C1"
+      ]
+    },
+    {
+      "name": "Reaction_118",
+      "reactants": [
+        "syn_T_C1.PD1",
+        "syn_T_C1.PDL1"
+      ],
+      "products": [
+        "syn_T_C1.PD1_PDL1"
+      ],
+      "rate_law": "kon_PD1_PDL1*(syn_T_C1.PD1)*(syn_T_C1.PDL1)  -  koff_PD1_PDL1*syn_T_C1.PD1_PDL1",
+      "parameters": [
+        "kon_PD1_PDL1",
+        "koff_PD1_PDL1"
+      ]
+    },
+    {
+      "name": "Reaction_119",
+      "reactants": [
+        "syn_T_C1.PD1",
+        "syn_T_C1.PDL2"
+      ],
+      "products": [
+        "syn_T_C1.PD1_PDL2"
+      ],
+      "rate_law": "kon_PD1_PDL2*(syn_T_C1.PD1)*(syn_T_C1.PDL2)  -  koff_PD1_PDL2*syn_T_C1.PD1_PDL2",
+      "parameters": [
+        "kon_PD1_PDL2",
+        "koff_PD1_PDL2"
+      ]
+    },
+    {
+      "name": "Reaction_120",
+      "reactants": [
+        "syn_T_C1.PD1"
+      ],
+      "products": [
+        "syn_T_C1.PD1_aPD1"
+      ],
+      "rate_law": "2*kon_PD1_aPD1*(syn_T_C1.PD1 * V_T.aPD1/gamma_T_aPD1) -  koff_PD1_aPD1*syn_T_C1.PD1_aPD1",
+      "parameters": [
+        "gamma_T_aPD1",
+        "kon_PD1_aPD1",
+        "koff_PD1_aPD1"
+      ]
+    },
+    {
+      "name": "Reaction_121",
+      "reactants": [
+        "syn_T_C1.PD1_aPD1",
+        "syn_T_C1.PD1"
+      ],
+      "products": [
+        "syn_T_C1.PD1_aPD1_PD1"
+      ],
+      "rate_law": "Chi_PD1_aPD1*kon_PD1_aPD1*(syn_T_C1.PD1 * syn_T_C1.PD1_aPD1) -  2*koff_PD1_aPD1*syn_T_C1.PD1_aPD1_PD1",
+      "parameters": [
+        "kon_PD1_aPD1",
+        "koff_PD1_aPD1",
+        "Chi_PD1_aPD1"
+      ]
+    },
+    {
+      "name": "Reaction_122",
+      "reactants": [
+        "syn_T_C1.PDL1"
+      ],
+      "products": [
+        "syn_T_C1.PDL1_aPDL1"
+      ],
+      "rate_law": "2*kon_PDL1_aPDL1*(syn_T_C1.PDL1 * V_T.aPDL1/gamma_T_aPDL1) -  koff_PDL1_aPDL1*syn_T_C1.PDL1_aPDL1",
+      "parameters": [
+        "gamma_T_aPDL1",
+        "kon_PDL1_aPDL1",
+        "koff_PDL1_aPDL1"
+      ]
+    },
+    {
+      "name": "Reaction_123",
+      "reactants": [
+        "syn_T_C1.PDL1_aPDL1",
+        "syn_T_C1.PDL1"
+      ],
+      "products": [
+        "syn_T_C1.PDL1_aPDL1_PDL1"
+      ],
+      "rate_law": "Chi_PDL1_aPDL1*kon_PDL1_aPDL1*(syn_T_C1.PDL1 * syn_T_C1.PDL1_aPDL1) -  2*koff_PDL1_aPDL1*syn_T_C1.PDL1_aPDL1_PDL1",
+      "parameters": [
+        "kon_PDL1_aPDL1",
+        "koff_PDL1_aPDL1",
+        "Chi_PDL1_aPDL1"
+      ]
+    },
+    {
+      "name": "Reaction_124",
+      "reactants": [
+        "syn_T_C1.CD28",
+        "syn_T_C1.CD80"
+      ],
+      "products": [
+        "syn_T_C1.CD28_CD80"
+      ],
+      "rate_law": "2*kon_CD28_CD80*(syn_T_C1.CD28)*(syn_T_C1.CD80)  -  koff_CD28_CD80*syn_T_C1.CD28_CD80",
+      "parameters": [
+        "kon_CD28_CD80",
+        "koff_CD28_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_125",
+      "reactants": [
+        "syn_T_C1.CD28_CD80",
+        "syn_T_C1.CD28"
+      ],
+      "products": [
+        "syn_T_C1.CD28_CD80_CD28"
+      ],
+      "rate_law": "kon_CD28_CD80*(syn_T_C1.CD28)*(syn_T_C1.CD28_CD80)  -  2*koff_CD28_CD80*syn_T_C1.CD28_CD80_CD28",
+      "parameters": [
+        "kon_CD28_CD80",
+        "koff_CD28_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_126",
+      "reactants": [
+        "syn_T_C1.CD28",
+        "syn_T_C1.CD86"
+      ],
+      "products": [
+        "syn_T_C1.CD28_CD86"
+      ],
+      "rate_law": "kon_CD28_CD86*(syn_T_C1.CD28)*(syn_T_C1.CD86)  -  koff_CD28_CD86*syn_T_C1.CD28_CD86",
+      "parameters": [
+        "kon_CD28_CD86",
+        "koff_CD28_CD86"
+      ]
+    },
+    {
+      "name": "Reaction_127",
+      "reactants": [
+        "syn_T_C1.CTLA4",
+        "syn_T_C1.CD80"
+      ],
+      "products": [
+        "syn_T_C1.CD80_CTLA4"
+      ],
+      "rate_law": "4*kon_CTLA4_CD80*(syn_T_C1.CTLA4)*(syn_T_C1.CD80)  -  koff_CTLA4_CD80*syn_T_C1.CD80_CTLA4",
+      "parameters": [
+        "kon_CTLA4_CD80",
+        "koff_CTLA4_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_128",
+      "reactants": [
+        "syn_T_C1.CTLA4",
+        "syn_T_C1.CD80_CTLA4"
+      ],
+      "products": [
+        "syn_T_C1.CTLA4_CD80_CTLA4"
+      ],
+      "rate_law": "2*kon_CTLA4_CD80*(syn_T_C1.CTLA4)*(syn_T_C1.CD80_CTLA4)  -  2*koff_CTLA4_CD80*syn_T_C1.CTLA4_CD80_CTLA4",
+      "parameters": [
+        "kon_CTLA4_CD80",
+        "koff_CTLA4_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_129",
+      "reactants": [
+        "syn_T_C1.CD80",
+        "syn_T_C1.CTLA4_CD80_CTLA4"
+      ],
+      "products": [
+        "syn_T_C1.CD80_CTLA4_CD80_CTLA4"
+      ],
+      "rate_law": "4*kon_CTLA4_CD80*(syn_T_C1.CD80)*(syn_T_C1.CTLA4_CD80_CTLA4)  -  koff_CTLA4_CD80*syn_T_C1.CD80_CTLA4_CD80_CTLA4",
+      "parameters": [
+        "kon_CTLA4_CD80",
+        "koff_CTLA4_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_130",
+      "reactants": [
+        "syn_T_C1.CD80_CTLA4",
+        "syn_T_C1.CD80"
+      ],
+      "products": [
+        "syn_T_C1.CD80_CTLA4_CD80"
+      ],
+      "rate_law": "2*kon_CTLA4_CD80*(syn_T_C1.CD80_CTLA4)*(syn_T_C1.CD80)  -  2*koff_CTLA4_CD80*syn_T_C1.CD80_CTLA4_CD80",
+      "parameters": [
+        "kon_CTLA4_CD80",
+        "koff_CTLA4_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_131",
+      "reactants": [
+        "syn_T_C1.CTLA4",
+        "syn_T_C1.CD80_CTLA4_CD80"
+      ],
+      "products": [
+        "syn_T_C1.CD80_CTLA4_CD80_CTLA4"
+      ],
+      "rate_law": "4*kon_CTLA4_CD80*(syn_T_C1.CTLA4)*(syn_T_C1.CD80_CTLA4_CD80)  -  koff_CTLA4_CD80*syn_T_C1.CD80_CTLA4_CD80_CTLA4",
+      "parameters": [
+        "kon_CTLA4_CD80",
+        "koff_CTLA4_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_132",
+      "reactants": [
+        "syn_T_C1.CTLA4",
+        "syn_T_C1.CD86"
+      ],
+      "products": [
+        "syn_T_C1.CD86_CTLA4"
+      ],
+      "rate_law": "2*kon_CTLA4_CD86*(syn_T_C1.CTLA4)*(syn_T_C1.CD86)  -  koff_CTLA4_CD86*syn_T_C1.CD86_CTLA4",
+      "parameters": [
+        "kon_CTLA4_CD86",
+        "koff_CTLA4_CD86"
+      ]
+    },
+    {
+      "name": "Reaction_133",
+      "reactants": [
+        "syn_T_C1.CD86_CTLA4",
+        "syn_T_C1.CD86"
+      ],
+      "products": [
+        "syn_T_C1.CD86_CTLA4_CD86"
+      ],
+      "rate_law": "kon_CTLA4_CD86*(syn_T_C1.CD86_CTLA4)*(syn_T_C1.CD86)  -  2*koff_CTLA4_CD86*syn_T_C1.CD86_CTLA4_CD86",
+      "parameters": [
+        "kon_CTLA4_CD86",
+        "koff_CTLA4_CD86"
+      ]
+    },
+    {
+      "name": "Reaction_134",
+      "reactants": [
+        "syn_T_C1.CTLA4"
+      ],
+      "products": [
+        "syn_T_C1.CTLA4_aCTLA4"
+      ],
+      "rate_law": "4*kon_CTLA4_aCTLA4*(syn_T_C1.CTLA4 * V_T.aCTLA4/gamma_T_aCTLA4) -  koff_CTLA4_aCTLA4*syn_T_C1.CTLA4_aCTLA4",
+      "parameters": [
+        "gamma_T_aCTLA4",
+        "kon_CTLA4_aCTLA4",
+        "koff_CTLA4_aCTLA4"
+      ]
+    },
+    {
+      "name": "Reaction_135",
+      "reactants": [
+        "syn_T_C1.CTLA4_aCTLA4",
+        "syn_T_C1.CTLA4"
+      ],
+      "products": [
+        "syn_T_C1.CTLA4_aCTLA4_CTLA4"
+      ],
+      "rate_law": "2*Chi_CTLA4_aCTLA4*kon_CTLA4_aCTLA4*(syn_T_C1.CTLA4 * syn_T_C1.CTLA4_aCTLA4) -  2*koff_CTLA4_aCTLA4*syn_T_C1.CTLA4_aCTLA4_CTLA4",
+      "parameters": [
+        "kon_CTLA4_aCTLA4",
+        "koff_CTLA4_aCTLA4",
+        "Chi_CTLA4_aCTLA4"
+      ]
+    },
+    {
+      "name": "Reaction_136",
+      "reactants": [
+        "syn_T_C1.CD80m",
+        "syn_T_C1.CD80m"
+      ],
+      "products": [
+        "syn_T_C1.CD80"
+      ],
+      "rate_law": "kon_CD80_CD80*(syn_T_C1.CD80m)*(syn_T_C1.CD80m) - koff_CD80_CD80*syn_T_C1.CD80",
+      "parameters": [
+        "kon_CD80_CD80",
+        "koff_CD80_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_137",
+      "reactants": [
+        "syn_T_C1.CD80m",
+        "syn_T_C1.PDL1"
+      ],
+      "products": [
+        "syn_T_C1.PDL1_CD80"
+      ],
+      "rate_law": "kon_CD80_PDL1*(syn_T_C1.CD80m)*(syn_T_C1.PDL1)  -  koff_CD80_PDL1*syn_T_C1.PDL1_CD80",
+      "parameters": [
+        "kon_CD80_PDL1",
+        "koff_CD80_PDL1"
+      ]
+    },
+    {
+      "name": "Reaction_138",
+      "reactants": [
+        "syn_T_C1.PDL1_CD80",
+        "syn_T_C1.CD28"
+      ],
+      "products": [
+        "syn_T_C1.PDL1_CD80_CD28"
+      ],
+      "rate_law": "kon_CD28_CD80*(syn_T_C1.PDL1_CD80)*(syn_T_C1.CD28)  - koff_CD28_CD80*syn_T_C1.PDL1_CD80_CD28",
+      "parameters": [
+        "kon_CD28_CD80",
+        "koff_CD28_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_139",
+      "reactants": [
+        "syn_T_C1.PDL1_CD80",
+        "syn_T_C1.CTLA4"
+      ],
+      "products": [
+        "syn_T_C1.PDL1_CD80_CTLA4"
+      ],
+      "rate_law": "2*kon_CTLA4_CD80*(syn_T_C1.PDL1_CD80)*(syn_T_C1.CTLA4)  - koff_CTLA4_CD80*syn_T_C1.PDL1_CD80_CTLA4",
+      "parameters": [
+        "kon_CTLA4_CD80",
+        "koff_CTLA4_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_140",
+      "reactants": [
+        "syn_T_C1.TPDL1"
+      ],
+      "products": [
+        "syn_T_C1.TPDL1_aPDL1"
+      ],
+      "rate_law": "2*kon_PDL1_aPDL1*(syn_T_C1.TPDL1 * V_T.aPDL1/gamma_T_aPDL1) -  koff_PDL1_aPDL1*syn_T_C1.TPDL1_aPDL1",
+      "parameters": [
+        "gamma_T_aPDL1",
+        "kon_PDL1_aPDL1",
+        "koff_PDL1_aPDL1"
+      ]
+    },
+    {
+      "name": "Reaction_141",
+      "reactants": [
+        "syn_T_C1.TPDL1_aPDL1",
+        "syn_T_C1.TPDL1"
+      ],
+      "products": [
+        "syn_T_C1.TPDL1_aPDL1_TPDL1"
+      ],
+      "rate_law": "Chi_PDL1_aPDL1*kon_PDL1_aPDL1*(syn_T_C1.TPDL1 * syn_T_C1.TPDL1_aPDL1) -  2*koff_PDL1_aPDL1*syn_T_C1.TPDL1_aPDL1_TPDL1",
+      "parameters": [
+        "kon_PDL1_aPDL1",
+        "koff_PDL1_aPDL1",
+        "Chi_PDL1_aPDL1"
+      ]
+    },
+    {
+      "name": "Reaction_142",
+      "reactants": [],
+      "products": [
+        "syn_T_APC.PDL1"
+      ],
+      "rate_law": "k_out_PDL1*V_T.IFNg/(V_T.IFNg+IFNg_50_ind)*(1-syn_T_APC.PDL1_total/(APC_PDL1_base*r_PDL1_IFNg/A_cell))",
+      "parameters": [
+        "A_cell",
+        "k_out_PDL1",
+        "r_PDL1_IFNg",
+        "APC_PDL1_base",
+        "IFNg_50_ind"
+      ]
+    },
+    {
+      "name": "Reaction_143",
+      "reactants": [],
+      "products": [
+        "syn_T_APC.PDL2"
+      ],
+      "rate_law": "k_out_PDL1*r_PDL2APC*V_T.IFNg/(V_T.IFNg+IFNg_50_ind)*(1-syn_T_APC.PDL2_total/(APC_PDL1_base*r_PDL1_IFNg/A_cell*r_PDL2APC))",
+      "parameters": [
+        "A_cell",
+        "k_out_PDL1",
+        "r_PDL1_IFNg",
+        "APC_PDL1_base",
+        "r_PDL2APC",
+        "IFNg_50_ind"
+      ]
+    },
+    {
+      "name": "Reaction_144",
+      "reactants": [],
+      "products": [
+        "syn_T_APC.PDL1"
+      ],
+      "rate_law": "k_in_PDL1*(APC_PDL1_base/A_cell-syn_T_APC.PDL1_total)",
+      "parameters": [
+        "A_cell",
+        "k_in_PDL1",
+        "APC_PDL1_base"
+      ]
+    },
+    {
+      "name": "Reaction_145",
+      "reactants": [],
+      "products": [
+        "syn_T_APC.PDL2"
+      ],
+      "rate_law": "k_in_PDL1*(APC_PDL1_base/A_cell*r_PDL2APC-syn_T_APC.PDL2_total)",
+      "parameters": [
+        "A_cell",
+        "k_in_PDL1",
+        "APC_PDL1_base",
+        "r_PDL2APC"
+      ]
+    },
+    {
+      "name": "Reaction_146",
+      "reactants": [
+        "syn_T_APC.PD1",
+        "syn_T_APC.PDL1"
+      ],
+      "products": [
+        "syn_T_APC.PD1_PDL1"
+      ],
+      "rate_law": "kon_PD1_PDL1*(syn_T_APC.PD1)*(syn_T_APC.PDL1)  -  koff_PD1_PDL1*syn_T_APC.PD1_PDL1",
+      "parameters": [
+        "kon_PD1_PDL1",
+        "koff_PD1_PDL1"
+      ]
+    },
+    {
+      "name": "Reaction_147",
+      "reactants": [
+        "syn_T_APC.PD1",
+        "syn_T_APC.PDL2"
+      ],
+      "products": [
+        "syn_T_APC.PD1_PDL2"
+      ],
+      "rate_law": "kon_PD1_PDL2*(syn_T_APC.PD1)*(syn_T_APC.PDL2)  -  koff_PD1_PDL2*syn_T_APC.PD1_PDL2",
+      "parameters": [
+        "kon_PD1_PDL2",
+        "koff_PD1_PDL2"
+      ]
+    },
+    {
+      "name": "Reaction_148",
+      "reactants": [
+        "syn_T_APC.PD1"
+      ],
+      "products": [
+        "syn_T_APC.PD1_aPD1"
+      ],
+      "rate_law": "2*kon_PD1_aPD1*(syn_T_APC.PD1 * V_LN.aPD1/gamma_LN_aPD1) -  koff_PD1_aPD1*syn_T_APC.PD1_aPD1",
+      "parameters": [
+        "gamma_LN_aPD1",
+        "kon_PD1_aPD1",
+        "koff_PD1_aPD1"
+      ]
+    },
+    {
+      "name": "Reaction_149",
+      "reactants": [
+        "syn_T_APC.PD1_aPD1",
+        "syn_T_APC.PD1"
+      ],
+      "products": [
+        "syn_T_APC.PD1_aPD1_PD1"
+      ],
+      "rate_law": "Chi_PD1_aPD1*kon_PD1_aPD1*(syn_T_APC.PD1 * syn_T_APC.PD1_aPD1) -  2*koff_PD1_aPD1*syn_T_APC.PD1_aPD1_PD1",
+      "parameters": [
+        "kon_PD1_aPD1",
+        "koff_PD1_aPD1",
+        "Chi_PD1_aPD1"
+      ]
+    },
+    {
+      "name": "Reaction_150",
+      "reactants": [
+        "syn_T_APC.PDL1"
+      ],
+      "products": [
+        "syn_T_APC.PDL1_aPDL1"
+      ],
+      "rate_law": "2*kon_PDL1_aPDL1*(syn_T_APC.PDL1 * V_LN.aPDL1/gamma_LN_aPDL1) -  koff_PDL1_aPDL1*syn_T_APC.PDL1_aPDL1",
+      "parameters": [
+        "gamma_LN_aPDL1",
+        "kon_PDL1_aPDL1",
+        "koff_PDL1_aPDL1"
+      ]
+    },
+    {
+      "name": "Reaction_151",
+      "reactants": [
+        "syn_T_APC.PDL1_aPDL1",
+        "syn_T_APC.PDL1"
+      ],
+      "products": [
+        "syn_T_APC.PDL1_aPDL1_PDL1"
+      ],
+      "rate_law": "Chi_PDL1_aPDL1*kon_PDL1_aPDL1*(syn_T_APC.PDL1 * syn_T_APC.PDL1_aPDL1) -  2*koff_PDL1_aPDL1*syn_T_APC.PDL1_aPDL1_PDL1",
+      "parameters": [
+        "kon_PDL1_aPDL1",
+        "koff_PDL1_aPDL1",
+        "Chi_PDL1_aPDL1"
+      ]
+    },
+    {
+      "name": "Reaction_152",
+      "reactants": [
+        "syn_T_APC.CD28",
+        "syn_T_APC.CD80"
+      ],
+      "products": [
+        "syn_T_APC.CD28_CD80"
+      ],
+      "rate_law": "2*kon_CD28_CD80*(syn_T_APC.CD28)*(syn_T_APC.CD80)  -  koff_CD28_CD80*syn_T_APC.CD28_CD80",
+      "parameters": [
+        "kon_CD28_CD80",
+        "koff_CD28_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_153",
+      "reactants": [
+        "syn_T_APC.CD28_CD80",
+        "syn_T_APC.CD28"
+      ],
+      "products": [
+        "syn_T_APC.CD28_CD80_CD28"
+      ],
+      "rate_law": "kon_CD28_CD80*(syn_T_APC.CD28)*(syn_T_APC.CD28_CD80)  -  2*koff_CD28_CD80*syn_T_APC.CD28_CD80_CD28",
+      "parameters": [
+        "kon_CD28_CD80",
+        "koff_CD28_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_154",
+      "reactants": [
+        "syn_T_APC.CD28",
+        "syn_T_APC.CD86"
+      ],
+      "products": [
+        "syn_T_APC.CD28_CD86"
+      ],
+      "rate_law": "kon_CD28_CD86*(syn_T_APC.CD28)*(syn_T_APC.CD86)  -  koff_CD28_CD86*syn_T_APC.CD28_CD86",
+      "parameters": [
+        "kon_CD28_CD86",
+        "koff_CD28_CD86"
+      ]
+    },
+    {
+      "name": "Reaction_155",
+      "reactants": [
+        "syn_T_APC.CTLA4",
+        "syn_T_APC.CD80"
+      ],
+      "products": [
+        "syn_T_APC.CD80_CTLA4"
+      ],
+      "rate_law": "4*kon_CTLA4_CD80*(syn_T_APC.CTLA4)*(syn_T_APC.CD80)  -  koff_CTLA4_CD80*syn_T_APC.CD80_CTLA4",
+      "parameters": [
+        "kon_CTLA4_CD80",
+        "koff_CTLA4_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_156",
+      "reactants": [
+        "syn_T_APC.CTLA4",
+        "syn_T_APC.CD80_CTLA4"
+      ],
+      "products": [
+        "syn_T_APC.CTLA4_CD80_CTLA4"
+      ],
+      "rate_law": "2*kon_CTLA4_CD80*(syn_T_APC.CTLA4)*(syn_T_APC.CD80_CTLA4)  -  2*koff_CTLA4_CD80*syn_T_APC.CTLA4_CD80_CTLA4",
+      "parameters": [
+        "kon_CTLA4_CD80",
+        "koff_CTLA4_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_157",
+      "reactants": [
+        "syn_T_APC.CD80",
+        "syn_T_APC.CTLA4_CD80_CTLA4"
+      ],
+      "products": [
+        "syn_T_APC.CD80_CTLA4_CD80_CTLA4"
+      ],
+      "rate_law": "4*kon_CTLA4_CD80*(syn_T_APC.CD80)*(syn_T_APC.CTLA4_CD80_CTLA4)  -  koff_CTLA4_CD80*syn_T_APC.CD80_CTLA4_CD80_CTLA4",
+      "parameters": [
+        "kon_CTLA4_CD80",
+        "koff_CTLA4_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_158",
+      "reactants": [
+        "syn_T_APC.CD80_CTLA4",
+        "syn_T_APC.CD80"
+      ],
+      "products": [
+        "syn_T_APC.CD80_CTLA4_CD80"
+      ],
+      "rate_law": "2*kon_CTLA4_CD80*(syn_T_APC.CD80_CTLA4)*(syn_T_APC.CD80)  -  2*koff_CTLA4_CD80*syn_T_APC.CD80_CTLA4_CD80",
+      "parameters": [
+        "kon_CTLA4_CD80",
+        "koff_CTLA4_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_159",
+      "reactants": [
+        "syn_T_APC.CTLA4",
+        "syn_T_APC.CD80_CTLA4_CD80"
+      ],
+      "products": [
+        "syn_T_APC.CD80_CTLA4_CD80_CTLA4"
+      ],
+      "rate_law": "4*kon_CTLA4_CD80*(syn_T_APC.CTLA4)*(syn_T_APC.CD80_CTLA4_CD80)  -  koff_CTLA4_CD80*syn_T_APC.CD80_CTLA4_CD80_CTLA4",
+      "parameters": [
+        "kon_CTLA4_CD80",
+        "koff_CTLA4_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_160",
+      "reactants": [
+        "syn_T_APC.CTLA4",
+        "syn_T_APC.CD86"
+      ],
+      "products": [
+        "syn_T_APC.CD86_CTLA4"
+      ],
+      "rate_law": "2*kon_CTLA4_CD86*(syn_T_APC.CTLA4)*(syn_T_APC.CD86)  -  koff_CTLA4_CD86*syn_T_APC.CD86_CTLA4",
+      "parameters": [
+        "kon_CTLA4_CD86",
+        "koff_CTLA4_CD86"
+      ]
+    },
+    {
+      "name": "Reaction_161",
+      "reactants": [
+        "syn_T_APC.CD86_CTLA4",
+        "syn_T_APC.CD86"
+      ],
+      "products": [
+        "syn_T_APC.CD86_CTLA4_CD86"
+      ],
+      "rate_law": "kon_CTLA4_CD86*(syn_T_APC.CD86_CTLA4)*(syn_T_APC.CD86)  -  2*koff_CTLA4_CD86*syn_T_APC.CD86_CTLA4_CD86",
+      "parameters": [
+        "kon_CTLA4_CD86",
+        "koff_CTLA4_CD86"
+      ]
+    },
+    {
+      "name": "Reaction_162",
+      "reactants": [
+        "syn_T_APC.CTLA4"
+      ],
+      "products": [
+        "syn_T_APC.CTLA4_aCTLA4"
+      ],
+      "rate_law": "4*kon_CTLA4_aCTLA4*(syn_T_APC.CTLA4 * V_LN.aCTLA4/gamma_LN_aCTLA4) -  koff_CTLA4_aCTLA4*syn_T_APC.CTLA4_aCTLA4",
+      "parameters": [
+        "gamma_LN_aCTLA4",
+        "kon_CTLA4_aCTLA4",
+        "koff_CTLA4_aCTLA4"
+      ]
+    },
+    {
+      "name": "Reaction_163",
+      "reactants": [
+        "syn_T_APC.CTLA4_aCTLA4",
+        "syn_T_APC.CTLA4"
+      ],
+      "products": [
+        "syn_T_APC.CTLA4_aCTLA4_CTLA4"
+      ],
+      "rate_law": "2*Chi_CTLA4_aCTLA4*kon_CTLA4_aCTLA4*(syn_T_APC.CTLA4 * syn_T_APC.CTLA4_aCTLA4) -  2*koff_CTLA4_aCTLA4*syn_T_APC.CTLA4_aCTLA4_CTLA4",
+      "parameters": [
+        "kon_CTLA4_aCTLA4",
+        "koff_CTLA4_aCTLA4",
+        "Chi_CTLA4_aCTLA4"
+      ]
+    },
+    {
+      "name": "Reaction_164",
+      "reactants": [
+        "syn_T_APC.CD80m",
+        "syn_T_APC.CD80m"
+      ],
+      "products": [
+        "syn_T_APC.CD80"
+      ],
+      "rate_law": "kon_CD80_CD80*(syn_T_APC.CD80m)*(syn_T_APC.CD80m) - koff_CD80_CD80*syn_T_APC.CD80",
+      "parameters": [
+        "kon_CD80_CD80",
+        "koff_CD80_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_165",
+      "reactants": [
+        "syn_T_APC.CD80m",
+        "syn_T_APC.PDL1"
+      ],
+      "products": [
+        "syn_T_APC.PDL1_CD80"
+      ],
+      "rate_law": "kon_CD80_PDL1*(syn_T_APC.CD80m)*(syn_T_APC.PDL1)  -  koff_CD80_PDL1*syn_T_APC.PDL1_CD80",
+      "parameters": [
+        "kon_CD80_PDL1",
+        "koff_CD80_PDL1"
+      ]
+    },
+    {
+      "name": "Reaction_166",
+      "reactants": [
+        "syn_T_APC.PDL1_CD80",
+        "syn_T_APC.CD28"
+      ],
+      "products": [
+        "syn_T_APC.PDL1_CD80_CD28"
+      ],
+      "rate_law": "kon_CD28_CD80*(syn_T_APC.PDL1_CD80)*(syn_T_APC.CD28)  - koff_CD28_CD80*syn_T_APC.PDL1_CD80_CD28",
+      "parameters": [
+        "kon_CD28_CD80",
+        "koff_CD28_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_167",
+      "reactants": [
+        "syn_T_APC.PDL1_CD80",
+        "syn_T_APC.CTLA4"
+      ],
+      "products": [
+        "syn_T_APC.PDL1_CD80_CTLA4"
+      ],
+      "rate_law": "2*kon_CTLA4_CD80*(syn_T_APC.PDL1_CD80)*(syn_T_APC.CTLA4)  - koff_CTLA4_CD80*syn_T_APC.PDL1_CD80_CTLA4",
+      "parameters": [
+        "kon_CTLA4_CD80",
+        "koff_CTLA4_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_168",
+      "reactants": [
+        "syn_T_APC.TPDL1"
+      ],
+      "products": [
+        "syn_T_APC.TPDL1_aPDL1"
+      ],
+      "rate_law": "2*kon_PDL1_aPDL1*(syn_T_APC.TPDL1 * V_LN.aPDL1/gamma_LN_aPDL1) -  koff_PDL1_aPDL1*syn_T_APC.TPDL1_aPDL1",
+      "parameters": [
+        "gamma_LN_aPDL1",
+        "kon_PDL1_aPDL1",
+        "koff_PDL1_aPDL1"
+      ]
+    },
+    {
+      "name": "Reaction_169",
+      "reactants": [
+        "syn_T_APC.TPDL1_aPDL1",
+        "syn_T_APC.TPDL1"
+      ],
+      "products": [
+        "syn_T_APC.TPDL1_aPDL1_TPDL1"
+      ],
+      "rate_law": "Chi_PDL1_aPDL1*kon_PDL1_aPDL1*(syn_T_APC.TPDL1 * syn_T_APC.TPDL1_aPDL1) -  2*koff_PDL1_aPDL1*syn_T_APC.TPDL1_aPDL1_TPDL1",
+      "parameters": [
+        "kon_PDL1_aPDL1",
+        "koff_PDL1_aPDL1",
+        "Chi_PDL1_aPDL1"
+      ]
+    },
+    {
+      "name": "Reaction_170",
+      "reactants": [
+        "V_LN.nT0"
+      ],
+      "products": [],
+      "rate_law": "k_Th_act*H_APCh*H_P1*V_LN.nT0",
+      "parameters": [
+        "H_APCh",
+        "H_P1",
+        "k_Th_act"
+      ]
+    },
+    {
+      "name": "Reaction_171",
+      "reactants": [],
+      "products": [
+        "V_LN.aTh"
+      ],
+      "rate_law": "k_Th_act*H_APCh*H_P1*V_LN.nT0*n_T1_clones",
+      "parameters": [
+        "H_APCh",
+        "n_T1_clones",
+        "H_P1",
+        "k_Th_act"
+      ]
+    },
+    {
+      "name": "Reaction_172",
+      "reactants": [
+        "V_LN.aTh"
+      ],
+      "products": [],
+      "rate_law": "(k_T0_pro/N_aTh)*V_LN.aTh",
+      "parameters": [
+        "k_T0_pro",
+        "N_aTh"
+      ]
+    },
+    {
+      "name": "Reaction_173",
+      "reactants": [],
+      "products": [
+        "V_LN.Th"
+      ],
+      "rate_law": "(k_T0_pro/N_aTh)*2^N_aTh*V_LN.aTh",
+      "parameters": [
+        "k_T0_pro",
+        "N_aTh"
+      ]
+    },
+    {
+      "name": "Reaction_174",
+      "reactants": [
+        "V_T.Th"
+      ],
+      "products": [
+        "V_T.T0"
+      ],
+      "rate_law": "k_Th_Treg*V_T.Th*H_TGFb*H_ArgI_Treg",
+      "parameters": [
+        "k_Th_Treg",
+        "H_TGFb",
+        "H_ArgI_Treg"
+      ]
+    },
+    {
+      "name": "Reaction_175",
+      "reactants": [
+        "V_C.Th"
+      ],
+      "products": [],
+      "rate_law": "k_T0_death*V_C.Th",
+      "parameters": [
+        "k_T0_death"
+      ]
+    },
+    {
+      "name": "Reaction_176",
+      "reactants": [
+        "V_P.Th"
+      ],
+      "products": [],
+      "rate_law": "k_T0_death*V_P.Th",
+      "parameters": [
+        "k_T0_death"
+      ]
+    },
+    {
+      "name": "Reaction_177",
+      "reactants": [
+        "V_LN.Th"
+      ],
+      "products": [],
+      "rate_law": "k_T0_death*V_LN.Th",
+      "parameters": [
+        "k_T0_death"
+      ]
+    },
+    {
+      "name": "Reaction_178",
+      "reactants": [
+        "V_T.Th"
+      ],
+      "products": [
+        "V_T.Th_exh"
+      ],
+      "rate_law": "k_T0_death*V_T.Th",
+      "parameters": [
+        "k_T0_death"
+      ]
+    },
+    {
+      "name": "Reaction_179",
+      "reactants": [
+        "V_T.Th"
+      ],
+      "products": [
+        "V_T.Th_exh"
+      ],
+      "rate_law": "k_cell_clear*V_T.Th*(Kc_rec/(C_total^2+Kc_rec))",
+      "parameters": [
+        "k_cell_clear",
+        "C_total",
+        "Kc_rec"
+      ]
+    },
+    {
+      "name": "Reaction_180",
+      "reactants": [
+        "V_C.Th"
+      ],
+      "products": [
+        "V_P.Th"
+      ],
+      "rate_law": "q_T0_P_in*V_C.Th",
+      "parameters": [
+        "q_T0_P_in"
+      ]
+    },
+    {
+      "name": "Reaction_181",
+      "reactants": [
+        "V_P.Th"
+      ],
+      "products": [
+        "V_C.Th"
+      ],
+      "rate_law": "q_T0_P_out*V_P.Th",
+      "parameters": [
+        "q_T0_P_out"
+      ]
+    },
+    {
+      "name": "Reaction_182",
+      "reactants": [
+        "V_C.Th"
+      ],
+      "products": [
+        "V_T.Th"
+      ],
+      "rate_law": "q_T0_T_in*V_T*V_C.Th*(C_total^2/(C_total^2+Kc_rec))",
+      "parameters": [
+        "C_total",
+        "q_T0_T_in",
+        "Kc_rec"
+      ]
+    },
+    {
+      "name": "Reaction_183",
+      "reactants": [
+        "V_LN.Th"
+      ],
+      "products": [
+        "V_C.Th"
+      ],
+      "rate_law": "q_T0_LN_out*V_LN.Th",
+      "parameters": [
+        "q_T0_LN_out"
+      ]
+    },
+    {
+      "name": "Reaction_184",
+      "reactants": [],
+      "products": [
+        "V_LN.IL2"
+      ],
+      "rate_law": "k_IL2_sec*V_LN.aTh",
+      "parameters": [
+        "k_IL2_sec"
+      ]
+    },
+    {
+      "name": "Reaction_185",
+      "reactants": [],
+      "products": [
+        "V_T.TGFb"
+      ],
+      "rate_law": "k_TGFb_deg*(TGFbase - V_T.TGFb)*V_T",
+      "parameters": [
+        "k_TGFb_deg",
+        "TGFbase"
+      ]
+    },
+    {
+      "name": "Reaction_186",
+      "reactants": [],
+      "products": [
+        "V_T.TGFb"
+      ],
+      "rate_law": "k_TGFb_Tsec*V_T.T0",
+      "parameters": [
+        "k_TGFb_Tsec"
+      ]
+    },
+    {
+      "name": "Reaction_187",
+      "reactants": [],
+      "products": [
+        "V_T.IFNg"
+      ],
+      "rate_law": "k_IFNg_Thsec*V_T.Th",
+      "parameters": [
+        "k_IFNg_Thsec"
+      ]
+    },
+    {
+      "name": "Reaction_188",
+      "reactants": [
+        "V_T.IFNg"
+      ],
+      "products": [],
+      "rate_law": "k_IFNg_deg*V_T.IFNg",
+      "parameters": [
+        "k_IFNg_deg"
+      ]
+    },
+    {
+      "name": "Reaction_189",
+      "reactants": [],
+      "products": [
+        "V_T.CCL2"
+      ],
+      "rate_law": "k_CCL2_sec*C_total",
+      "parameters": [
+        "C_total",
+        "k_CCL2_sec"
+      ]
+    },
+    {
+      "name": "Reaction_190",
+      "reactants": [
+        "V_T.CCL2"
+      ],
+      "products": [],
+      "rate_law": "k_CCL2_deg*V_T.CCL2",
+      "parameters": [
+        "k_CCL2_deg"
+      ]
+    },
+    {
+      "name": "Reaction_191",
+      "reactants": [],
+      "products": [
+        "V_T.MDSC"
+      ],
+      "rate_law": "k_MDSC_rec*V_T*(V_T.CCL2/(V_T.CCL2 + CCL2_50))",
+      "parameters": [
+        "CCL2_50",
+        "k_MDSC_rec"
+      ]
+    },
+    {
+      "name": "Reaction_192",
+      "reactants": [
+        "V_T.MDSC"
+      ],
+      "products": [],
+      "rate_law": "k_MDSC_death*V_T.MDSC",
+      "parameters": [
+        "k_MDSC_death"
+      ]
+    },
+    {
+      "name": "Reaction_193",
+      "reactants": [
+        "V_T.MDSC"
+      ],
+      "products": [],
+      "rate_law": "k_cell_clear*V_T.MDSC*(Kc_rec/(C_total^2 + Kc_rec))",
+      "parameters": [
+        "k_cell_clear",
+        "C_total",
+        "Kc_rec"
+      ]
+    },
+    {
+      "name": "Reaction_194",
+      "reactants": [
+        "V_T.NO"
+      ],
+      "products": [],
+      "rate_law": "k_NO_deg*V_T.NO",
+      "parameters": [
+        "k_NO_deg"
+      ]
+    },
+    {
+      "name": "Reaction_195",
+      "reactants": [
+        "V_T.ArgI"
+      ],
+      "products": [],
+      "rate_law": "k_ArgI_deg*V_T.ArgI",
+      "parameters": [
+        "k_ArgI_deg"
+      ]
+    },
+    {
+      "name": "Reaction_196",
+      "reactants": [],
+      "products": [
+        "V_T.NO"
+      ],
+      "rate_law": "k_NO_sec*V_T.MDSC",
+      "parameters": [
+        "k_NO_sec"
+      ]
+    },
+    {
+      "name": "Reaction_197",
+      "reactants": [],
+      "products": [
+        "V_T.ArgI"
+      ],
+      "rate_law": "k_ArgI_sec*V_T.MDSC",
+      "parameters": [
+        "k_ArgI_sec"
+      ]
+    },
+    {
+      "name": "Reaction_198",
+      "reactants": [
+        "V_1.NabP"
+      ],
+      "products": [
+        "V_2.NabP"
+      ],
+      "rate_law": "Vmt/(V_1.NabP+Kt)*V_1.NabP - Vmt/(V_2.NabP+Kt)*V_2.NabP",
+      "parameters": [
+        "Vmt",
+        "Kt"
+      ]
+    },
+    {
+      "name": "Reaction_199",
+      "reactants": [
+        "V_1.NabP"
+      ],
+      "products": [
+        "V_3.NabP"
+      ],
+      "rate_law": "Q2*V_1.NabP - Q2*V_3.NabP",
+      "parameters": [
+        "Q2"
+      ]
+    },
+    {
+      "name": "Reaction_200",
+      "reactants": [
+        "V_1.NabP"
+      ],
+      "products": [],
+      "rate_law": "Vmcl/(V_1.NabP+Kcl)*V_1.NabP",
+      "parameters": [
+        "Vmcl",
+        "Kcl"
+      ]
+    },
+    {
+      "name": "Reaction_201",
+      "reactants": [
+        "V_T.C1"
+      ],
+      "products": [
+        "V_T.C_x"
+      ],
+      "rate_law": "k_C_nabp*V_T.C1*(V_T.NabP/(V_T.NabP+IC50_nabp))*min(C_total,Kc_nabp)/C_total",
+      "parameters": [
+        "C_total",
+        "k_C_nabp",
+        "IC50_nabp",
+        "Kc_nabp"
+      ]
+    },
+    {
+      "name": "Reaction_202",
+      "reactants": [
+        "V_T.C1"
+      ],
+      "products": [
+        "V_T.C2"
+      ],
+      "rate_law": "k_C_resist*V_T.C1*H_TGFb",
+      "parameters": [
+        "H_TGFb",
+        "k_C_resist"
+      ]
+    },
+    {
+      "name": "Reaction_203",
+      "reactants": [
+        "V_T.C2"
+      ],
+      "products": [
+        "V_T.C_x"
+      ],
+      "rate_law": "k_C_nabp*V_T.C2*(V_T.NabP/(V_T.NabP+IC50_nabp*r_resist))*min(C_total,Kc_nabp)/C_total",
+      "parameters": [
+        "C_total",
+        "k_C_nabp",
+        "IC50_nabp",
+        "Kc_nabp",
+        "r_resist"
+      ]
+    },
+    {
+      "name": "Reaction_204",
+      "reactants": [],
+      "products": [
+        "V_T.c_vas"
+      ],
+      "rate_law": "k_vas_nabp*C_total*V_T.NabP/(V_T.NabP+IC50_nabp_vas)",
+      "parameters": [
+        "C_total",
+        "k_vas_nabp",
+        "IC50_nabp_vas"
+      ]
+    },
+    {
+      "name": "Reaction_205",
+      "reactants": [
+        "V_T.K"
+      ],
+      "products": [],
+      "rate_law": "k_K_nabp*V_T.K*V_T.NabP",
+      "parameters": [
+        "k_K_nabp"
+      ]
+    },
+    {
+      "name": "Reaction_206",
+      "reactants": [],
+      "products": [
+        "V_T.c_vas"
+      ],
+      "rate_law": "k_vas_Msec*V_T.Mac_M2",
+      "parameters": [
+        "k_vas_Msec"
+      ]
+    },
+    {
+      "name": "Reaction_207",
+      "reactants": [],
+      "products": [
+        "V_T.Mac_M1"
+      ],
+      "rate_law": "k_Mac_rec*V_T*(V_T.CCL2/(V_T.CCL2 + CCL2_50))",
+      "parameters": [
+        "CCL2_50",
+        "k_Mac_rec"
+      ]
+    },
+    {
+      "name": "Reaction_208",
+      "reactants": [
+        "V_T.Mac_M1"
+      ],
+      "products": [],
+      "rate_law": "k_cell_clear*V_T.Mac_M1*(Kc_rec/(C_total^2 + Kc_rec))",
+      "parameters": [
+        "k_cell_clear",
+        "C_total",
+        "Kc_rec"
+      ]
+    },
+    {
+      "name": "Reaction_209",
+      "reactants": [
+        "V_T.Mac_M2"
+      ],
+      "products": [],
+      "rate_law": "k_cell_clear*V_T.Mac_M2*(Kc_rec/(C_total^2 + Kc_rec))",
+      "parameters": [
+        "k_cell_clear",
+        "C_total",
+        "Kc_rec"
+      ]
+    },
+    {
+      "name": "Reaction_210",
+      "reactants": [
+        "V_T.Mac_M1"
+      ],
+      "products": [],
+      "rate_law": "k_Mac_death*V_T.Mac_M1",
+      "parameters": [
+        "k_Mac_death"
+      ]
+    },
+    {
+      "name": "Reaction_211",
+      "reactants": [
+        "V_T.Mac_M2"
+      ],
+      "products": [],
+      "rate_law": "k_Mac_death*V_T.Mac_M2",
+      "parameters": [
+        "k_Mac_death"
+      ]
+    },
+    {
+      "name": "Reaction_212",
+      "reactants": [],
+      "products": [
+        "V_T.IL12"
+      ],
+      "rate_law": "k_IL12_sec*V_T.mAPC",
+      "parameters": [
+        "k_IL12_sec"
+      ]
+    },
+    {
+      "name": "Reaction_213",
+      "reactants": [],
+      "products": [
+        "V_T.IL12"
+      ],
+      "rate_law": "k_IL12_Msec*V_T.Mac_M1",
+      "parameters": [
+        "k_IL12_Msec"
+      ]
+    },
+    {
+      "name": "Reaction_214",
+      "reactants": [
+        "V_T.IL12"
+      ],
+      "products": [],
+      "rate_law": "k_IL12_deg*V_T.IL12",
+      "parameters": [
+        "k_IL12_deg"
+      ]
+    },
+    {
+      "name": "Reaction_215",
+      "reactants": [],
+      "products": [
+        "V_T.TGFb"
+      ],
+      "rate_law": "k_TGFb_Msec*V_T.Mac_M2",
+      "parameters": [
+        "k_TGFb_Msec"
+      ]
+    },
+    {
+      "name": "Reaction_216",
+      "reactants": [],
+      "products": [
+        "V_T.IL10"
+      ],
+      "rate_law": "k_IL10_sec*V_T.Mac_M2",
+      "parameters": [
+        "k_IL10_sec"
+      ]
+    },
+    {
+      "name": "Reaction_217",
+      "reactants": [
+        "V_T.IL10"
+      ],
+      "products": [],
+      "rate_law": "k_IL10_deg*V_T.IL10",
+      "parameters": [
+        "k_IL10_deg"
+      ]
+    },
+    {
+      "name": "Reaction_218",
+      "reactants": [
+        "V_T.Mac_M1"
+      ],
+      "products": [
+        "V_T.Mac_M2"
+      ],
+      "rate_law": "k_M2_pol*V_T.Mac_M1*(V_T.TGFb/(V_T.TGFb+TGFb_50) + V_T.IL10/(V_T.IL10+IL10_50))",
+      "parameters": [
+        "TGFb_50",
+        "k_M2_pol",
+        "IL10_50"
+      ]
+    },
+    {
+      "name": "Reaction_219",
+      "reactants": [
+        "V_T.Mac_M2"
+      ],
+      "products": [
+        "V_T.Mac_M1"
+      ],
+      "rate_law": "k_M1_pol*V_T.Mac_M2*(V_T.IL12/(V_T.IL12+IL12_50) + V_T.IFNg/(V_T.IFNg+IFNg_50))",
+      "parameters": [
+        "k_M1_pol",
+        "IL12_50",
+        "IFNg_50"
+      ]
+    },
+    {
+      "name": "Reaction_220",
+      "reactants": [],
+      "products": [
+        "syn_M_C.PDL1"
+      ],
+      "rate_law": "k_out_PDL1*V_T.IFNg/(V_T.IFNg+IFNg_50_ind)*(1-syn_M_C.PDL1_total/(C1_PDL1_base*r_PDL1_IFNg/A_cell))",
+      "parameters": [
+        "A_cell",
+        "k_out_PDL1",
+        "r_PDL1_IFNg",
+        "C1_PDL1_base",
+        "IFNg_50_ind"
+      ]
+    },
+    {
+      "name": "Reaction_221",
+      "reactants": [],
+      "products": [
+        "syn_M_C.PDL2"
+      ],
+      "rate_law": "k_out_PDL1*r_PDL2C1*V_T.IFNg/(V_T.IFNg+IFNg_50_ind)*(1-syn_M_C.PDL2_total/(C1_PDL1_base*r_PDL1_IFNg/A_cell*r_PDL2C1))",
+      "parameters": [
+        "A_cell",
+        "k_out_PDL1",
+        "r_PDL1_IFNg",
+        "C1_PDL1_base",
+        "r_PDL2C1",
+        "IFNg_50_ind"
+      ]
+    },
+    {
+      "name": "Reaction_222",
+      "reactants": [],
+      "products": [
+        "syn_M_C.PDL1"
+      ],
+      "rate_law": "k_in_PDL1*(C1_PDL1_base/A_cell-syn_M_C.PDL1_total)",
+      "parameters": [
+        "A_cell",
+        "k_in_PDL1",
+        "C1_PDL1_base"
+      ]
+    },
+    {
+      "name": "Reaction_223",
+      "reactants": [],
+      "products": [
+        "syn_M_C.PDL2"
+      ],
+      "rate_law": "k_in_PDL1*(C1_PDL1_base/A_cell*r_PDL2C1-syn_M_C.PDL2_total)",
+      "parameters": [
+        "A_cell",
+        "k_in_PDL1",
+        "C1_PDL1_base",
+        "r_PDL2C1"
+      ]
+    },
+    {
+      "name": "Reaction_224",
+      "reactants": [],
+      "products": [
+        "syn_M_C.CD47"
+      ],
+      "rate_law": "kdeg_CD47*A_syn*C_CD47",
+      "parameters": [
+        "A_syn",
+        "kdeg_CD47",
+        "C_CD47"
+      ]
+    },
+    {
+      "name": "Reaction_225",
+      "reactants": [
+        "syn_M_C.CD47"
+      ],
+      "products": [],
+      "rate_law": "kdeg_CD47*syn_M_C.CD47",
+      "parameters": [
+        "kdeg_CD47"
+      ]
+    },
+    {
+      "name": "Reaction_226",
+      "reactants": [
+        "syn_M_C.CD47",
+        "syn_M_C.SIRPa"
+      ],
+      "products": [
+        "syn_M_C.CD47_SIRPa"
+      ],
+      "rate_law": "kon_CD47_SIRPa*(syn_M_C.CD47)*(syn_M_C.SIRPa)  -  koff_CD47_SIRPa*syn_M_C.CD47_SIRPa",
+      "parameters": [
+        "kon_CD47_SIRPa",
+        "koff_CD47_SIRPa"
+      ]
+    },
+    {
+      "name": "Reaction_227",
+      "reactants": [
+        "syn_M_C.PD1",
+        "syn_M_C.PDL1"
+      ],
+      "products": [
+        "syn_M_C.PD1_PDL1"
+      ],
+      "rate_law": "kon_PD1_PDL1*(syn_M_C.PD1)*(syn_M_C.PDL1)  -  koff_PD1_PDL1*syn_M_C.PD1_PDL1",
+      "parameters": [
+        "kon_PD1_PDL1",
+        "koff_PD1_PDL1"
+      ]
+    },
+    {
+      "name": "Reaction_228",
+      "reactants": [
+        "syn_M_C.PD1",
+        "syn_M_C.PDL2"
+      ],
+      "products": [
+        "syn_M_C.PD1_PDL2"
+      ],
+      "rate_law": "kon_PD1_PDL2*(syn_M_C.PD1)*(syn_M_C.PDL2)  -  koff_PD1_PDL2*syn_M_C.PD1_PDL2",
+      "parameters": [
+        "kon_PD1_PDL2",
+        "koff_PD1_PDL2"
+      ]
+    },
+    {
+      "name": "Reaction_229",
+      "reactants": [
+        "syn_M_C.PD1"
+      ],
+      "products": [
+        "syn_M_C.PD1_aPD1"
+      ],
+      "rate_law": "2*kon_PD1_aPD1*(syn_M_C.PD1 * V_T.aPD1/gamma_T_aPD1) -  koff_PD1_aPD1*syn_M_C.PD1_aPD1",
+      "parameters": [
+        "gamma_T_aPD1",
+        "kon_PD1_aPD1",
+        "koff_PD1_aPD1"
+      ]
+    },
+    {
+      "name": "Reaction_230",
+      "reactants": [
+        "syn_M_C.PD1_aPD1",
+        "syn_M_C.PD1"
+      ],
+      "products": [
+        "syn_M_C.PD1_aPD1_PD1"
+      ],
+      "rate_law": "Chi_PD1_aPD1*kon_PD1_aPD1*(syn_M_C.PD1 * syn_M_C.PD1_aPD1) -  2*koff_PD1_aPD1*syn_M_C.PD1_aPD1_PD1",
+      "parameters": [
+        "kon_PD1_aPD1",
+        "koff_PD1_aPD1",
+        "Chi_PD1_aPD1"
+      ]
+    },
+    {
+      "name": "Reaction_231",
+      "reactants": [
+        "syn_M_C.PDL1"
+      ],
+      "products": [
+        "syn_M_C.PDL1_aPDL1"
+      ],
+      "rate_law": "2*kon_PDL1_aPDL1*(syn_M_C.PDL1 * V_T.aPDL1/gamma_T_aPDL1) -  koff_PDL1_aPDL1*syn_M_C.PDL1_aPDL1",
+      "parameters": [
+        "gamma_T_aPDL1",
+        "kon_PDL1_aPDL1",
+        "koff_PDL1_aPDL1"
+      ]
+    },
+    {
+      "name": "Reaction_232",
+      "reactants": [
+        "syn_M_C.PDL1_aPDL1",
+        "syn_M_C.PDL1"
+      ],
+      "products": [
+        "syn_M_C.PDL1_aPDL1_PDL1"
+      ],
+      "rate_law": "Chi_PDL1_aPDL1*kon_PDL1_aPDL1*(syn_M_C.PDL1 * syn_M_C.PDL1_aPDL1) -  2*koff_PDL1_aPDL1*syn_M_C.PDL1_aPDL1_PDL1",
+      "parameters": [
+        "kon_PDL1_aPDL1",
+        "koff_PDL1_aPDL1",
+        "Chi_PDL1_aPDL1"
+      ]
+    },
+    {
+      "name": "Reaction_233",
+      "reactants": [
+        "syn_M_C.CD80m",
+        "syn_M_C.CD80m"
+      ],
+      "products": [
+        "syn_M_C.CD80"
+      ],
+      "rate_law": "kon_CD80_CD80*(syn_M_C.CD80m)*(syn_M_C.CD80m) - koff_CD80_CD80*syn_M_C.CD80",
+      "parameters": [
+        "kon_CD80_CD80",
+        "koff_CD80_CD80"
+      ]
+    },
+    {
+      "name": "Reaction_234",
+      "reactants": [
+        "syn_M_C.CD80m",
+        "syn_M_C.PDL1"
+      ],
+      "products": [
+        "syn_M_C.PDL1_CD80"
+      ],
+      "rate_law": "kon_CD80_PDL1*(syn_M_C.CD80m)*(syn_M_C.PDL1)  -  koff_CD80_PDL1*syn_M_C.PDL1_CD80",
+      "parameters": [
+        "kon_CD80_PDL1",
+        "koff_CD80_PDL1"
+      ]
+    },
+    {
+      "name": "Reaction_235",
+      "reactants": [
+        "V_T.C1"
+      ],
+      "products": [
+        "V_T.C_x"
+      ],
+      "rate_law": "k_M1_phago*V_T.C1*V_T.Mac_M1/(V_T.Mac_M1+K_Mac_C*V_T.C1+cell)*(1-H_Mac_C)*(1-H_IL10_phago)",
+      "parameters": [
+        "cell",
+        "k_M1_phago",
+        "H_Mac_C",
+        "K_Mac_C",
+        "H_IL10_phago"
+      ]
+    },
+    {
+      "name": "Reaction_236",
+      "reactants": [
+        "V_T.C2"
+      ],
+      "products": [
+        "V_T.C_x"
+      ],
+      "rate_law": "k_M1_phago*V_T.C2*V_T.Mac_M1/(V_T.Mac_M1+K_Mac_C*V_T.C2+cell)*(1-H_Mac_C)*(1-H_IL10_phago)",
+      "parameters": [
+        "cell",
+        "k_M1_phago",
+        "H_Mac_C",
+        "K_Mac_C",
+        "H_IL10_phago"
+      ]
+    }
+  ]
+}

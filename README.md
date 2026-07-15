@@ -22,7 +22,24 @@ tied to one model.
   parameters and the diagram and target scores show the delta.
 - Preset interventions (block a cytokine, deplete a cell type) as one-click overrides.
 
-## Running it
+## Try it
+
+The repo bundles a working example built from the published, MIT-licensed
+[QSPIO-TNBC](https://github.com/popellab/QSPIO-TNBC) model (a TNBC immuno-oncology QSP
+model, 154 species / 234 reactions). The compiled simulator ships with it, so there's no
+build step:
+
+```bash
+git clone https://github.com/popellab/qsp-model-explorer && cd qsp-model-explorer
+pip install -e /path/to/qsp-hpc-tools     # dependency (see below)
+pip install -e .
+qsp-model-explorer --repo examples/tnbc   # → http://localhost:8765/
+```
+
+The bundled binary is macOS arm64; on other platforms, see
+[`examples/tnbc/README.md`](examples/tnbc/README.md).
+
+## Running it on your own model
 
 You need Python 3.11+ and `qsp-hpc-tools` installed.
 
