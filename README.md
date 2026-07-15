@@ -11,13 +11,7 @@ tied to one model.
 
 ## Demo
 
-<!--
-  To embed the video player: open this file on GitHub, click the pencil (Edit), and drag
-  docs/demo.mp4 onto the line below. GitHub uploads it and inserts a
-  https://github.com/user-attachments/assets/... URL that renders as an inline player.
-  Then delete this comment.
--->
-_A walkthrough is on the way — drag `docs/demo.mp4` in here (see the comment above)._
+https://github.com/user-attachments/assets/bd8469e8-37a4-465a-ac2f-9f0b57170be6
 
 ## What's in the UI
 
