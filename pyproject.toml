@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qsp-model-explorer"
+version = "0.1.0"
+description = "Interactive browser explorer for QSPIO/qsp_sim QSP models"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.0",
+    "pyyaml>=6.0",
+    # qsp-hpc-tools provides the calibration-target loader + param-XML renderer.
+    # Not on PyPI — install from the qsp-hpc-tools repo (pip install -e path/to/qsp-hpc-tools).
+    "qsp-hpc-tools",
+]
+
+[project.scripts]
+qsp-model-explorer = "qsp_model_explorer.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+qsp_model_explorer = ["static/*"]

@@ -1,0 +1,1714 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QSP Model Explorer</title>
+<style>
+  :root{
+    --bg:#0e1116; --panel:#161b22; --panel2:#1c2230; --line:#2a3140;
+    --ink:#d6deeb; --muted:#8b97a8; --accent:#5ac8fa;
+    --good:#3fb950; --warn:#d29922; --bad:#f85149;
+    --up:#f85149; --down:#388bfd;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);
+    font:13px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  #app{display:grid;grid-template-rows:auto 1fr;height:100vh;overflow:hidden}
+  header{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:8px 14px;
+    background:var(--panel);border-bottom:1px solid var(--line)}
+  header h1{font-size:14px;margin:0;font-weight:600;letter-spacing:.3px}
+  header .sp{flex:1}
+  select,button{background:var(--panel2);color:var(--ink);border:1px solid var(--line);
+    border-radius:6px;padding:5px 9px;font:inherit;cursor:pointer}
+  button:hover,select:hover{border-color:var(--accent)}
+  .status{color:var(--muted);font-size:12px}
+  /* model-source picker: which checkout we're simulating, and what we diff against */
+  .srcbar{display:flex;align-items:center;gap:5px}
+  .srcbar .lbl{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.5px}
+  .srcbar select{max-width:230px}
+  .srcbar button{padding:3px 7px;font-size:11px}
+  .srcbar select.dirty{border-color:var(--warn)}
+  .srcbar select.xbranch{border-color:var(--accent);color:var(--accent)}
+  /* build overlay — a branch we haven't compiled yet takes ~10-20s (ccache warm) */
+  #build{position:fixed;inset:0;background:rgba(10,12,16,.86);display:none;z-index:60;
+         align-items:center;justify-content:center}
+  #build .box{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+              padding:18px 20px;width:min(680px,92vw)}
+  #build h3{margin:0 0 4px;font-size:13px}
+  #build .sub{color:var(--muted);font-size:11px;margin-bottom:12px}
+  #build .bar{height:6px;background:var(--bg);border-radius:4px;overflow:hidden;margin-bottom:10px}
+  #build .bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+  #build pre{margin:0;max-height:230px;overflow:auto;background:var(--bg);border:1px solid var(--line);
+             border-radius:6px;padding:8px;font-size:10.5px;line-height:1.45;color:var(--muted);white-space:pre-wrap}
+  #build .row{display:flex;gap:8px;justify-content:flex-end;margin-top:10px}
+  .status b{color:var(--ink);font-weight:600}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
+  main{display:grid;grid-template-columns:minmax(220px,300px) minmax(0,1fr) minmax(260px,360px);
+    min-height:0;min-width:0;overflow:hidden}
+  .col{min-height:0;min-width:0;overflow:auto;border-right:1px solid var(--line)}
+  .col:last-child{border-right:none;border-left:1px solid var(--line)}
+  .col h2{position:sticky;top:0;background:var(--panel);margin:0;padding:8px 12px;
+    font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);z-index:2}
+  /* sliders */
+  .slider{padding:9px 12px;border-bottom:1px solid var(--line)}
+  .slider .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .slider .nm{font-weight:600;color:var(--ink)}
+  .slider .nm.sub{color:var(--accent)}
+  .slider .val{color:var(--muted);font-size:12px}
+  .slider input[type=range]{width:100%;margin:6px 0 0;accent-color:var(--accent)}
+  .slider .rng{display:flex;justify-content:space-between;color:#5b6675;font-size:10px}
+  .slider .x{color:#5b6675;cursor:pointer;font-size:11px}
+  .slider .x:hover{color:var(--bad)}
+  .addrow{padding:9px 12px;display:flex;gap:6px}
+  .addrow input{flex:1;background:var(--panel2);color:var(--ink);border:1px solid var(--line);
+    border-radius:6px;padding:5px 8px;font:inherit}
+  /* targets */
+  .sortz{font-size:11px;font-weight:400;color:var(--muted);float:right;cursor:pointer}
+  .sortz input{vertical-align:middle;margin-right:3px}
+  .tgt{padding:7px 12px;border-bottom:1px solid var(--line)}
+  .tgt .r1{display:flex;justify-content:space-between;gap:8px}
+  .tgt .id{font-size:11px;color:var(--ink);word-break:break-word}
+  .tgt .z{font-weight:700;font-size:12px;white-space:nowrap}
+  .tgt .bar{position:relative;height:14px;margin-top:5px;background:var(--panel2);
+    border-radius:3px;overflow:hidden}
+  .tgt .ci{position:absolute;top:0;bottom:0;background:#26456022;border-left:1px solid #2f6feb;border-right:1px solid #2f6feb}
+  .tgt .med{position:absolute;top:0;bottom:0;width:2px;background:var(--muted)}
+  .tgt .cur{position:absolute;top:2px;bottom:2px;width:3px;border-radius:2px}
+  .tgt .nums{color:var(--muted);font-size:10.5px;margin-top:3px}
+  /* hills */
+  .hill{display:flex;align-items:center;gap:8px;padding:4px 12px;border-bottom:1px solid #1c2230}
+  .hill .nm{width:120px;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .hill .track{flex:1;height:11px;background:var(--panel2);border-radius:3px;overflow:hidden;position:relative}
+  .hill .fill{height:100%;border-radius:3px}
+  .hill .v{width:38px;text-align:right;font-size:11px;color:var(--muted)}
+  .hill.sat .v{color:var(--bad);font-weight:700}
+  .hill .dv{width:48px;text-align:right;font-size:10px;font-weight:600}
+  .hill .bmark{position:absolute;top:-1px;bottom:-1px;width:2px;background:var(--ink);opacity:.55}
+  /* branch/baseline comparison readouts on the calibration targets */
+  .tgtsum{padding:7px 12px;font-size:11px;color:var(--muted);background:var(--panel2);
+          border-bottom:1px solid var(--line)}
+  .tgt .dz{font-size:10.5px;margin-top:3px;font-weight:600}
+  .tgt .dz b{font-weight:700}
+  .tgt .base{position:absolute;top:1px;bottom:1px;width:2px;background:var(--ink);opacity:.55;border-radius:1px}
+  /* trajectory small-multiples */
+  .traj{padding:5px 12px 7px;border-bottom:1px solid #1c2230}
+  .traj .tjhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .traj .tjname{font-size:11px;color:var(--ink)}
+  .traj .tjpeak{font-size:9.5px;margin-left:5px;font-variant-numeric:tabular-nums;opacity:.9}
+  .traj .tjval{font-size:10.5px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .tjsvg{width:100%;height:38px;display:block;margin-top:3px;overflow:visible}
+  .tjsvg .base{fill:none;stroke:#5b6675;stroke-width:1;stroke-opacity:.5;vector-effect:non-scaling-stroke}
+  .tjsvg .cur{fill:none;stroke:var(--accent);stroke-width:1.5;vector-effect:non-scaling-stroke}
+  .tjsvg .mark{stroke:#f0c274;stroke-width:1;stroke-opacity:.85;vector-effect:non-scaling-stroke}
+  /* diagram */
+  #diagram{width:100%;height:100%;display:block;background:
+    radial-gradient(1200px 600px at 60% 0%,#12161d,#0e1116)}
+  .cmp{fill:rgba(42,52,68,.13);stroke:#3a4658;stroke-width:1.2;stroke-opacity:.6}
+  .cmplabel{fill:#c3cede;font:700 13px ui-monospace;letter-spacing:.5px;
+    paint-order:stroke;stroke:#0e1116;stroke-width:4px;stroke-linejoin:round}
+  .edge{stroke:#2a3140;stroke-width:.6;fill:none;pointer-events:none;cursor:pointer}
+  .edgehit{stroke:transparent;stroke-width:15;fill:none;pointer-events:stroke;cursor:pointer}
+  .gate .ring{fill:#0b0e13;stroke:#3a4152;stroke-width:1;pointer-events:none}
+  .gate .lvl{stroke:none;pointer-events:none}
+  .gate .hit{fill:transparent;pointer-events:all;cursor:help}
+  .edge.hl{stroke:#fff !important;stroke-opacity:1 !important}
+  .node{stroke:#0e1116;stroke-width:.8;cursor:pointer}
+  .node.hl{stroke:#fff;stroke-width:1.6}
+  .nlabel{fill:#98a3b3;font:9px ui-monospace;pointer-events:none;
+    paint-order:stroke;stroke:#0e1116;stroke-width:2.4px;stroke-linejoin:round}
+  #tip{position:fixed;pointer-events:none;background:#0b0e13;border:1px solid var(--line);
+    border-radius:6px;padding:6px 9px;font-size:11px;max-width:280px;display:none;z-index:9;color:var(--ink)}
+  #tip b{color:var(--accent)}
+  .legend{position:absolute;bottom:10px;left:10px;background:#0b0e13cc;border:1px solid var(--line);
+    border-radius:6px;padding:8px 10px;font-size:10.5px;color:var(--muted)}
+  .toolbar{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;padding:6px 12px;border-bottom:1px solid var(--line);
+    background:var(--panel);position:sticky;top:0;z-index:2}
+  .toolbar label{color:var(--muted);font-size:11px;display:flex;align-items:center;gap:4px}
+  .toolbar select{padding:3px 7px;font-size:11px}
+  /* group tag: names what the following toggles color/affect (nodes vs edges) */
+  .tgrp{color:#5b6675;font-size:9.5px;text-transform:uppercase;letter-spacing:.5px;cursor:help}
+  .vsep{width:1px;height:16px;background:var(--line);margin:0 4px}
+  /* intervention (knockout/block) strip */
+  .perturbbar{display:flex;flex-wrap:wrap;gap:5px;align-items:center;padding:6px 12px;
+    border-bottom:1px solid var(--line);background:var(--panel)}
+  .perturbbar .lbl{color:var(--muted);font-size:10px;letter-spacing:.7px;text-transform:uppercase;margin-right:2px}
+  .ivbtn{background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:12px;
+    padding:2px 9px;font-size:11px;cursor:pointer;white-space:nowrap}
+  .ivbtn:hover{border-color:var(--accent)}
+  .ivbtn.on{background:#3a2418;border-color:var(--warn);color:#f0c274}
+  .ivbtn.on::before{content:"⊘ "}
+  .ivclear{margin-left:auto;color:#5b6675;font-size:11px;cursor:pointer;border:none;background:none}
+  .ivclear:hover{color:var(--bad)}
+  .slider .z0{color:#5b6675;cursor:pointer;font-size:11px}
+  /* the same parameter's value on the comparison branch */
+  .slider .cmp{font-size:10.5px;margin-top:4px;padding-top:4px;border-top:1px dashed var(--line)}
+  .slider .cmp b{color:var(--ink);font-weight:600}
+  #changedbtn{font-size:11px;padding:3px 8px;white-space:nowrap}
+  .slider .z0:hover,.slider .z0.on{color:var(--warn)}
+  .timebar{display:flex;gap:8px;align-items:center;padding:6px 12px;border-top:1px solid var(--line);
+    background:var(--panel);font-size:11px;color:var(--muted)}
+  .timebar input[type=range]{flex:1;accent-color:var(--accent);min-width:80px}
+  .timebar button{padding:2px 8px;font-size:11px}
+  .timebar label{color:var(--muted);font-size:11px;display:flex;align-items:center;gap:3px}
+  .tlbl{min-width:104px;font-variant-numeric:tabular-nums;color:var(--ink)}
+  .diagwrap{position:relative;height:100%;display:flex;flex-direction:column}
+  .swatch{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 3px -1px 0}
+  .layerlabel{fill:#4b5568;font:600 10px ui-monospace;letter-spacing:.5px}
+  .edge.fluxhl{stroke-opacity:1 !important}
+  /* modal */
+  #modal,#refmodal{position:fixed;inset:0;background:#0009;display:none;align-items:center;justify-content:center;z-index:20}
+  #modal .box,#refmodal .box{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;width:520px;max-width:92vw}
+  #modal h3,#refmodal h3{margin:0 0 10px;font-size:13px}
+  #modal input[type=text],#refmodal input[type=text]{width:100%;background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:6px 9px;font:inherit;margin-bottom:8px}
+  #modal .chips,#refmodal .chips{display:flex;flex-wrap:wrap;gap:5px;min-height:34px;max-height:200px;overflow:auto;padding:6px;background:var(--bg);border:1px solid var(--line);border-radius:6px;margin-bottom:10px}
+  #modal .chip{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:2px 8px;font-size:11px;display:flex;gap:5px;align-items:center}
+  #modal .chip b{color:var(--accent);font-weight:600}
+  #modal .chip span{cursor:pointer;color:var(--muted)}
+  #modal .chip span:hover{color:var(--bad)}
+  #modal .row,#refmodal .row{display:flex;gap:8px;justify-content:flex-end}
+  #modal .del{margin-right:auto;color:var(--bad);border-color:#5b2a2a}
+  /* branch list inside the ref picker: one clickable row per ref */
+  #refmodal .refrow{display:flex;gap:8px;align-items:baseline;width:100%;padding:3px 5px;border-radius:4px;cursor:pointer;font-size:11px}
+  #refmodal .refrow:hover{background:var(--panel2)}
+  #refmodal .refrow b{color:var(--accent);font-weight:600;min-width:190px}
+  #refmodal .refrow i{color:var(--muted);font-style:normal;font-size:10px;margin-left:auto;white-space:nowrap}
+  #refmodal .refrow em{color:var(--muted);font-style:normal;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>QSP MODEL EXPLORER</h1>
+    <span class="srcbar" title="which checkout of the model to simulate — any branch, built on demand">
+      <span class="lbl">model</span>
+      <select id="source"></select>
+      <button id="addsrc" title="point the explorer at another branch / tag / sha">＋ branch…</button>
+      <button id="rmsrc" title="remove this added ref (deletes its scratch worktree)" style="display:none">✕</button>
+    </span>
+    <span class="srcbar" title="θ — WHICH PARAMETER VALUES to run these equations at. A commit moves the model two ways: it changes the equations, or it moves where θ sits. This is that second axis.">
+      <span class="lbl">θ</span>
+      <select id="theta"></select>
+      <select id="thetasrc" title="take θ from ANOTHER branch — run branch B's equations at branch A's parameters, which isolates an equation change from a prior refresh"></select>
+    </span>
+    <span class="srcbar" title="Δ-baseline. Set the branch to compare equations, or the θ to compare parameter vectors (e.g. submodel medians vs CSV prior center) — then pick 'baseline (your Δ)' below the diagram.">
+      <span class="lbl">vs</span>
+      <select id="basesource"></select>
+      <select id="basetheta"></select>
+    </span>
+    <select id="scenario"></select>
+    <button id="reset">reset params</button>
+    <span class="sp"></span>
+    <span class="status" id="status">initializing…</span>
+  </header>
+  <main>
+    <div class="col" id="sliders">
+      <h2>Parameters</h2>
+      <div class="addrow">
+        <input id="addparam" list="alllist" placeholder="add parameter…">
+        <datalist id="alllist"></datalist>
+        <button id="changedbtn" style="display:none"></button>
+      </div>
+      <div id="sliderlist"></div>
+    </div>
+
+    <div class="col" style="padding:0;overflow:hidden">
+      <div class="diagwrap">
+        <div class="toolbar">
+          <select id="view" title="Lens — which part of the model to draw. Pick a single module (species laid out in signal-flow order) or 'all compartments' for the whole species map."></select>
+          <label title="Show the synapse-complex (syn_*) species — the dense receptor-occupancy book-keeping states (30–80 each). Hidden by default because they bury everything else."><input type="checkbox" id="showsyn"> syn</label>
+          <label title="Labels: human-readable biology names (checked) vs raw model IDs like V_T.CD8 (unchecked). Module views only."><input type="checkbox" id="plainlabels" checked> plain</label>
+          <span class="vsep"></span>
+          <span class="tgrp" title="How the NODES (species) are colored. 'Δ' = colored by change vs the reference set in 'Δ vs'; 'abs' = colored by raw value.">nodes</span>
+          <label title="Color each species by how much it CHANGED vs the reference (the 'Δ vs' selector on this bar)."><input type="radio" name="cmode" value="delta" checked> Δ</label>
+          <label title="Color each species by its ABSOLUTE value at the current timepoint, ignoring any reference."><input type="radio" name="cmode" value="abs"> abs</label>
+          <span class="vsep"></span>
+          <span class="tgrp" title="Controls for the reaction-flux EDGES between species.">edges</span>
+          <label title="Show/hide the directed flux arrows between species."><input type="checkbox" id="showedges" checked> flux</label>
+          <span id="edgebasiswrap" title="all-compartments edge basis: regulation (rate-law influences — complete mechanistic wiring) vs conversions (stoichiometric mass transfer — sparse)"><select id="edgebasis" style="padding:2px 5px;font-size:11px"><option value="influence">regulation</option><option value="stoich">conversions</option></select></span>
+          <label title="Color each EDGE by the CHANGE in its flux vs the reference (the 'Δ vs' selector on this bar)."><input type="radio" name="emode" value="delta" checked> Δ</label>
+          <label title="Color each EDGE by its absolute flux MAGNITUDE, ignoring any reference."><input type="radio" name="emode" value="mag"> mag</label>
+          <label title="Animate flux flowing along the edges as traveling waves (wave height ∝ flux size). Cosmetic — doesn't change the data."><input type="checkbox" id="flow" checked> ⟿ flow</label>
+          <label title="Put Hill-gate saturation valves on the edges — discs whose size+color track each reaction's Hill saturation, so you can spot a closed gate choking a reaction."><input type="checkbox" id="gates" checked> ⊘ gates</label>
+          <span class="tgrp" title="How the gate VALVES are drawn. 'abs' = absolute saturation (teal→red, disc size ∝ saturation). 'Δ' = change vs the 'Δ vs' reference (blue = gate opened, red = gate closed further; disc size ∝ |change|).">valve</span>
+          <label title="Valve = absolute Hill saturation (teal→red, size ∝ saturation)."><input type="radio" name="gmode" value="abs" checked> abs</label>
+          <label title="Valve = Δ saturation vs the 'Δ vs' reference (blue = opened, red = closed further; size ∝ |change|). Only meaningful with a slider moved or a vs-branch set."><input type="radio" name="gmode" value="delta"> Δ</label>
+          <span class="vsep"></span>
+          <span class="tgrp" title="The REFERENCE that all the 'Δ' coloring above (nodes / edges / valve) compares against. Pick what 'change' means:">Δ vs</span>
+          <label title="color vs the diagnosis start — shows how the system evolves over the run"><input type="radio" name="refmode" value="start" checked> t₀ (dynamics)</label>
+          <label title="color vs the no-override baseline at the same time — isolates what your parameter change / the vs-branch did (only meaningful with a slider moved or a vs-branch set)"><input type="radio" name="refmode" value="sametime"> baseline (your Δ)</label>
+          <span class="sp" style="flex:1"></span>
+          <button id="fit" title="Re-fit the diagram to the window (zoom + re-center). Purely a view reset — changes nothing about the model.">fit</button>
+        </div>
+        <div class="perturbbar" id="perturbbar"></div>
+        <div style="flex:1;position:relative">
+          <svg id="diagram"></svg>
+          <div class="legend" id="legend"><div id="legNodes"></div><div id="legEdges"></div></div>
+        </div>
+        <div class="timebar">
+          <button id="playbtn" title="play / pause the trajectory">▶</button>
+          <input type="range" id="timeslider" min="0" max="0" value="0" step="1">
+          <span class="tlbl" id="timelabel">endpoint</span>
+          <button id="tendbtn" title="jump to endpoint">⇥</button>
+          <span class="vsep"></span>
+          <span class="tgrp" title="Playback speed of the trajectory animation. Only the animation cadence changes — nothing about the model or its timesteps.">speed</span>
+          <button id="slowbtn" title="slower">−</button>
+          <span class="tlbl" id="speedlabel" style="min-width:34px;text-align:center">1×</span>
+          <button id="fastbtn" title="faster">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col" id="right">
+      <h2>Calibration targets
+        <label class="sortz" title="biggest movers vs the Δ-baseline model first — with a branch selected in 'vs', this ranks what the commit actually changed"><input type="checkbox" id="sortdz"> |Δ|</label>
+        <label class="sortz"><input type="checkbox" id="sortz"> sort by |z|</label>
+      </h2>
+      <div id="targetlist"></div>
+      <h2>Key trajectories <span class="sortz" id="trajref" title="the faint grey curve behind each sparkline"></span></h2>
+      <div id="trajlist"></div>
+      <h2>Hill saturation (endpoint)</h2>
+      <div id="hilllist"></div>
+    </div>
+  </main>
+</div>
+<div id="tip"></div>
+<div id="build"><div class="box">
+  <h3 id="b_title">Building model…</h3>
+  <div class="sub" id="b_sub"></div>
+  <div class="bar"><i id="b_bar"></i></div>
+  <pre id="b_log"></pre>
+  <div class="row"><button id="b_close" style="display:none">close</button></div>
+</div></div>
+<div id="refmodal" class="modalw"><div class="box">
+  <h3>Point the explorer at another branch</h3>
+  <div class="sub" style="color:var(--muted);font-size:11px;margin-bottom:8px">
+    Checked out detached into a scratch worktree, then compiled (~10-20s). The generated
+    C++ is committed, so no MATLAB / codegen is needed.
+  </div>
+  <input type="text" id="r_ref" list="reflist" placeholder="branch, tag or sha…">
+  <datalist id="reflist"></datalist>
+  <div class="chips" id="r_hint" style="display:block;max-height:170px"></div>
+  <div class="row">
+    <button id="r_cancel">cancel</button>
+    <button id="r_go">load</button>
+  </div>
+</div></div>
+<div id="modal"><div class="box">
+  <h3>Custom module</h3>
+  <input type="text" id="m_name" placeholder="module name">
+  <input type="text" id="m_add" list="specieslist" placeholder="add species (type to search)…">
+  <datalist id="specieslist"></datalist>
+  <div class="chips" id="m_chips"></div>
+  <div class="row">
+    <button class="del" id="m_delete" style="display:none">delete</button>
+    <button id="m_cancel">cancel</button>
+    <button id="m_save">save</button>
+  </div>
+</div></div>
+<script>
+const $ = s => document.querySelector(s);
+const SVGNS = "http://www.w3.org/2000/svg";
+let META, BASELINE=null, BASELINE_FLUX=null, LAYOUT=null, EDGES=[], NODEIDX={}, RXMAP={}, OVR={}, SCEN, curResult=null;
+// Model source = which git checkout of the QSP model we simulate. SRC drives the
+// run; BASE_SRC drives the Δ-baseline. Setting BASE_SRC to a different branch is
+// the point of the feature: the diagram then shows what that commit did to the TME.
+let SRC=null, BASE_SRC=null, SOURCES=[];
+// θ = which parameter VALUES the equations run at, a separate axis from the branch.
+// THETA_SRC may be a different branch than SRC (branch B's equations at branch A's θ),
+// which is what isolates an equation change from a prior refresh.
+// BASE_THETA is the Δ-baseline's θ: same branch + different θ answers "what did the
+// submodel-prior refresh change vs the CSV prior center?"
+let THETA="submodel", THETA_SRC=null, BASE_THETA=null;
+function thetaReq(){ return {theta:THETA, theta_src:THETA_SRC||SRC}; }
+// The comparison branch's parameter table. A commit can move the model in two ways:
+// change the EQUATIONS, or change where θ SITS (a submodel-prior refresh moves medians).
+// The diagram only shows the first. This shows the second.
+let BASE_SLIDERS=null;
+let BASELINE_SERIES=null, BASELINE_FLUX_T=null, TI=0, playTimer=null, PENDING_T=null, EDGEGEOM=[];
+// Baseline readouts (not just trajectories): the target z-scores and Hill values of the
+// reference run. When BASE_SRC is another branch these carry the branch diff — the z-shift
+// per calibration target is the single most useful thing a model change produces.
+let BASELINE_TARGETS={}, BASELINE_HILLS={};
+// Which time index the diagram is showing. curIdx() = the scrubbed frame; the
+// Δ-coloring reference index depends on refmode (same-time vs t₀=diagnosis).
+function curIdx(){ return (curResult&&curResult.times)?Math.min(TI,curResult.times.length-1):0; }
+function refIdx(ti){ return (document.querySelector('input[name=refmode]:checked')||{}).value==="start" ? 0 : ti; }
+let VIEW="all", CUSTOM=JSON.parse(localStorage.getItem("mx_custom")||"{}");
+let inflight=false, pending=false;
+// Intervention (knockout/block) layer: merged on top of the slider overrides (OVR).
+// Kept separate so a preset toggles cleanly without disturbing slider edits.
+let INT_OVR={}, ACTIVE_INT=new Set();
+function effectiveOverrides(){ return {...OVR, ...INT_OVR}; }
+
+// ---------- utilities ----------
+const fmt = v => {
+  if(v===null||v===undefined||Number.isNaN(v)) return "—";
+  const a=Math.abs(v);
+  if(a!==0 && (a<1e-3||a>=1e5)) return v.toExponential(2);
+  return (+v.toPrecision(4)).toString();
+};
+function divColor(t){ // t in [-1,1] -> blue..grey..red
+  t=Math.max(-1,Math.min(1,t));
+  const grey=[90,100,115];
+  const c = t>=0 ? [248,81,73] : [56,139,253];
+  const k=Math.abs(t);
+  const mix=(i)=>Math.round(grey[i]*(1-k)+c[i]*k);
+  return `rgb(${mix(0)},${mix(1)},${mix(2)})`;
+}
+function absColor(t){ // t in [0,1] viridis-ish
+  const stops=[[13,8,135],[126,3,168],[204,71,120],[248,149,64],[240,249,33]];
+  t=Math.max(0,Math.min(1,t))*(stops.length-1); const i=Math.floor(t),f=t-i;
+  const a=stops[i],b=stops[Math.min(i+1,stops.length-1)];
+  return `rgb(${a.map((x,j)=>Math.round(x+(b[j]-x)*f)).join(",")})`;
+}
+
+// ---------- plain-language glossary (review mode) ----------
+// Human-readable labels for biologists/clinicians. Falls back to the model ID.
+function spLabel(s){ const g=(META.glossary&&META.glossary.species)||{}; return g[s.base_name]||s.base_name; }
+function compLabel(c){ const g=(META.glossary&&META.glossary.compartments)||{}; return g[c]||c; }
+function plainOn(){ return !!(document.getElementById("plainlabels")||{}).checked; }
+function nodeLabel(s){ return plainOn() ? spLabel(s) : (s.compartment+"."+s.base_name); }
+// All-view edge basis: "influence" (rate-law regulators+reactants → products —
+// the real mechanistic wiring) or "stoich" (reactant → product mass conversions).
+function edgeBasis(){ return (document.getElementById("edgebasis")||{}).value || "influence"; }
+// Local activation(+1)/inhibition(-1) sign of an influence edge's source on the
+// reaction flux. Meaningful on influence edges: always in module views, and in the
+// all-view when it's on the regulation basis. Stoichiometric conversions have no sign.
+function signOf(e){ if(!LAYOUT) return 0;
+  const inf = LAYOUT.mode==="module" || (LAYOUT.mode==="all" && edgeBasis()==="influence");
+  if(!inf) return 0;
+  const src=META.graph.species[e.a]?.name; return (META.graph.signs?.[e.rx]?.[src])||0; }
+
+// ---------- sliders ----------
+function sliderValue(inp){
+  const m=META.sliders[inp.dataset.name], t=+inp.value/1000;
+  return m.log ? Math.exp(Math.log(m.lo)+t*(Math.log(m.hi)-Math.log(m.lo)))
+               : m.lo+t*(m.hi-m.lo);
+}
+function valueToSlider(m,v){
+  const t = m.log ? (Math.log(v)-Math.log(m.lo))/(Math.log(m.hi)-Math.log(m.lo))
+                  : (v-m.lo)/(m.hi-m.lo);
+  return Math.max(0,Math.min(1000,Math.round(t*1000)));
+}
+function addSlider(name){
+  if($(`[data-name="${name}"]`)) return;
+  const m=META.sliders[name]; if(!m) return;
+  const el=document.createElement("div"); el.className="slider";
+  el.innerHTML=`<div class="top">
+      <span class="nm ${m.submodel?'sub':''}">${name}</span>
+      <span><span class="val"></span> <span class="z0" title="knock out (set to 0)">⊘</span> <span class="x" title="remove">✕</span></span>
+    </div>
+    <input type="range" min="0" max="1000" data-name="${name}">
+    <div class="rng"><span>${fmt(m.lo)}</span><span>${m.units||''}</span><span>${fmt(m.hi)}</span></div>
+    <div class="cmp" style="display:none"></div>`;
+  $("#sliderlist").appendChild(el);
+  const inp=el.querySelector("input");
+  inp.value=valueToSlider(m,m.center);
+  updateCmp(el,name);   // what this param's center is on the comparison branch
+  const upd=()=>{ el.querySelector(".val").textContent=fmt(sliderValue(inp)); };
+  upd();
+  inp.addEventListener("input",()=>{ upd(); OVR[name]=sliderValue(inp); simulate(); });
+  el.querySelector(".x").addEventListener("click",()=>{ delete OVR[name]; el.remove(); simulate(); });
+  // ⊘ knockout: set this param to 0; click again to restore the slider value
+  el.querySelector(".z0").addEventListener("click",()=>{
+    const z=el.querySelector(".z0"), on=z.classList.toggle("on");
+    if(on){ z.dataset.prev = (name in OVR)? OVR[name] : sliderValue(inp);
+      OVR[name]=0; inp.disabled=true; el.querySelector(".val").textContent="0 (off)"; }
+    else { inp.disabled=false; OVR[name]=+z.dataset.prev; el.querySelector(".val").textContent=fmt(OVR[name]); }
+    simulate();
+  });
+}
+function resetParams(){
+  OVR={};
+  document.querySelectorAll("#sliderlist input").forEach(inp=>{
+    const m=META.sliders[inp.dataset.name]; inp.value=valueToSlider(m,m.center); inp.disabled=false;
+    inp.parentElement.querySelector(".val").textContent=fmt(m.center);
+    const z=inp.parentElement.querySelector(".z0"); if(z) z.classList.remove("on");
+  });
+  clearInterventions();
+  simulate();
+}
+// ---------- interventions (knockout / block presets) ----------
+function recomputeIntOverrides(){
+  INT_OVR={};
+  (META.interventions||[]).forEach(v=>{ if(ACTIVE_INT.has(v.name)) Object.assign(INT_OVR, v.overrides); });
+}
+function toggleIntervention(iv, btn){
+  if(ACTIVE_INT.has(iv.name)) ACTIVE_INT.delete(iv.name); else ACTIVE_INT.add(iv.name);
+  btn.classList.toggle("on", ACTIVE_INT.has(iv.name));
+  recomputeIntOverrides();
+  simulate();
+}
+function clearInterventions(){
+  ACTIVE_INT.clear(); INT_OVR={};
+  document.querySelectorAll(".ivbtn.on").forEach(b=>b.classList.remove("on"));
+}
+
+// ---------- diagram layout ----------
+function indexNodes(){ META.graph.species.forEach((s,i)=>{ NODEIDX[s.name]=i; });
+  META.graph.reactions.forEach(rx=>{ RXMAP[rx.name]=rx; }); }
+function isSyn(name){ const i=NODEIDX[name];
+  return i!=null && (META.graph.species[i]?.compartment||"").toLowerCase().startsWith("syn"); }
+function visibleSpecies(){
+  if(VIEW==="all") return null;
+  if(VIEW.startsWith("custom:")) return CUSTOM[VIEW.slice(7)]||[];
+  let list=META.modules[VIEW]||[];
+  // Synapse-complex (syn_*) species are hidden from preset modules by default —
+  // they're dense receptor-occupancy books that clutter the cascade. 'syn' toggle
+  // brings them back.
+  if(!(document.getElementById("showsyn")||{}).checked) list=list.filter(n=>!isSyn(n));
+  return list;
+}
+function computeLayout(){
+  const vis=visibleSpecies();
+  if(vis===null){ layoutForceAll(); }
+  else { const me=moduleEdges(vis); layoutDownstream(vis, me.pairs); EDGES=me.full; }
+}
+// Species that INFLUENCE a reaction. The server provides `rx.influencers` = direct
+// rate-law species PLUS Hill-mediated drivers (cytokines hidden behind H_* columns,
+// recovered from the C++ Hill formulas). Fall back to a bare rate-law scan if a
+// stale payload lacks it (then Hill-mediated regulators are missing).
+function rxInfluencers(rx, nameSet){
+  const found=new Set();
+  if(rx.influencers){ rx.influencers.forEach(n=>{ if(nameSet.has(n)) found.add(n); }); return found; }
+  (rx.reactants||[]).forEach(a=>{ if(nameSet.has(a)) found.add(a); });
+  (rx.rate_law.match(/[A-Za-z_][A-Za-z0-9_.]*/g)||[]).forEach(tok=>{ if(nameSet.has(tok)) found.add(tok); });
+  return found;
+}
+// Influence edges (regulator/reactant → product) among a module's species.
+// Returns {pairs:[[listIdx,listIdx]] unique for layout, full:[{rx,a,b}] global idx for drawing}.
+function moduleEdges(list){
+  const S=new Set(list), idxOf={}; list.forEach((n,i)=>idxOf[n]=i);
+  const full=[], pairs=[], seen=new Set();
+  META.graph.reactions.forEach(rx=>{
+    const srcs=rxInfluencers(rx, S), prods=(rx.products||[]).filter(p=>S.has(p));
+    srcs.forEach(a=>prods.forEach(b=>{ if(a===b) return;
+      full.push({rx:rx.name, a:NODEIDX[a], b:NODEIDX[b]});
+      const k=idxOf[a]+"-"+idxOf[b]; if(!seen.has(k)){ seen.add(k); pairs.push([idxOf[a],idxOf[b]]); }
+    }));
+  });
+  return {pairs, full};
+}
+// Deterministic PRNG so the organic layout is stable across redraws.
+function mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0;
+  let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+// Andrew's monotone-chain convex hull.
+function convexHull(pts){
+  if(pts.length<3) return pts.slice();
+  const p=pts.slice().sort((a,b)=>a.x-b.x||a.y-b.y);
+  const cross=(o,a,b)=>(a.x-o.x)*(b.y-o.y)-(a.y-o.y)*(b.x-o.x);
+  const lo=[],hi=[];
+  for(const q of p){ while(lo.length>=2&&cross(lo[lo.length-2],lo[lo.length-1],q)<=0)lo.pop(); lo.push(q); }
+  for(let i=p.length-1;i>=0;i--){ const q=p[i]; while(hi.length>=2&&cross(hi[hi.length-2],hi[hi.length-1],q)<=0)hi.pop(); hi.push(q); }
+  lo.pop(); hi.pop(); return lo.concat(hi);
+}
+// Closed Catmull-Rom → cubic-bezier path for a soft blob through the given points.
+function blobPath(pts){
+  const n=pts.length; if(n<2) return "";
+  let d=`M${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
+  for(let i=0;i<n;i++){
+    const p0=pts[(i-1+n)%n], p1=pts[i], p2=pts[(i+1)%n], p3=pts[(i+2)%n];
+    const c1x=p1.x+(p2.x-p0.x)/6, c1y=p1.y+(p2.y-p0.y)/6;
+    const c2x=p2.x-(p3.x-p1.x)/6, c2y=p2.y-(p3.y-p1.y)/6;
+    d+=`C${c1x.toFixed(1)} ${c1y.toFixed(1)} ${c2x.toFixed(1)} ${c2y.toFixed(1)} ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+  }
+  return d+"Z";
+}
+// Organic all-view: force-directed positions clustered by compartment, real
+// reaction (reactant→product) edges, soft blob outlines instead of grid boxes.
+function layoutForceAll(){
+  const synOff=!(document.getElementById("showsyn")||{}).checked;
+  const species=META.graph.species.filter(s=>!(synOff && (s.compartment||"").toLowerCase().startsWith("syn")));
+  const names=species.map(s=>s.name), S=new Set(names), loc={}; names.forEach((n,i)=>loc[n]=i);
+  const N=species.length;
+  // compartments → seed centres on a ring (largest first, spread around)
+  const byC={}; species.forEach((s,i)=>{ (byC[s.compartment]??=[]).push(i); });
+  const comps=Object.keys(byC).sort((a,b)=>byC[b].length-byC[a].length);
+  const rnd=mulberry32(0x51A9), TAU=Math.PI*2, ringR=90+34*Math.sqrt(N);
+  const cc={}; comps.forEach((c,ci)=>{ const a=ci/comps.length*TAU;
+    cc[c]={x:Math.cos(a)*ringR, y:Math.sin(a)*ringR}; });
+  const px=new Float64Array(N), py=new Float64Array(N), comp=new Array(N);
+  species.forEach((s,i)=>{ comp[i]=s.compartment; const c=cc[s.compartment];
+    px[i]=c.x+(rnd()-0.5)*70; py[i]=c.y+(rnd()-0.5)*70; });
+  // Edges, deduped for the force springs. "influence" = rate-law regulators +
+  // reactants → products (the real regulatory wiring; most QSP reactions drive
+  // their product through the rate law, not stoichiometry). "stoich" = literal
+  // reactant → product mass conversions (the sparse mass-transfer subset).
+  const basis=edgeBasis();
+  const full=[], springs=[], seen=new Set();
+  META.graph.reactions.forEach(rx=>{
+    const srcs = basis==="stoich"
+      ? new Set((rx.reactants||[]).filter(a=>S.has(a)))
+      : rxInfluencers(rx, S);
+    const prods=(rx.products||[]).filter(b=>S.has(b));
+    srcs.forEach(a=>prods.forEach(b=>{ if(a===b) return;
+      full.push({rx:rx.name,a:NODEIDX[a],b:NODEIDX[b]});
+      const k=loc[a]<loc[b]?loc[a]+"-"+loc[b]:loc[b]+"-"+loc[a];
+      if(!seen.has(k)){ seen.add(k); springs.push([loc[a],loc[b]]); } }));
+  });
+  // force sim
+  const ITERS=360, L0=78, KR=4200, KS=0.055, KC=0.04;
+  for(let it=0; it<ITERS; it++){
+    const cool=1-it/ITERS, step=Math.min(8, 2+18*cool);
+    const fx=new Float64Array(N), fy=new Float64Array(N);
+    // repulsion (all pairs)
+    for(let i=0;i<N;i++) for(let j=i+1;j<N;j++){
+      let dx=px[i]-px[j], dy=py[i]-py[j]; let d2=dx*dx+dy*dy; if(d2<1)d2=1;
+      const f=KR/d2, d=Math.sqrt(d2), ux=dx/d, uy=dy/d;
+      fx[i]+=f*ux; fy[i]+=f*uy; fx[j]-=f*ux; fy[j]-=f*uy;
+    }
+    // springs (reaction edges)
+    springs.forEach(([a,b])=>{ let dx=px[b]-px[a], dy=py[b]-py[a], d=Math.hypot(dx,dy)||1;
+      const f=KS*(d-L0), ux=dx/d, uy=dy/d; fx[a]+=f*ux; fy[a]+=f*uy; fx[b]-=f*ux; fy[b]-=f*uy; });
+    // compartment cohesion toward live centroid
+    const ctr={}; comps.forEach(c=>ctr[c]={x:0,y:0,n:0});
+    for(let i=0;i<N;i++){ const c=ctr[comp[i]]; c.x+=px[i]; c.y+=py[i]; c.n++; }
+    comps.forEach(c=>{ ctr[c].x/=ctr[c].n; ctr[c].y/=ctr[c].n; });
+    for(let i=0;i<N;i++){ const c=ctr[comp[i]]; fx[i]+=KC*(c.x-px[i]); fy[i]+=KC*(c.y-py[i]); }
+    for(let i=0;i<N;i++){ const m=Math.hypot(fx[i],fy[i])||1, s=Math.min(1, step/m);
+      px[i]+=fx[i]*s; py[i]+=fy[i]*s; }
+  }
+  // Separate compartments so their blobs never overlap: treat each compartment as a
+  // bounding circle (centroid + max member radius + margin) and push whole
+  // compartments apart until every pair of circles is disjoint. Translating all
+  // members together preserves the intra-compartment layout.
+  for(let pass=0; pass<160; pass++){
+    const cen={}, rad={};
+    comps.forEach(c=>{ let x=0,y=0; byC[c].forEach(i=>{x+=px[i];y+=py[i];}); const nn=byC[c].length;
+      x/=nn; y/=nn; cen[c]={x,y}; let r=0; byC[c].forEach(i=>{ r=Math.max(r,Math.hypot(px[i]-x,py[i]-y)); });
+      rad[c]=r+55; });   // +55 ≈ blob grow (30) + margin so the smoothed outlines clear
+    let moved=false;
+    for(let a=0;a<comps.length;a++) for(let b=a+1;b<comps.length;b++){
+      const ca=cen[comps[a]], cb=cen[comps[b]];
+      let dx=cb.x-ca.x, dy=cb.y-ca.y, d=Math.hypot(dx,dy)||1;
+      const need=rad[comps[a]]+rad[comps[b]];
+      if(d<need-0.5){ const push=(need-d)/2, ux=dx/d, uy=dy/d;
+        byC[comps[a]].forEach(i=>{ px[i]-=ux*push; py[i]-=uy*push; });
+        byC[comps[b]].forEach(i=>{ px[i]+=ux*push; py[i]+=uy*push; });
+        moved=true; }
+    }
+    if(!moved) break;
+  }
+  // normalise to positive coords
+  let minx=1e9,miny=1e9,maxx=-1e9,maxy=-1e9;
+  for(let i=0;i<N;i++){ minx=Math.min(minx,px[i]); miny=Math.min(miny,py[i]); maxx=Math.max(maxx,px[i]); maxy=Math.max(maxy,py[i]); }
+  const PAD=70;
+  const NODE=[]; species.forEach((s,i)=>{ NODE[NODEIDX[s.name]]={s, x:px[i]-minx+PAD, y:py[i]-miny+PAD}; });
+  // blob outline per compartment (expanded hull, smoothed)
+  const BOXES=[]; comps.forEach(c=>{
+    const mem=byC[c].map(i=>({x:px[i]-minx+PAD, y:py[i]-miny+PAD}));
+    const cx=mem.reduce((a,p)=>a+p.x,0)/mem.length, cy=mem.reduce((a,p)=>a+p.y,0)/mem.length;
+    let outline;
+    if(mem.length<3){ outline=[]; for(let k=0;k<8;k++){ const a=k/8*TAU; outline.push({x:cx+Math.cos(a)*34, y:cy+Math.sin(a)*34}); } }
+    else { const hull=convexHull(mem); const grow=30;
+      outline=hull.map(p=>{ const dx=p.x-cx, dy=p.y-cy, d=Math.hypot(dx,dy)||1; return {x:p.x+dx/d*grow, y:p.y+dy/d*grow}; }); }
+    let top=outline[0]; outline.forEach(p=>{ if(p.y<top.y) top=p; });
+    BOXES.push({name:c, path:blobPath(outline), lx:cx, ly:top.y-13});
+  });
+  LAYOUT={NODE, BOXES, layerLabels:[], W:maxx-minx+PAD*2, H:maxy-miny+PAD*2, mode:"all"};
+  // edges: real reactions among visible nodes
+  EDGES=full;
+}
+// Downstream layered layout: x = signal-flow depth (longest path over the module's
+// influence edges, seeded by the cascade's curated order for isolated nodes).
+function layoutDownstream(list, pairs){
+  const n=list.length;
+  const deg=list.map(()=>0);
+  pairs.forEach(([a,b])=>{ deg[a]++; deg[b]++; });
+  // Layer only on forward-in-cascade-order edges: feedback edges (M1↔M2 polarization,
+  // CD8↔CD8_pex reflux) form cycles that would otherwise inflate the longest path.
+  const fwd=pairs.filter(([a,b])=>a<b);
+  const layer=list.map(()=>0);
+  for(let it=0; it<n; it++){ let ch=false;
+    fwd.forEach(([a,b])=>{ if(layer[b]<layer[a]+1){ layer[b]=layer[a]+1; ch=true; } });
+    if(!ch) break; }
+  const maxL=Math.max(0,...layer);
+  // isolated nodes: spread left→right by curated list order so the cascade still reads
+  list.forEach((_,i)=>{ if(deg[i]===0) layer[i]= maxL===0 ? i : Math.round(i/(n-1||1)*maxL); });
+  const maxLayer=Math.max(0,...layer);
+  const byLayer={}; list.forEach((_,i)=>{ (byLayer[layer[i]]??=[]).push(i); });
+  const LX=210, LY=86, PADX=70, PADY=54, NODE=[], layerLabels=[];
+  let maxPer=1;
+  Object.keys(byLayer).map(Number).sort((a,b)=>a-b).forEach(L=>{
+    const col=byLayer[L].sort((a,b)=>a-b); maxPer=Math.max(maxPer,col.length);
+    col.forEach((li,k)=>{ const gi=NODEIDX[list[li]];
+      NODE[gi]={s:META.graph.species[gi], x:PADX+L*LX, y:PADY+k*LY, layer:L}; });
+    layerLabels.push({x:PADX+L*LX, y:24, text:"stage "+(L+1)});
+  });
+  LAYOUT={NODE,BOXES:[],layerLabels,W:PADX*2+maxLayer*LX, H:PADY*2+maxPer*LY, mode:"module"};
+}
+// Post-layout label de-collision: node labels are centered under their node; when
+// two overlap (dense clusters, full names) stagger them vertically, with a weak
+// spring pulling each back toward its node so it stays associated. x stays fixed
+// under the node; only y moves. Cheap O(n²) greedy relaxation, runs once per draw.
+function declutterLabels(labels){
+  if(labels.length<2) return;
+  const CW=5.0, HALFH=6.0, PADY=1.5;   // 9px monospace ≈ 5px/char; line ≈ 12px
+  const L=labels.map(o=>({el:o.el, y:o.ay, ay:o.ay,
+                          hw:Math.max(6, o.txt.length*CW/2)+2, x:o.ax}));
+  for(let it=0; it<110; it++){
+    for(let i=0;i<L.length;i++) for(let j=i+1;j<L.length;j++){
+      const a=L[i], b=L[j];
+      const ox=(a.hw+b.hw)-Math.abs(b.x-a.x); if(ox<=0) continue;   // no x-overlap
+      const dy=b.y-a.y, oy=(2*HALFH+PADY)-Math.abs(dy); if(oy<=0) continue;
+      const s = dy>0?1 : dy<0?-1 : ((i&1)?1:-1);   // deterministic tie-break
+      const push=oy/2+0.4; a.y-=s*push; b.y+=s*push;
+    }
+    for(const a of L) a.y += (a.ay-a.y)*0.035;      // spring back toward the node
+  }
+  L.forEach(a=>a.el.setAttribute("y", a.y.toFixed(1)));
+}
+function drawDiagram(){
+  const svg=$("#diagram"); svg.innerHTML="";  // EDGEGEOM reset below with the edge loop
+  // arrowhead marker (inherits line stroke via context-stroke)
+  const defs=document.createElementNS(SVGNS,"defs");
+  defs.innerHTML=`<marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6"
+     markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8 z" fill="context-stroke"/></marker>
+    <marker id="inhibit" viewBox="0 0 8 8" refX="1.5" refY="4" markerWidth="7"
+     markerHeight="7" orient="auto"><path d="M1.5 0.5 L1.5 7.5" stroke="context-stroke" stroke-width="1.8" fill="none"/></marker>`;
+  svg.appendChild(defs);
+  const g=document.createElementNS(SVGNS,"g"); g.id="viewport"; svg.appendChild(g);
+  // compartment blobs (all view) drawn FIRST so edges + nodes sit on top
+  LAYOUT.BOXES.forEach(bx=>{
+    const rc=document.createElementNS(SVGNS,"path");
+    rc.setAttribute("d",bx.path); rc.setAttribute("class","cmp"); g.appendChild(rc);
+    const t=document.createElementNS(SVGNS,"text");
+    t.setAttribute("x",bx.lx);t.setAttribute("y",bx.ly);t.setAttribute("text-anchor","middle");
+    t.setAttribute("class","cmplabel"); t.textContent=plainOn()?compLabel(bx.name):bx.name; g.appendChild(t);
+  });
+  const r=10;
+  // edges (directed reactant→product, trimmed to node rims)
+  const eg=document.createElementNS(SVGNS,"g"); eg.id="edges";
+  const showEdges = $("#showedges").checked;
+  eg.style.display = showEdges ? "" : "none";
+  EDGEGEOM=[];
+  EDGES.forEach((e,ei)=>{
+    const A=LAYOUT.NODE[e.a], B=LAYOUT.NODE[e.b]; if(!A||!B) return;
+    const dx=B.x-A.x, dy=B.y-A.y, len=Math.hypot(dx,dy)||1, ux=dx/len, uy=dy/len;
+    const x1=A.x+ux*r, y1=A.y+uy*r, x2=B.x-ux*(r+5), y2=B.y-uy*(r+5);
+    // store trimmed-segment geometry so animateFlux can rebuild a traveling wave
+    const sdx=x2-x1, sdy=y2-y1, slen=Math.hypot(sdx,sdy)||1, sux=sdx/slen, suy=sdy/slen;
+    EDGEGEOM[ei]={x1,y1,x2,y2, len:slen, ux:sux, uy:suy, nx:-suy, ny:sux};
+    const straight=`M${x1} ${y1} L${x2} ${y2}`;
+    const p=document.createElementNS(SVGNS,"path");
+    p.setAttribute("d",straight);
+    // SBGN-style head: arrow for activation, flat tee for inhibition (module views).
+    const sgn=signOf(e);
+    p.setAttribute("class","edge"); p.setAttribute("marker-end", sgn<0?"url(#inhibit)":"url(#arrow)");
+    p.dataset.ei=ei; p.dataset.sign=sgn;
+    eg.appendChild(p);
+    // wide invisible hit path (static + straight) so hovering an edge is easy even
+    // while the visible edge is a thin, waving line; the visible edge ignores pointer events.
+    const hit=document.createElementNS(SVGNS,"path");
+    hit.setAttribute("d",straight); hit.setAttribute("class","edgehit"); hit.dataset.ei=ei;
+    hit.addEventListener("mousemove",ev=>showEdgeTip(ev,ei));
+    hit.addEventListener("mouseenter",()=>p.classList.add("hl"));
+    hit.addEventListener("mouseleave",()=>{ p.classList.remove("hl"); hideTip(); });
+    eg.appendChild(hit);
+  });
+  g.appendChild(eg);
+  (LAYOUT.layerLabels||[]).forEach(ll=>{
+    const t=document.createElementNS(SVGNS,"text");
+    t.setAttribute("x",ll.x);t.setAttribute("y",ll.y);t.setAttribute("text-anchor","middle");
+    t.setAttribute("class","layerlabel"); t.textContent=ll.text; g.appendChild(t);
+  });
+  // nodes
+  const mod = LAYOUT.mode==="module";
+  const labelEls=[];
+  LAYOUT.NODE.forEach((n,i)=>{
+    if(!n) return;
+    const c=document.createElementNS(SVGNS,"circle");
+    c.setAttribute("cx",n.x);c.setAttribute("cy",n.y);c.setAttribute("r",r);
+    c.setAttribute("class","node"); c.dataset.i=i; c.setAttribute("fill","#3a4152");
+    g.appendChild(c);
+    const t=document.createElementNS(SVGNS,"text");
+    t.setAttribute("x",n.x);t.setAttribute("y",n.y+20);t.setAttribute("text-anchor","middle");
+    t.setAttribute("class","nlabel");
+    t.textContent = mod ? nodeLabel(n.s).slice(0,24)
+                        : (plainOn()?spLabel(n.s):n.s.base_name).slice(0,20);
+    g.appendChild(t);
+    labelEls.push({el:t, ax:n.x, ay:n.y+20, txt:t.textContent});
+    c.addEventListener("mousemove",e=>showTip(e,i));
+    c.addEventListener("mouseleave",hideTip);
+    c.addEventListener("mouseenter",()=>hlNode(i,true));
+    c.addEventListener("mouseleave",()=>hlNode(i,false));
+  });
+  declutterLabels(labelEls);
+  drawGates(g, mod);
+  fitView();
+  colorNodes(); colorEdges(); colorGates();
+}
+// Hill-gate "valves" on the reaction edges: a small ring at the edge midpoint with
+// an inner disc whose size+color track that reaction's Hill saturation. Ties a
+// throttled flux directly to the gate closing it. Module views only (all-view is
+// too dense). Positions are static; colorGates() updates size/color per timepoint.
+const HILL_RE=/\bH_[A-Za-z0-9_]+/g;
+// Continuous saturation color: teal → amber → red, interpolated in HSL so there are
+// no discrete buckets (the old v>=0.8 / v>=0.95 thresholds made the valves look
+// artificially step-gated). The knee at 0.8 keeps them cool until near-saturation.
+function gateColor(v){
+  v=Math.max(0,Math.min(1,isFinite(v)?v:0));
+  const stops=[[0,199,94,67],[0.8,40,72,48],[1,3,92,63]];  // [pos, h, s%, l%]
+  let a=stops[0], b=stops[1];
+  for(let i=0;i<stops.length-1;i++){ if(v>=stops[i][0] && v<=stops[i+1][0]){ a=stops[i]; b=stops[i+1]; break; } }
+  const t=(v-a[0])/((b[0]-a[0])||1);
+  return `hsl(${(a[1]+(b[1]-a[1])*t).toFixed(0)},${(a[2]+(b[2]-a[2])*t).toFixed(0)}%,${(a[3]+(b[3]-a[3])*t).toFixed(0)}%)`;
+}
+function drawGates(g, isModule){
+  if(!isModule) return;
+  const gg=document.createElementNS(SVGNS,"g"); gg.id="gatelayer";
+  const seen=new Set();
+  EDGES.forEach((e,ei)=>{
+    const geo=EDGEGEOM[ei], rx=RXMAP[e.rx]; if(!geo||!rx||!rx.rate_law) return;
+    const hills=[...new Set(rx.rate_law.match(HILL_RE)||[])];
+    if(!hills.length) return;
+    // one cluster per reaction (dedupe reactions shared across influence edges),
+    // but a separate valve for EACH Hill gating it — laid in a row along the edge.
+    if(seen.has(e.rx)) return; seen.add(e.rx);
+    const midx=(geo.x1+geo.x2)/2, midy=(geo.y1+geo.y2)/2, step=15, k=hills.length;
+    hills.forEach((hn,j)=>{
+      const off=(j-(k-1)/2)*step, cx=midx+geo.ux*off, cy=midy+geo.uy*off;
+      const grp=document.createElementNS(SVGNS,"g"); grp.setAttribute("class","gate");
+      grp.dataset.hill=hn;
+      const ring=document.createElementNS(SVGNS,"circle");
+      ring.setAttribute("class","ring"); ring.setAttribute("cx",cx); ring.setAttribute("cy",cy); ring.setAttribute("r",6);
+      const lvl=document.createElementNS(SVGNS,"circle");
+      lvl.setAttribute("class","lvl"); lvl.setAttribute("cx",cx); lvl.setAttribute("cy",cy); lvl.setAttribute("r",0);
+      const hit=document.createElementNS(SVGNS,"circle");   // generous hover target
+      hit.setAttribute("class","hit"); hit.setAttribute("cx",cx); hit.setAttribute("cy",cy); hit.setAttribute("r",11);
+      hit.addEventListener("mousemove",ev=>showGateTip(ev,hn));
+      hit.addEventListener("mouseleave",hideTip);
+      grp.appendChild(ring); grp.appendChild(lvl); grp.appendChild(hit);
+      gg.appendChild(grp);
+    });
+  });
+  g.appendChild(gg);
+}
+function colorGates(){
+  const gg=document.getElementById("gatelayer"); if(!gg) return;
+  const tog=document.getElementById("gates");
+  const show = tog && tog.checked && curResult && curResult.series;
+  gg.style.display = show ? "" : "none";
+  if(!show) return;
+  const gmode=(document.querySelector('input[name=gmode]:checked')||{}).value||"abs";
+  const ti=curIdx(), bi=refIdx(ti);
+  const at=(name,idx,src)=>{ const a=src&&src[name]; return a?a[Math.min(idx,a.length-1)]:undefined; };
+  const rad=x=>(1+Math.sqrt(Math.min(Math.max(x,0),1))*4.6).toFixed(2);
+  gg.querySelectorAll(".gate").forEach(grp=>{
+    const hn=grp.dataset.hill, v = curResult.series[hn]?.[ti];
+    const lvl=grp.querySelector(".lvl");
+    if(v==null){ lvl.setAttribute("r",0); return; }
+    // abs: size+color = saturation (teal→red). delta: size = |Δ saturation| so
+    // an OPENED gate (v dropped) is still visible, color = signed Δ on the diverging
+    // blue↔red ramp (blue = opened, red = closed further) vs the 'Δ vs' reference.
+    const b = (gmode==="delta") ? at(hn,bi,BASELINE_SERIES) : undefined;
+    if(gmode==="delta" && b!=null){
+      const dv=v-b;
+      lvl.setAttribute("r",rad(Math.abs(dv)));
+      lvl.setAttribute("fill",divColor(dv/0.3));
+    } else {
+      lvl.setAttribute("r",rad(v));                 // area ∝ saturation
+      lvl.setAttribute("fill",gateColor(v));
+    }
+  });
+}
+function showGateTip(e,hn){
+  const ti=curIdx(), v = curResult?.series?.[hn]?.[ti];
+  const c = v==null?'#8b97a8':gateColor(v);
+  const gmode=(document.querySelector('input[name=gmode]:checked')||{}).value||"abs";
+  let dtxt="";
+  if(gmode==="delta" && BASELINE_SERIES){
+    const bs=BASELINE_SERIES[hn]; const b=bs?bs[Math.min(refIdx(ti),bs.length-1)]:undefined;
+    if(b!=null && v!=null){ const dv=v-b;
+      dtxt=`<br>Δ vs baseline <span style="color:${divColor(dv/0.3)}">${dv>=0?'+':''}${dv.toFixed(3)}</span>`; }
+  }
+  $("#tip").innerHTML=`<b>${hn}</b> <span style="color:#8b97a8">Hill gate</span><br>`+
+    `saturation <span style="color:${c}">${v==null?'–':v.toFixed(3)}</span>${v>=0.95?' · saturated':''}${dtxt}`;
+  const t=$("#tip"); t.style.display="block"; t.style.left=(e.clientX+14)+"px"; t.style.top=(e.clientY+14)+"px";
+}
+function hlNode(i,on){
+  document.querySelectorAll("#edges path.edge").forEach(l=>{
+    const e=EDGES[+l.dataset.ei]; if(e && (e.a===i||e.b===i)) l.classList.toggle("hl",on);
+  });
+  const node=document.querySelector(`.node[data-i="${i}"]`); if(node) node.classList.toggle("hl",on);
+}
+function colorNodes(){
+  if(!curResult||!curResult.series) return;
+  const mode=document.querySelector('input[name=cmode]:checked').value;
+  const S=curResult.series, ti=curIdx(), bi=refIdx(ti);
+  const at=(name,idx,src)=>{ const a=src&&src[name]; return a?a[Math.min(idx,a.length-1)]:undefined; };
+  // abs scale bounds (log10 over positive values at this timepoint)
+  let lo=Infinity,hi=-Infinity;
+  if(mode==="abs"){
+    for(const k in S){ const v=S[k][ti]; if(v>0){ const l=Math.log10(v); if(l<lo)lo=l; if(l>hi)hi=l; } }
+  }
+  document.querySelectorAll(".node").forEach(c=>{
+    const n=LAYOUT.NODE[+c.dataset.i]; if(!n) return;
+    const name=n.s.name, v=at(name,ti,S);
+    let fill="#3a4152";
+    if(v!==undefined && v!==null){
+      if(mode==="delta" && BASELINE_SERIES){
+        const b=at(name,bi,BASELINE_SERIES);
+        if(b>0 && v>0){ const r=Math.log2(v/b)/3; fill=divColor(r); }
+        else if(b===v) fill=divColor(0);
+      } else if(mode==="abs" && v>0 && hi>lo){
+        fill=absColor((Math.log10(v)-lo)/(hi-lo));
+      }
+    }
+    c.setAttribute("fill",fill);
+  });
+  $("#legNodes").innerHTML = mode==="delta"
+    ? `<b>nodes: Δ from baseline</b> (log₂)<br><span class="swatch" style="background:${divColor(-1)}"></span>↓ ×⅛
+       <span class="swatch" style="background:${divColor(0)}"></span>same
+       <span class="swatch" style="background:${divColor(1)}"></span>↑ ×8`
+    : `<b>nodes: abs value</b> (log₁₀, per-state)`;
+}
+function colorEdges(){
+  const lines=document.querySelectorAll("#edges path.edge");
+  if(!lines.length || !curResult || !curResult.fluxes_t) return;
+  const FT=curResult.fluxes_t, emode=document.querySelector('input[name=emode]:checked').value;
+  const ti=curIdx(), bi=refIdx(ti);
+  // Flow waves only while the trajectory is actively PLAYING — a paused/scrubbed frame
+  // is a static snapshot and should stay calm. Also frozen at the endpoint and (too
+  // dense) in the all-compartments view.
+  const atEnd = !!(curResult && curResult.times && ti >= curResult.times.length-1);
+  const animate = $("#flow").checked && !!playTimer && !atEnd && LAYOUT.mode!=="all";
+  const fluxAt=(rx,idx,src)=>{ const a=src&&src[rx]; return a?a[Math.min(idx,a.length-1)]:null; };
+  let mn=Infinity,mx=-Infinity;
+  EDGES.forEach(e=>{ const f=fluxAt(e.rx,ti,FT); if(f!=null){ const a=Math.abs(f);
+    if(a>0){ const l=Math.log10(a); if(l<mn)mn=l; if(l>mx)mx=l; } } });
+  lines.forEach(l=>{
+    const e=EDGES[+l.dataset.ei], f=fluxAt(e.rx,ti,FT);
+    let w=0.5, col="#2a3140", op=0.3, t=0, dir=0;
+    if(f!=null){ const a=Math.abs(f); t=(mx>mn)?(Math.log10(Math.max(a,1e-300))-mn)/(mx-mn):0.5;
+      if(a>0){ w=0.6+t*5.2; op=0.45+t*0.5; dir=(f<0?-1:1); }
+      if(emode==="delta" && BASELINE_FLUX_T){ const bf=fluxAt(e.rx,bi,BASELINE_FLUX_T);
+        col=(bf!=null && Math.abs(bf)>0 && a>0) ? divColor(Math.log2(a/Math.abs(bf))/3) : divColor(0);
+      } else col=absColor(a>0?t:0);
+    }
+    l.setAttribute("stroke-width",w.toFixed(2)); l.setAttribute("stroke",col);
+    l.setAttribute("stroke-opacity",op.toFixed(2));
+    // Flow animation: each edge is a traveling sine wave whose transverse AMPLITUDE
+    // scales with |flux| — big flux → tall waves, small flux → nearly flat. animateFlux
+    // rebuilds the wavy path each frame (all travel at the same speed, dataset.dir).
+    if(animate && dir!==0){
+      l.dataset.amp=(t*9).toFixed(2);   // px transverse amplitude
+      l.dataset.dir=dir;
+    } else {
+      l.dataset.amp="0"; l.dataset.dir="0";
+      const g=EDGEGEOM[+l.dataset.ei]; if(g) l.setAttribute("d",`M${g.x1} ${g.y1} L${g.x2} ${g.y2}`);
+    }
+  });
+  // Own container, set (not appended) — so calling colorEdges() alone (e.g. the flow
+  // toggle) replaces the edges legend instead of stacking another row each time.
+  $("#legEdges").innerHTML = emode==="delta"
+    ? `<div style="margin-top:6px"><b>edges: Δ flux</b> (log₂) · width ∝ |flux|</div>`
+    : `<div style="margin-top:6px"><b>edges: |flux|</b> (log₁₀) · width ∝ |flux|</div>`;
+}
+function repaint(){ colorNodes(); colorEdges(); colorGates(); }
+// Flux-flow animation: each edge is redrawn every frame as a transverse sine wave
+// traveling in the flux direction. |flux| sets the wave AMPLITUDE (dataset.amp),
+// all waves travel at one speed. PHASE advances globally so the crests move.
+let flowRAF=null, PHASE=0;
+const FLOW_SPEED=0.16, WAVELEN=26;   // rad/frame phase advance; wavelength (px)
+function animateFlux(){
+  flowRAF=requestAnimationFrame(animateFlux);
+  const eg=$("#edges"); if(!eg || eg.style.display==="none") return;
+  // frozen at the endpoint (colorEdges leaves the paths straight there)
+  if(curResult && curResult.times && curIdx()>=curResult.times.length-1) return;
+  PHASE += FLOW_SPEED;
+  const k=2*Math.PI/WAVELEN;
+  eg.querySelectorAll("path.edge").forEach(l=>{
+    const amp=+(l.dataset.amp||0), dir=+(l.dataset.dir||0);
+    if(!amp || !dir) return;
+    const g=EDGEGEOM[+l.dataset.ei]; if(!g) return;
+    const N=Math.max(6, Math.min(64, Math.round(g.len/4)));
+    let d="M";
+    for(let i=0;i<=N;i++){
+      const s=g.len*i/N;
+      const env=Math.sin(Math.PI*i/N);              // taper to 0 at both node rims
+      const off=amp*env*Math.sin(k*s - dir*PHASE);  // -dir*PHASE ⇒ crests travel A→B for +flux
+      const x=g.x1+g.ux*s + g.nx*off, y=g.y1+g.uy*s + g.ny*off;
+      d += (i?" L":"")+`${x.toFixed(1)} ${y.toFixed(1)}`;
+    }
+    l.setAttribute("d",d);
+  });
+}
+// Hill saturation at the currently-scrubbed timepoint (recomputed from series).
+function currentHills(){
+  if(!curResult||!curResult.series) return [];
+  const ti=curIdx(), out=[];
+  for(const k in curResult.series){ if(k.startsWith("H_")){ const v=curResult.series[k][ti];
+    if(v!=null) out.push({name:k, value:v, saturated:v>=0.95}); } }
+  out.sort((a,b)=>b.value-a.value); return out;
+}
+function paintFrame(){ repaint(); renderHills(currentHills()); updateTrajMarker(); }
+// ---------- time slider ----------
+function updateTimeLabel(){
+  const lab=$("#timelabel"); if(!curResult||!curResult.times){ lab.textContent="endpoint"; return; }
+  const ti=curIdx(), n=curResult.times.length, t=curResult.times[ti];
+  lab.textContent = (ti===n-1) ? `t = ${fmt(t)} d (endpoint)` : `t = ${fmt(t)} d`;
+}
+function resetTimeSlider(){ // called on each new sim: park the slider at the endpoint
+  const sl=$("#timeslider"); if(!curResult||!curResult.times) return;
+  const n=curResult.times.length; sl.max=String(n-1); sl.value=String(n-1); TI=n-1;
+  if(PENDING_T!=null){ TI=Math.round(PENDING_T*(n-1)); sl.value=String(TI); PENDING_T=null; }
+  updateTimeLabel();
+}
+function scrubTo(idx){ TI=idx; $("#timeslider").value=String(idx); updateTimeLabel(); paintFrame(); }
+// Playback cadence — 220 ms/frame = 1×. Speed multipliers just shorten/lengthen the
+// interval; the model timesteps are untouched. Restart the interval live if playing.
+const PLAY_BASE_MS=220, PLAY_SPEEDS=[0.25,0.5,1,2,4,8];
+let PLAY_SPEED_I=2;  // index into PLAY_SPEEDS → 1×
+function playInterval(){ return Math.round(PLAY_BASE_MS/PLAY_SPEEDS[PLAY_SPEED_I]); }
+function startPlayTimer(){ const n=curResult.times.length;
+  playTimer=setInterval(()=>{ if(TI>=n-1){ stopPlay(); return; } scrubTo(TI+1); }, playInterval()); }
+function setSpeed(delta){
+  PLAY_SPEED_I=Math.max(0,Math.min(PLAY_SPEEDS.length-1,PLAY_SPEED_I+delta));
+  const m=PLAY_SPEEDS[PLAY_SPEED_I];
+  $("#speedlabel").textContent=m+"×";
+  if(playTimer){ clearInterval(playTimer); startPlayTimer(); }  // apply live
+}
+function stopPlay(){ if(playTimer){ clearInterval(playTimer); playTimer=null; $("#playbtn").textContent="▶";
+  colorEdges(); } }  // straighten the wave paths now that we're paused
+function togglePlay(){
+  if(playTimer){ stopPlay(); return; }
+  if(!curResult||!curResult.times) return;
+  const n=curResult.times.length;
+  if(TI>=n-1) TI=0;            // restart from t₀ if parked at the end
+  $("#playbtn").textContent="⏸";
+  startPlayTimer();
+  paintFrame();                // reflect the (possibly reset) frame + start waves now
+}
+
+// ---------- pan/zoom ----------
+let vb={x:0,y:0,w:0,h:0};
+function applyVB(){ $("#diagram").setAttribute("viewBox",`${vb.x} ${vb.y} ${vb.w} ${vb.h}`); }
+function fitView(){
+  const svg=$("#diagram"), r=svg.getBoundingClientRect();
+  const pad=40, aw=LAYOUT.W+pad*2, ah=LAYOUT.H+pad*2;
+  // Module cascades are wide-and-short: fit to HEIGHT so nodes stay readable and
+  // the flow scrolls left→right. Compartment map: fit both to see everything.
+  const scale = LAYOUT.mode==="module"
+    ? Math.min(r.height/ah, 1.3)
+    : Math.min(r.width/aw, r.height/ah);
+  const vbW=r.width/scale, vbH=r.height/scale;
+  // module: anchor to the left so the cascade reads from its start (stage 1);
+  // compartment map: center the whole bbox.
+  const x = LAYOUT.mode==="module" ? -pad : LAYOUT.W/2-vbW/2;
+  vb={x, y:LAYOUT.H/2-vbH/2, w:vbW, h:vbH}; applyVB();
+}
+(function panzoom(){
+  const svg=$("#diagram"); let drag=null;
+  svg.addEventListener("wheel",e=>{e.preventDefault();
+    const f=e.deltaY<0?0.9:1.1, r=svg.getBoundingClientRect();
+    const mx=vb.x+(e.clientX-r.left)/r.width*vb.w, my=vb.y+(e.clientY-r.top)/r.height*vb.h;
+    vb.x=mx-(mx-vb.x)*f; vb.y=my-(my-vb.y)*f; vb.w*=f; vb.h*=f; applyVB();
+  },{passive:false});
+  svg.addEventListener("mousedown",e=>{ if(e.target.classList.contains("node"))return; drag={x:e.clientX,y:e.clientY,vx:vb.x,vy:vb.y}; });
+  window.addEventListener("mousemove",e=>{ if(!drag)return; const r=svg.getBoundingClientRect();
+    vb.x=drag.vx-(e.clientX-drag.x)/r.width*vb.w; vb.y=drag.vy-(e.clientY-drag.y)/r.height*vb.h; applyVB(); });
+  window.addEventListener("mouseup",()=>drag=null);
+})();
+function showTip(e,i){
+  const n=LAYOUT.NODE[i], ti=curIdx();
+  const v=curResult?.series?.[n.s.name]?.[ti];
+  const bs=BASELINE_SERIES?.[n.s.name]; const b=bs?bs[Math.min(refIdx(ti),bs.length-1)]:undefined;
+  let d=""; if(b>0&&v>0){ const r=v/b; d=` &nbsp; Δ ×${fmt(r)}`; }
+  $("#tip").innerHTML=`<b>${spLabel(n.s)}</b> <span style="color:#8b97a8">${compLabel(n.s.compartment)}${n.s.units?' · '+n.s.units:''}</span><br>`+
+    `<span style="color:#5b6675">${n.s.name}</span><br>`+
+    `value: ${fmt(v)}${d}`+(n.s.description?`<br><span style="color:#8b97a8">${n.s.description}</span>`:"");
+  const t=$("#tip"); t.style.display="block"; t.style.left=(e.clientX+14)+"px"; t.style.top=(e.clientY+14)+"px";
+}
+function showEdgeTip(e,ei){
+  const ed=EDGES[ei], rx=RXMAP[ed.rx], ti=curIdx();
+  const f=curResult?.fluxes_t?.[ed.rx]?.[ti];
+  const bft=BASELINE_FLUX_T?.[ed.rx]; const bf=bft?bft[Math.min(refIdx(ti),bft.length-1)]:null;
+  const A=LAYOUT.NODE[ed.a], B=LAYOUT.NODE[ed.b];
+  let d=""; if(bf!=null && Math.abs(bf)>0 && f!=null){ d=` · Δ ×${fmt(f/bf)}`; }
+  // Hill gates on this reaction, at the scrubbed time (saturated ones flagged red)
+  let gates="";
+  if(rx&&rx.rate_law&&curResult?.series){
+    const hn=[...new Set(rx.rate_law.match(HILL_RE)||[])].filter(n=>curResult.series[n]);
+    if(hn.length) gates="<br>"+hn.map(n=>{ const v=curResult.series[n][ti];
+      const c=v==null?'#8b97a8':gateColor(v);
+      return `<span style="color:${c}">${n} ${v==null?'–':v.toFixed(2)}</span>`; }).join(" · ");
+  }
+  // A reactant → product edge is a mass CONVERSION (substrate consumed), not
+  // regulation — "promotes" would be a tautology there. Only rate-law regulators
+  // (species that aren't reactants) get the promotes/inhibits verb.
+  const isConv = rx && (rx.reactants||[]).includes(A.s.name);
+  const sgn=signOf(ed);
+  const verb = isConv ? '<span style="color:#8b97a8">→ becomes</span>'
+    : sgn>0 ? '<span style="color:#7fd8c8">promotes</span>'
+    : sgn<0 ? '<span style="color:#ff8a7a">inhibits</span>' : '→';
+  $("#tip").innerHTML=`<b>${spLabel(A.s)} ${verb} ${spLabel(B.s)}</b><br>`+
+    `<span style="color:#5b6675">${ed.rx}</span><br>`+
+    (rx&&rx.rate_law?`<span style="color:#8b97a8">${rx.rate_law}</span><br>`:"")+`flux ${fmt(f)}${d}`+gates;
+  const t=$("#tip"); t.style.display="block"; t.style.left=(e.clientX+14)+"px"; t.style.top=(e.clientY+14)+"px";
+}
+function hideTip(){ $("#tip").style.display="none"; }
+
+// ---------- readouts ----------
+// Δz vs the baseline run. |z| is distance from the literature median in sigmas, so a
+// SHRINKING |z| is the model getting closer to the data — that, not the sign of Δz, is
+// what "better" means here.
+function targetDelta(t){
+  const b=BASELINE_TARGETS[t.id];
+  if(!b || b.z===null || b.z===undefined || t.z===null) return null;
+  const dz=t.z-b.z;
+  if(Math.abs(dz)<0.01) return null;
+  return {z0:b.z, v0:b.value, dz, better:Math.abs(t.z)<Math.abs(b.z)};
+}
+function renderTargets(list){
+  const box=$("#targetlist"); box.innerHTML="";
+  const xbranch = BASE_SRC && BASE_SRC!==SRC;
+
+  // Cross-branch header: the scoreboard for "what did this commit do to the fit?"
+  if(xbranch){
+    const moved=list.map(targetDelta).filter(Boolean);
+    const better=moved.filter(d=>d.better).length;
+    const sum=document.createElement("div"); sum.className="tgtsum";
+    sum.innerHTML = moved.length
+      ? `vs <b>${srcLabel(BASE_SRC)}</b> — ${moved.length} moved: `+
+        `<b style="color:var(--good)">${better} closer</b> · `+
+        `<b style="color:var(--bad)">${moved.length-better} further</b>`
+      : `vs <b>${srcLabel(BASE_SRC)}</b> — no target moved`;
+    box.appendChild(sum);
+  }
+
+  // Server sends a stable alphabetical order; only re-sort on demand so dragging a
+  // slider doesn't reshuffle the rows out from under you.
+  const byDz = $("#sortdz") && $("#sortdz").checked;
+  if(byDz){
+    list=list.slice().sort((a,b)=>{
+      const ad=targetDelta(a), bd=targetDelta(b);
+      return (bd?Math.abs(bd.dz):-1)-(ad?Math.abs(ad.dz):-1);
+    });
+  } else if($("#sortz") && $("#sortz").checked){
+    list=list.slice().sort((a,b)=>{
+      const az=a.z===null?-1:Math.abs(a.z), bz=b.z===null?-1:Math.abs(b.z);
+      return bz-az;
+    });
+  }
+  list.forEach(t=>{
+    const el=document.createElement("div"); el.className="tgt";
+    if(t.error){ el.innerHTML=`<div class="r1"><span class="id">${t.id}</span><span class="z" style="color:var(--muted)">err</span></div>`; box.appendChild(el); return; }
+    const z=t.z, az=z===null?null:Math.abs(z);
+    const zc = t.in_ci?'var(--good)': az===null?'var(--muted)': az>2?'var(--bad)':az>1?'var(--warn)':'var(--good)';
+    // bar: log scale spanning [ci_lo/3 .. ci_hi*3], clamp
+    const lo=Math.log(Math.max(t.ci_lo,1e-12)/3), hi=Math.log(Math.max(t.ci_hi,1e-12)*3);
+    const pos=x=>Math.max(0,Math.min(100,(Math.log(Math.max(x,1e-12))-lo)/(hi-lo)*100));
+    const d=targetDelta(t);
+    const dc = d ? (d.better?'var(--good)':'var(--bad)') : 'var(--muted)';
+    // the shift itself, in sigmas: where the reference model sat -> where this one sits
+    const dzHtml = d
+      ? `<div class="dz" style="color:${dc}" title="${xbranch?'z on '+srcLabel(BASE_SRC):'z at no-override baseline'} → z now">
+           ${(d.z0>0?'+':'')+d.z0.toFixed(2)}σ → ${(z>0?'+':'')+z.toFixed(2)}σ
+           <b>(${d.better?'closer':'further'} ${Math.abs(d.dz).toFixed(2)}σ)</b></div>`
+      : "";
+    // ghost tick = where the reference model's sim value landed on the same axis
+    const ghost = d && isFinite(d.v0) ? `<div class="base" style="left:${pos(d.v0)}%" title="${xbranch?srcLabel(BASE_SRC):'baseline'}: ${fmt(d.v0)}"></div>` : "";
+    el.innerHTML=`<div class="r1"><span class="id">${t.id}</span>
+        <span class="z" style="color:${zc}">${z===null?'':(z>0?'+':'')+z.toFixed(2)+'σ'}</span></div>
+      <div class="bar">
+        <div class="ci" style="left:${pos(t.ci_lo)}%;width:${pos(t.ci_hi)-pos(t.ci_lo)}%"></div>
+        <div class="med" style="left:${pos(t.median)}%"></div>
+        ${ghost}
+        <div class="cur" style="left:${pos(t.value)}%;background:${zc}"></div>
+      </div>
+      ${dzHtml}
+      <div class="nums">sim ${fmt(t.value)} · target ${fmt(t.median)} [${fmt(t.ci_lo)}, ${fmt(t.ci_hi)}] ${t.units||''}</div>`;
+    box.appendChild(el);
+  });
+}
+// ---------- trajectory small-multiples ----------
+// Shape is what a wet-lab/clinical reviewer critiques ("CD8 should peak ~day 7 then
+// contract"). Uses the trajectory already in curResult — no new sim. Faint grey =
+// no-override baseline; cyan = current (perturbed/params); amber line = scrubbed time.
+function trajPath(arr, times, t0, span, ymin, yspan){
+  let d="";
+  for(let i=0;i<arr.length;i++){ const v=arr[i]; if(v==null) continue;
+    const x=((times[i]-t0)/span)*200, y=36-((v-ymin)/yspan)*34;
+    d+=(d?"L":"M")+x.toFixed(1)+" "+y.toFixed(1)+" "; }
+  return d;
+}
+function renderTrajectories(){
+  const box=$("#trajlist"); if(!box) return;
+  if(!curResult||!curResult.series||!META.traj_species){ box.innerHTML=""; return; }
+  const times=curResult.times, n=times.length;
+  if(n<2){ box.innerHTML='<div class="traj" style="color:#5b6675">— single snapshot (no trajectory)</div>'; return; }
+  const t0=times[0], span=(times[n-1]-t0)||1;
+  box.innerHTML="";
+  META.traj_species.forEach(name=>{
+    const arr=curResult.series[name]; if(!arr) return;
+    const barr=(BASELINE_SERIES&&BASELINE_SERIES[name])||null;
+    let ymin=Infinity,ymax=-Infinity;
+    const scan=a=>{ if(!a)return; for(const v of a){ if(v==null)continue; if(v<ymin)ymin=v; if(v>ymax)ymax=v; } };
+    scan(arr); scan(barr);
+    if(!isFinite(ymin)){ ymin=0; ymax=1; }
+    const yspan=(ymax-ymin)||Math.abs(ymax)||1;
+    const sp=META.graph.species[NODEIDX[name]], lab=sp?spLabel(sp):name;
+    const basePath=barr?`<path class="base" d="${trajPath(barr,times,t0,span,ymin,yspan)}"/>`:"";
+    // Peak |Δ| across the WHOLE trajectory vs the baseline. A cross-branch difference
+    // is often transient — it separates mid-run then re-converges by the endpoint, so
+    // the scrubbed ×fold (parked at the endpoint) reads ~1.0 and hides it. This badge
+    // surfaces the largest divergence so a stale-looking endpoint doesn't read as "no Δ".
+    let peak=0;
+    if(barr){ const L=Math.min(arr.length,barr.length);
+      for(let i=0;i<L;i++){ const va=arr[i],vb=barr[i];
+        if(va==null||vb==null) continue;
+        const den=Math.max(Math.abs(va),Math.abs(vb),1e-30);
+        const rel=Math.abs(va-vb)/den; if(rel>peak) peak=rel; } }
+    const peakBadge=(barr && peak>0.02)
+      ? `<span class="tjpeak" style="color:${peak>=0.2?'var(--warn)':peak>=0.05?'var(--accent)':'var(--muted)'}" title="largest divergence from the Δ-baseline anywhere along the trajectory — may be transient (scrub the time slider to find it)">▲${(peak*100).toFixed(0)}%</span>`
+      : "";
+    const el=document.createElement("div"); el.className="traj"; el.dataset.name=name;
+    el.innerHTML=`<div class="tjhead"><span class="tjname">${lab}${peakBadge}</span><span class="tjval"></span></div>
+      <svg class="tjsvg" viewBox="0 0 200 38" preserveAspectRatio="none">
+        ${basePath}<path class="cur" d="${trajPath(arr,times,t0,span,ymin,yspan)}"/>
+        <line class="mark" x1="0" y1="0" x2="0" y2="38"/></svg>`;
+    box.appendChild(el);
+  });
+  updateTrajMarker();
+}
+function updateTrajMarker(){
+  const box=$("#trajlist"); if(!box||!curResult||!curResult.times) return;
+  const times=curResult.times, n=times.length, ti=curIdx();
+  const t0=times[0], span=(times[n-1]-t0)||1, x=((times[ti]-t0)/span)*200;
+  box.querySelectorAll(".traj").forEach(el=>{
+    const name=el.dataset.name, arr=curResult.series[name]; if(!arr) return;
+    const mk=el.querySelector(".mark"); if(mk){ mk.setAttribute("x1",x.toFixed(1)); mk.setAttribute("x2",x.toFixed(1)); }
+    const v=arr[ti]; const bs=BASELINE_SERIES&&BASELINE_SERIES[name];
+    let d=""; if(bs){ const b=bs[Math.min(ti,bs.length-1)]; if(b>0&&v>0) d=" ·×"+fmt(v/b); }
+    const vv=el.querySelector(".tjval"); if(vv) vv.textContent=fmt(v)+d;
+  });
+}
+function renderHills(list){
+  const box=$("#hilllist"); box.innerHTML="";
+  list.forEach(h=>{
+    const el=document.createElement("div"); el.className="hill"+(h.saturated?" sat":"");
+    const col=gateColor(h.value);
+    // A gate that (de)saturates across a model change is a headline result — a Hill
+    // pinned at 1.0 is a dead lever, so a drop off the rail means the lever came alive.
+    // Read the reference at the SAME timestep: currentHills() is time-indexed (the row
+    // follows the scrubber), so comparing it to the baseline's endpoint would lie.
+    const bser=BASELINE_SERIES&&BASELINE_SERIES[h.name];
+    const b = bser ? bser[Math.min(curIdx(),bser.length-1)]
+                   : (BASELINE_HILLS[h.name]===undefined?null:BASELINE_HILLS[h.name]);
+    const dh=(b==null)?null:h.value-b;
+    const ghost=(dh!==null && Math.abs(dh)>1e-4)
+      ? `<span class="bmark" style="left:${(b*100).toFixed(1)}%" title="baseline ${b.toFixed(3)}"></span>` : "";
+    const dtxt=(dh!==null && Math.abs(dh)>1e-4)
+      ? `<span class="dv" style="color:${dh>0?'var(--warn)':'var(--good)'}" title="change vs the Δ-baseline model">${dh>0?'+':''}${dh.toFixed(3)}</span>` : "";
+    el.innerHTML=`<span class="nm" title="${h.name}">${h.name}</span>
+      <span class="track"><span class="fill" style="width:${(h.value*100).toFixed(1)}%;background:${col}"></span>${ghost}</span>
+      <span class="v">${h.value.toFixed(3)}</span>${dtxt}`;
+    box.appendChild(el);
+  });
+}
+
+// ---------- simulate ----------
+let debTimer=null;
+function simulate(){ clearTimeout(debTimer); debTimer=setTimeout(_simulate,140); }
+async function _simulate(){
+  if(inflight){ pending=true; return; }
+  inflight=true;
+  setStatus("running", "var(--warn)");
+  const t0=performance.now();
+  try{
+    const res=await fetch("/simulate",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({src:SRC,scenario:SCEN,overrides:effectiveOverrides(),...thetaReq()})});
+    const r=await res.json();
+    if(r.error){ setStatus("sim error: "+r.error.split("\n")[0], "var(--bad)"); }
+    else{
+      curResult=r;
+      renderTargets(r.targets); renderTrajectories(); resetTimeSlider(); paintFrame();
+      const nOut=r.targets.filter(t=>t.z!==null&&!t.in_ci).length;
+      const xref=(BASE_SRC&&BASE_SRC!==SRC)||((BASE_THETA||THETA)!==THETA);
+      const xb=xref?` · <b style="color:var(--accent)">Δ vs ${baselineDesc()}</b>`:"";
+      // a θ carrying params these equations don't have is a STALE FIT announcing itself
+      const td=(r.theta&&r.theta.n_dropped)
+        ? ` · <b style="color:var(--warn)" title="${(r.theta.dropped||[]).join(', ')}">θ: ${r.theta.n_dropped} param(s) not in these equations</b>`:"";
+      const dp=(r.dropped_params&&r.dropped_params.length)
+        ? ` · <b style="color:var(--warn)">${r.dropped_params.length} override(s) absent on this branch</b>`:"";
+      setStatus(`<span class="dot" style="background:${r.cache_hit?'var(--accent)':'var(--good)'}"></span>`+
+        `${r.cache_hit?'cached':'ran'} ${r.wall_s}s · t=${fmt(r.t_end)}d · `+
+        `<b>${nOut}</b>/${r.targets.length} targets outside CI${xb}${td}${dp}`);
+    }
+  }catch(e){ setStatus("fetch failed: "+e, "var(--bad)"); }
+  inflight=false;
+  if(pending){ pending=false; _simulate(); }
+}
+function setStatus(html,color){ const s=$("#status"); s.innerHTML=html; s.style.color=color||"var(--muted)"; }
+async function fetchBaseline(){ // establish the no-override reference for delta coloring
+  // BASE_SRC may be a DIFFERENT branch than SRC — then this reference is "the model
+  // before my commit", and Δ-coloring reads out what the commit changed. Species that
+  // don't exist on both branches simply have no baseline entry and stay uncolored.
+  // The baseline's θ comes from the baseline's own branch, so "vs branch X" means
+  // X's equations at X's parameters — a self-consistent other model, not a chimera.
+  const bs=BASE_SRC||SRC;
+  const res=await fetch("/simulate",{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({src:bs,scenario:SCEN,overrides:{},
+      theta:BASE_THETA||THETA, theta_src:bs})});
+  const r=await res.json(); if(!r.error){ BASELINE={...r.species}; BASELINE_FLUX={...r.fluxes};
+    BASELINE_SERIES=r.series; BASELINE_FLUX_T=r.fluxes_t;
+    BASELINE_TARGETS={}; (r.targets||[]).forEach(t=>{ if(!t.error) BASELINE_TARGETS[t.id]=t; });
+    BASELINE_HILLS={}; (r.hills||[]).forEach(h=>{ BASELINE_HILLS[h.name]=h.value; });
+  }
+}
+
+// ---------- cross-branch parameter comparison ----------
+async function loadBaseSliders(){
+  BASE_SLIDERS=null;
+  const bs=BASE_SRC||SRC, bt=BASE_THETA||THETA;
+  // Load whenever the reference differs in EITHER axis. Same branch + different θ is
+  // the most useful case of all: it shows, per parameter, what the submodel-prior
+  // refresh did to the CSV prior center.
+  if(bs===SRC && bt===THETA) return;
+  const q=new URLSearchParams({src:bs, theta:bt, theta_src:bs});
+  const r=await (await fetch("/sliders?"+q)).json();
+  if(!r.error) BASE_SLIDERS=r.sliders;
+}
+// null when there's nothing to say; otherwise how this param differs on the other branch.
+function paramCmp(name){
+  if(!BASE_SLIDERS) return null;
+  const m=META.sliders[name];
+  const b=BASE_SLIDERS[name];
+  if(!b) return {added:true};                       // param doesn't exist on the other branch
+  if(!m) return null;
+  const fold = b.center ? m.center/b.center : null;
+  if(fold===null || Math.abs(fold-1)<1e-6) return null;   // same center: nothing to show
+  return {v0:b.center, fold};
+}
+function paramsChanged(){
+  if(!BASE_SLIDERS) return [];
+  return Object.keys(META.sliders).filter(n=>paramCmp(n)!==null);
+}
+function cmpRefName(){
+  const xb=BASE_SRC&&BASE_SRC!==SRC, xt=(BASE_THETA||THETA)!==THETA;
+  if(xb&&xt) return `${srcLabel(BASE_SRC)}·${thetaLabel(BASE_THETA)}`;
+  if(xb) return srcLabel(BASE_SRC);
+  if(xt) return thetaLabel(BASE_THETA);
+  return "baseline";
+}
+function updateCmp(el,name){
+  const box=el.querySelector(".cmp"); if(!box) return;
+  const c=paramCmp(name);
+  if(!c){ box.style.display="none"; box.innerHTML=""; return; }
+  box.style.display="";
+  if(c.added){
+    box.innerHTML=`<span style="color:var(--good)">new — absent on ${cmpRefName()}</span>`;
+    return;
+  }
+  const up=c.fold>1;
+  box.innerHTML=`<span style="color:var(--muted)">${cmpRefName()}:</span> `+
+    `<b>${fmt(c.v0)}</b> `+
+    `<span style="color:${up?'var(--warn)':'var(--accent)'}">${up?'↑':'↓'} ×${c.fold.toFixed(2)}</span>`;
+}
+function refreshAllCmp(){
+  document.querySelectorAll("#sliderlist .slider").forEach(el=>{
+    const inp=el.querySelector("input[data-name]");
+    if(inp) updateCmp(el, inp.dataset.name);
+  });
+  const btn=$("#changedbtn");
+  if(btn){
+    const n=paramsChanged().length;
+    btn.style.display = n ? "" : "none";
+    btn.textContent = `θ moved: ${n}`;
+    btn.title = `${n} parameter medians differ from ${cmpRefName()} — click to load them as sliders.\n`+
+                `These shift where the model SITS, independent of any equation change.`;
+  }
+}
+
+// ---------- θ selectors ----------
+function thetaLabel(f){ const t=(META.theta_flavors||[]).find(x=>x.id===f); return t?t.label:f; }
+function fillThetaSelects(){
+  const flav=META.theta_flavors||[];
+  const th=$("#theta"); th.innerHTML="";
+  flav.forEach(f=>{ const o=document.createElement("option");
+    o.value=f.id; o.textContent=f.label; o.title=f.desc||""; th.appendChild(o); });
+  th.value = flav.some(f=>f.id===THETA) ? THETA : "submodel";
+  THETA=th.value;
+
+  // θ may be taken from another branch — that's the equations-vs-θ isolation
+  const ts=$("#thetasrc"); ts.innerHTML="";
+  SOURCES.forEach(s=>{ const o=document.createElement("option");
+    o.value=s.id; o.textContent=(s.id===SRC?"from this branch":"from "+s.label);
+    ts.appendChild(o); });
+  ts.value = THETA_SRC||SRC;
+  ts.classList.toggle("xbranch", (THETA_SRC||SRC)!==SRC);
+  // template flavor has no overlay, so "from where" is meaningless
+  ts.disabled = (THETA==="template");
+
+  const bt=$("#basetheta"); bt.innerHTML="";
+  flav.forEach(f=>{ const o=document.createElement("option");
+    o.value=f.id; o.textContent=f.label; bt.appendChild(o); });
+  bt.value = BASE_THETA||THETA;
+  bt.classList.toggle("xbranch", (BASE_THETA||THETA)!==THETA);
+}
+// What the Δ-baseline actually IS right now, in words — the radio label under the
+// diagram is otherwise a lie once you start crossing branches and θ.
+function baselineDesc(){
+  const xb=BASE_SRC&&BASE_SRC!==SRC, xt=(BASE_THETA||THETA)!==THETA;
+  if(xb&&xt) return `${srcLabel(BASE_SRC)} · ${thetaLabel(BASE_THETA)}`;
+  if(xb)     return `${srcLabel(BASE_SRC)} (branch Δ)`;
+  if(xt)     return `${thetaLabel(BASE_THETA)} (θ Δ)`;
+  return "baseline (your Δ)";
+}
+
+// ---------- model sources ----------
+function srcLabel(id){ const s=SOURCES.find(s=>s.id===id); return s?s.label:id; }
+function srcOptionText(s){
+  const bits=[s.label];
+  if(s.subject) bits.push("— "+s.subject.slice(0,42));
+  if(!s.built) bits.push("(needs build)");
+  else if(s.stale) bits.push("(stale — will rebuild)");
+  return bits.join(" ");
+}
+function fillSourceSelects(){
+  for(const [sel,cur] of [[$("#source"),SRC],[$("#basesource"),BASE_SRC||SRC]]){
+    sel.innerHTML="";
+    SOURCES.forEach(s=>{ const o=document.createElement("option");
+      o.value=s.id; o.textContent=srcOptionText(s); sel.appendChild(o); });
+    sel.value=cur;
+  }
+  const cur=SOURCES.find(s=>s.id===SRC);
+  // a dirty worktree is NOT the commit it names — flag it, the working tree is what runs
+  $("#source").classList.toggle("dirty", !!(cur&&cur.dirty));
+  $("#source").title = cur
+    ? `${cur.path}\n${cur.branch} @ ${cur.sha} — ${cur.subject}` +
+      (cur.dirty ? "\n\n* uncommitted changes: this is the WORKING TREE, not the commit." : "")
+    : "";
+  $("#rmsrc").style.display = (cur&&cur.kind==="ref") ? "" : "none";
+  $("#basesource").classList.toggle("xbranch", !!(BASE_SRC&&BASE_SRC!==SRC));
+  const xref = (BASE_SRC&&BASE_SRC!==SRC) || (META&&(BASE_THETA||THETA)!==THETA);
+  const tr=$("#trajref");
+  if(tr) tr.innerHTML = xref
+    ? `grey = <b style="color:var(--accent)">${baselineDesc()}</b>`
+    : `grey = no-override baseline`;
+  // once you cross branches or θ, "baseline" is ambiguous — say what it actually is
+  const rb=document.querySelector('input[name=refmode][value=sametime]');
+  if(rb) rb.parentElement.childNodes[1].nodeValue = " " + baselineDesc();
+}
+// Build + load a source, streaming cmake progress. Resolves true when ready.
+async function ensureSource(id,{rebuild=false}={}){
+  const r=await (await fetch("/source/activate",{method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({id,rebuild})})).json();
+  if(r.error){ alert(r.error); return false; }
+  if(r.status==="ready") return true;
+  return await pollBuild(id);
+}
+function pollBuild(id){
+  const box=$("#build"); box.style.display="flex";
+  $("#b_close").style.display="none";
+  $("#b_title").textContent=`Preparing ${srcLabel(id)}…`;
+  $("#b_sub").textContent="compiling qsp_sim (the generated C++ is committed — no MATLAB needed)";
+  return new Promise(resolve=>{
+    const tick=async()=>{
+      const s=await (await fetch("/source?id="+encodeURIComponent(id))).json();
+      $("#b_bar").style.width=(s.progress||0)+"%";
+      $("#b_log").textContent=(s.log||[]).join("\n");
+      $("#b_log").scrollTop=$("#b_log").scrollHeight;
+      if(s.status==="ready"){ box.style.display="none"; resolve(true); return; }
+      if(s.status==="error"){
+        $("#b_title").textContent=`Failed to prepare ${srcLabel(id)}`;
+        $("#b_sub").textContent=s.message||"see log";
+        $("#b_close").style.display="";
+        $("#b_close").onclick=()=>{ box.style.display="none"; resolve(false); };
+        return;
+      }
+      $("#b_title").textContent=
+        (s.status==="building"?`Building ${srcLabel(id)}…`:`Loading ${srcLabel(id)}…`);
+      setTimeout(tick,500);
+    };
+    tick();
+  });
+}
+// Switching the RUN source changes the parameter set, species and targets, so we
+// rebuild the page from the URL rather than surgically re-initialising. Every bit of
+// app state (scenario, view, overrides, interventions, time) already round-trips
+// through query params, so a reload is lossless — and params that don't exist on the
+// new branch drop out naturally when ?ovr= is re-parsed against its sliders.
+// Full app state → URL. `id` is the src the URL should name (SRC for an in-place
+// sync, the target branch for a switch). Baseline pickers (BASE_SRC/BASE_THETA) are
+// part of this too, so a reload restores the Δ-comparison instead of dropping it.
+function buildURL(id){
+  const u=new URL(location.href);
+  u.searchParams.set("src",id);
+  if(BASE_SRC&&BASE_SRC!==id) u.searchParams.set("base",BASE_SRC); else u.searchParams.delete("base");
+  u.searchParams.set("theta",THETA);
+  if(THETA_SRC&&THETA_SRC!==id) u.searchParams.set("theta_src",THETA_SRC); else u.searchParams.delete("theta_src");
+  if(BASE_THETA&&BASE_THETA!==THETA) u.searchParams.set("basetheta",BASE_THETA); else u.searchParams.delete("basetheta");
+  u.searchParams.set("scenario",SCEN);
+  u.searchParams.set("view",VIEW);
+  const ov=Object.entries(OVR).map(([k,v])=>`${k}:${v}`).join(",");
+  if(ov) u.searchParams.set("ovr",ov); else u.searchParams.delete("ovr");
+  const ints=[...ACTIVE_INT].join(",");
+  if(ints) u.searchParams.set("int",ints); else u.searchParams.delete("int");
+  return u;
+}
+// Persist current state to the URL WITHOUT navigating — for controls (the Δ-baseline
+// pickers) that re-fetch in place rather than reload. Keeps a Cmd-R from resetting them.
+function syncURL(){ history.replaceState(null,"",buildURL(SRC).toString()); }
+function switchSource(id){ location.href=buildURL(id).toString(); }
+
+function wireSourceControls(){
+  $("#source").addEventListener("change",e=>switchSource(e.target.value));
+
+  // θ changes re-center every slider (the center IS the operating point), so reload
+  // rather than surgically re-init — same reasoning as a branch switch.
+  $("#theta").addEventListener("change",e=>{ THETA=e.target.value; switchSource(SRC); });
+  $("#thetasrc").addEventListener("change",e=>{ THETA_SRC=e.target.value; switchSource(SRC); });
+
+  // Baseline θ does NOT need a reload — it only re-fetches the reference run.
+  $("#basetheta").addEventListener("change",async e=>{
+    BASE_THETA=e.target.value;
+    if(BASE_THETA!==THETA || (BASE_SRC&&BASE_SRC!==SRC)){
+      const rb=document.querySelector('input[name=refmode][value=sametime]'); if(rb) rb.checked=true; }
+    fillThetaSelects(); fillSourceSelects();
+    syncURL();
+    await fetchBaseline(); paintFrame(); simulate();
+  });
+
+  // Changing the Δ-baseline source does NOT need a reload — it only re-fetches the
+  // reference run. Cross-branch Δ is only visible in the "sametime" refmode, so flip
+  // to it automatically; otherwise the user picks a branch and sees nothing change.
+  $("#basesource").addEventListener("change",async e=>{
+    const id=e.target.value;
+    if(id!==SRC && !await ensureSource(id)){ $("#basesource").value=BASE_SRC; return; }
+    BASE_SRC=id;
+    if(BASE_SRC!==SRC){ const rb=document.querySelector('input[name=refmode][value=sametime]');
+      if(rb) rb.checked=true; }
+    fillSourceSelects();
+    syncURL();
+    await loadBaseSliders(); refreshAllCmp();
+    await fetchBaseline(); paintFrame(); simulate();
+  });
+
+  // load every param whose median differs across the two branches — the θ half of a
+  // model change, which no amount of staring at the diagram will show you
+  $("#changedbtn").addEventListener("click",()=>{
+    paramsChanged().forEach(addSlider);
+    refreshAllCmp();
+  });
+
+  $("#addsrc").addEventListener("click",async()=>{
+    const refs=(await (await fetch("/refs")).json()).refs||[];
+    const dl=$("#reflist"); dl.innerHTML="";
+    const hint=$("#r_hint"); hint.innerHTML="";
+    refs.forEach(r=>{
+      const o=document.createElement("option"); o.value=r.ref; dl.appendChild(o);
+      const row=document.createElement("div"); row.className="refrow";
+      row.innerHTML=`<b></b><em></em><i></i>`;
+      row.querySelector("b").textContent=r.ref;
+      row.querySelector("em").textContent=r.subject;
+      row.querySelector("i").textContent=r.when;
+      row.addEventListener("click",()=>{ $("#r_ref").value=r.ref; });
+      hint.appendChild(row);
+    });
+    $("#r_ref").value="";
+    $("#refmodal").style.display="flex";
+    $("#r_ref").focus();
+  });
+  $("#r_cancel").addEventListener("click",()=>{ $("#refmodal").style.display="none"; });
+  $("#r_go").addEventListener("click",async()=>{
+    const ref=$("#r_ref").value.trim(); if(!ref) return;
+    $("#refmodal").style.display="none";
+    const r=await (await fetch("/source/add",{method:"POST",
+      headers:{"Content-Type":"application/json"},body:JSON.stringify({ref})})).json();
+    if(r.error){ alert(r.error); return; }
+    SOURCES=(await (await fetch("/sources")).json()).sources;
+    if(await pollBuild(r.id)) switchSource(r.id);
+  });
+  $("#r_ref").addEventListener("keydown",e=>{ if(e.key==="Enter") $("#r_go").click(); });
+
+  $("#rmsrc").addEventListener("click",async()=>{
+    const cur=SOURCES.find(s=>s.id===SRC);
+    if(!cur||cur.kind!=="ref") return;
+    if(!confirm(`Remove ${cur.label}?\n\nDeletes the scratch worktree at:\n${cur.path}`)) return;
+    const r=await (await fetch("/source/remove",{method:"POST",
+      headers:{"Content-Type":"application/json"},body:JSON.stringify({id:SRC})})).json();
+    if(r.error){ alert(r.error); return; }
+    const u=new URL(location.href); u.searchParams.delete("src"); u.searchParams.delete("base");
+    location.href=u.toString();
+  });
+}
+
+// ---------- boot ----------
+async function boot(){
+  // 1. model source — resolve, build if needed, THEN load meta (sliders/species/targets
+  //    are all source-dependent, so nothing else can happen first).
+  const qp=new URLSearchParams(location.search);
+  const sl=await (await fetch("/sources")).json();
+  SOURCES=sl.sources;
+  SRC = (qp.get("src") && SOURCES.some(s=>s.id===qp.get("src"))) ? qp.get("src") : sl.default;
+  BASE_SRC = (qp.get("base") && SOURCES.some(s=>s.id===qp.get("base"))) ? qp.get("base") : SRC;
+  THETA = qp.get("theta") || "submodel";
+  THETA_SRC = (qp.get("theta_src") && SOURCES.some(s=>s.id===qp.get("theta_src"))) ? qp.get("theta_src") : SRC;
+  BASE_THETA = qp.get("basetheta") || THETA;
+  fillSourceSelects();
+  setStatus("preparing model…");
+  if(!await ensureSource(SRC)){ setStatus("model source failed to load", "var(--bad)"); return; }
+  if(BASE_SRC!==SRC && !await ensureSource(BASE_SRC)){ BASE_SRC=SRC; }
+  if(THETA_SRC!==SRC && !await ensureSource(THETA_SRC)){ THETA_SRC=SRC; }
+
+  const tq=new URLSearchParams({src:SRC, theta:THETA, theta_src:THETA_SRC});
+  META=await (await fetch("/meta?"+tq)).json();
+  if(META.error){ setStatus("meta: "+META.error, "var(--bad)"); return; }
+  SOURCES=(await (await fetch("/sources")).json()).sources;  // statuses moved on
+  fillThetaSelects();
+  fillSourceSelects();
+  wireSourceControls();
+  if(META.theta && META.theta.n_dropped)
+    console.warn(`θ: ${META.theta.n_dropped} param(s) in this θ don't exist in these `+
+                 `equations and were dropped:`, META.theta.dropped);
+  if(META.default_view) VIEW=META.default_view;   // progressive disclosure: start clean
+  SCEN=META.scenarios[0];
+  const scp=new URLSearchParams(location.search).get("scenario");
+  if(scp && META.scenarios.includes(scp)) SCEN=scp;
+  const sc=$("#scenario"); META.scenarios.forEach(s=>{const o=document.createElement("option");o.value=o.textContent=s;sc.appendChild(o);});
+  sc.value=SCEN;
+  sc.addEventListener("change",async()=>{ SCEN=sc.value; BASELINE=null; BASELINE_SERIES=null; BASELINE_FLUX_T=null; stopPlay(); OVR={};
+    document.querySelectorAll("#sliderlist input").forEach(inp=>{ const m=META.sliders[inp.dataset.name];
+      inp.value=valueToSlider(m,m.center); inp.parentElement.querySelector(".val").textContent=fmt(m.center); });
+    await fetchBaseline(); simulate(); });
+  // datalist of all params
+  const dl=$("#alllist"); Object.keys(META.sliders).sort().forEach(n=>{const o=document.createElement("option");o.value=n;dl.appendChild(o);});
+  $("#addparam").addEventListener("change",e=>{ addSlider(e.target.value); e.target.value=""; });
+  await loadBaseSliders();   // before the curated sliders render, so each shows its Δ
+  META.curated.forEach(addSlider);
+  refreshAllCmp();
+  // intervention (knockout/block) strip
+  const pb=$("#perturbbar");
+  if(META.interventions && META.interventions.length){
+    const lab=document.createElement("span"); lab.className="lbl"; lab.textContent="Perturb"; pb.appendChild(lab);
+    META.interventions.forEach(iv=>{
+      const b=document.createElement("button"); b.className="ivbtn"; b.textContent=iv.label; b.title=iv.desc||"";
+      b.addEventListener("click",()=>toggleIntervention(iv,b)); pb.appendChild(b);
+    });
+    const clr=document.createElement("button"); clr.className="ivclear"; clr.textContent="clear";
+    clr.title="clear all interventions"; clr.addEventListener("click",()=>{ clearInterventions(); simulate(); });
+    pb.appendChild(clr);
+    // ?int=name,name — preset active interventions (shareable counterfactual)
+    const ip=new URLSearchParams(location.search).get("int");
+    if(ip){ const want=new Set(ip.split(","));
+      document.querySelectorAll("#perturbbar .ivbtn").forEach((b,idx)=>{
+        const iv=META.interventions[idx];
+        if(iv && want.has(iv.name)){ ACTIVE_INT.add(iv.name); b.classList.add("on"); }
+      });
+      recomputeIntOverrides();
+    }
+  } else { pb.style.display="none"; }
+  // URL preset overrides: ?ovr=name:value,name:value  (shareable counterfactual link)
+  const q=new URLSearchParams(location.search).get("ovr");
+  if(q) q.split(",").forEach(pair=>{ const [n,v]=pair.split(":");
+    if(META.sliders[n] && isFinite(+v)){ addSlider(n); OVR[n]=+v;
+      const inp=$(`[data-name="${n}"]`); inp.value=valueToSlider(META.sliders[n],+v);
+      inp.parentElement.querySelector(".val").textContent=fmt(+v); } });
+  $("#reset").addEventListener("click",resetParams);
+  $("#fit").addEventListener("click",fitView);
+  $("#showedges").addEventListener("change",()=>{ $("#edges").style.display=$("#showedges").checked?"":"none"; });
+  $("#flow").addEventListener("change",colorEdges);
+  $("#gates").addEventListener("change",colorGates);
+  $("#showsyn").addEventListener("change",()=>{ computeLayout(); drawDiagram(); });
+  $("#plainlabels").addEventListener("change",drawDiagram);
+  $("#edgebasis").addEventListener("change",()=>{ computeLayout(); drawDiagram(); });
+  $("#sortz").addEventListener("change",()=>{ if(curResult) renderTargets(curResult.targets); });
+  $("#sortdz").addEventListener("change",()=>{ if(curResult) renderTargets(curResult.targets); });
+  $("#timeslider").addEventListener("input",e=>{ stopPlay(); scrubTo(+e.target.value); });
+  $("#playbtn").addEventListener("click",togglePlay);
+  $("#tendbtn").addEventListener("click",()=>{ stopPlay(); if(curResult&&curResult.times) scrubTo(curResult.times.length-1); });
+  $("#slowbtn").addEventListener("click",()=>setSpeed(-1));
+  $("#fastbtn").addEventListener("click",()=>setSpeed(+1));
+  document.querySelectorAll('input[name=refmode]').forEach(r=>r.addEventListener("change",paintFrame));
+  document.querySelectorAll('input[name=cmode]').forEach(r=>r.addEventListener("change",repaint));
+  document.querySelectorAll('input[name=emode]').forEach(r=>r.addEventListener("change",colorEdges));
+  document.querySelectorAll('input[name=gmode]').forEach(r=>r.addEventListener("change",colorGates));
+
+  // view selector (All / preset modules / custom)
+  indexNodes();
+  const vsel=$("#view");
+  function populateViews(){
+    vsel.innerHTML="";
+    const add=(v,label)=>{ const o=document.createElement("option"); o.value=v; o.textContent=label; vsel.appendChild(o); };
+    add("all","All compartments");
+    Object.keys(META.modules).forEach(m=>add(m,"▸ "+m));
+    Object.keys(CUSTOM).forEach(m=>add("custom:"+m,"★ "+m));
+    add("__new__","＋ new custom module…");
+    vsel.value = VIEW;
+  }
+  function switchView(v){
+    VIEW=v; vsel.value=v;
+    $("#showedges").checked = true;   // edges on by default (all + modules)
+    $("#edges") && ($("#edges").style.display = $("#showedges").checked ? "" : "none");
+    $("#edgebasiswrap").style.display = (v==="all") ? "" : "none";  // basis toggle is all-view only
+    computeLayout(); drawDiagram();
+  }
+  vsel.addEventListener("change",()=>{
+    if(vsel.value==="__new__"){ vsel.value=VIEW; openBuilder(null); return; }
+    if(vsel.value.startsWith("custom:")){ VIEW=vsel.value; }
+    switchView(vsel.value);
+  });
+  populateViews();
+  // URL preset time frame: ?t=<0..1 fraction of trajectory> (applied once, on first sim)
+  const tp=new URLSearchParams(location.search).get("t");
+  if(tp!=null && isFinite(+tp)) PENDING_T=Math.max(0,Math.min(1,+tp));
+  // URL preset view: ?view=<module name|custom:name|all>
+  const vparam=new URLSearchParams(location.search).get("view");
+  if(vparam && (vparam==="all" || META.modules[vparam] || CUSTOM[vparam.replace(/^custom:/,"")])){
+    VIEW=vparam; vsel.value=vparam; $("#showedges").checked=true;
+  }
+
+  // species datalist for the custom builder
+  const spdl=$("#specieslist");
+  META.graph.species.forEach(s=>{ const o=document.createElement("option"); o.value=s.name; spdl.appendChild(o); });
+
+  // custom module builder modal
+  let builderSpecies=[], builderEditing=null;
+  function renderChips(){
+    $("#m_chips").innerHTML = builderSpecies.map((s,i)=>
+      `<span class="chip"><b>${s}</b><span data-i="${i}">✕</span></span>`).join("");
+    $("#m_chips").querySelectorAll("span[data-i]").forEach(x=>
+      x.addEventListener("click",()=>{ builderSpecies.splice(+x.dataset.i,1); renderChips(); }));
+  }
+  window.openBuilder=(name)=>{
+    builderEditing=name; builderSpecies = name ? [...(CUSTOM[name]||[])] : [];
+    $("#m_name").value = name||""; $("#m_add").value="";
+    $("#m_delete").style.display = name ? "" : "none";
+    renderChips(); $("#modal").style.display="flex"; $("#m_name").focus();
+  };
+  $("#m_add").addEventListener("change",e=>{
+    const v=e.target.value.trim();
+    if(v && NODEIDX[v]!==undefined && !builderSpecies.includes(v)){ builderSpecies.push(v); renderChips(); }
+    e.target.value="";
+  });
+  $("#m_cancel").addEventListener("click",()=>{ $("#modal").style.display="none"; });
+  $("#m_delete").addEventListener("click",()=>{
+    if(builderEditing){ delete CUSTOM[builderEditing];
+      localStorage.setItem("mx_custom",JSON.stringify(CUSTOM));
+      if(VIEW==="custom:"+builderEditing) VIEW="all";
+      populateViews(); switchView(VIEW); }
+    $("#modal").style.display="none";
+  });
+  $("#m_save").addEventListener("click",()=>{
+    const nm=$("#m_name").value.trim();
+    if(!nm || !builderSpecies.length){ $("#m_name").focus(); return; }
+    if(builderEditing && builderEditing!==nm) delete CUSTOM[builderEditing];
+    CUSTOM[nm]=builderSpecies; localStorage.setItem("mx_custom",JSON.stringify(CUSTOM));
+    populateViews(); $("#modal").style.display="none"; switchView("custom:"+nm);
+  });
+
+  $("#edgebasiswrap").style.display = (VIEW==="all") ? "" : "none";  // all-view only
+  computeLayout(); drawDiagram();
+  await fetchBaseline();
+  simulate();
+  animateFlux();  // start the flux-flow loop (self-idles when edges are hidden)
+}
+boot();
+</script>
+</body>
+</html>
