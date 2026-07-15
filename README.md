@@ -35,29 +35,31 @@ build step:
 
 ```bash
 git clone https://github.com/popellab/qsp-model-explorer && cd qsp-model-explorer
-pip install -e /path/to/qsp-hpc-tools     # dependency (see below)
+pip install git+https://github.com/popellab/qsp-hpc-tools   # the one dependency
 pip install -e .
 qsp-model-explorer --repo examples/tnbc   # → http://localhost:8765/
 ```
+
+The only dependency is [`qsp-hpc-tools`](https://github.com/popellab/qsp-hpc-tools)
+(the calibration-target loader and parameter-XML reader).
 
 The bundled binary is macOS arm64; on other platforms, see
 [`examples/tnbc/README.md`](examples/tnbc/README.md).
 
 ## Running it on your own model
 
-You need Python 3.11+ and `qsp-hpc-tools` installed.
+Same install as above (Python 3.11+ and
+[`qsp-hpc-tools`](https://github.com/popellab/qsp-hpc-tools)), then point `--repo` at your
+model instead of the example:
 
 ```bash
-pip install -e /path/to/qsp-hpc-tools
-pip install -e /path/to/qsp-model-explorer
-
 qsp-model-explorer --repo /path/to/your/model     # serves at http://localhost:8765/
 ```
 
 If the model already has an `explorer.toml`, there's nothing else to set up. You can add
 more branches from the UI and pick one as the Δ-baseline to compare two commits.
 
-## Pointing it at your own model
+## Writing an `explorer.toml`
 
 The `explorer.toml` tells the explorer where the model's files are. A minimal one needs a
 binary, three data files, and a scenario:
