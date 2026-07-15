@@ -838,6 +838,169 @@ class Handler(BaseHTTPRequestHandler):
         return self._send(404, {"error": "not found"})
 
 
+def run_check(repo: Path, cfg: ExplorerConfig) -> int:
+    """Dry-run the config: verify every referenced file exists and actually loads,
+    without booting the server or building the binary. Returns a process exit code
+    (0 = usable, 1 = at least one hard failure). Optional-but-malformed files are
+    warnings; missing required files / unparseable schemas are failures."""
+    fails: list[str] = []
+    warns: list[str] = []
+
+    def ok(msg: str) -> None:
+        print(f"  \033[32m[ok]\033[0m   {msg}")
+
+    def warn(msg: str) -> None:
+        warns.append(msg)
+        print(f"  \033[33m[warn]\033[0m {msg}")
+
+    def fail(msg: str) -> None:
+        fails.append(msg)
+        print(f"  \033[31m[FAIL]\033[0m {msg}")
+
+    def P(rel: str) -> Path:
+        return repo / rel
+
+    print(f"\nchecking model '{cfg.name}'")
+    print(f"config: {cfg.config_path}")
+    print(f"repo:   {repo}\n")
+
+    # --- simulator binary + build ----------------------------------------
+    binary = P(cfg.binary)
+    if binary.exists():
+        ok(f"binary present: {cfg.binary}")
+    elif cfg.cmake_source:
+        if P(cfg.cmake_source).exists():
+            warn(f"binary missing ({cfg.binary}) — will build from [build] "
+                 f"cmake_source '{cfg.cmake_source}' on launch")
+        else:
+            fail(f"binary missing AND [build] cmake_source '{cfg.cmake_source}' "
+                 "does not exist — cannot build")
+    else:
+        fail(f"binary missing ({cfg.binary}) and no [build] cmake_source to build it")
+
+    if cfg.ode_system:
+        ok("ode_system declared: Hill-driver signs enabled") if P(cfg.ode_system).exists() \
+            else warn(f"ode_system '{cfg.ode_system}' missing — Hill signs degrade to "
+                      "direct-rate-law only")
+
+    # --- param template ---------------------------------------------------
+    tmpl = P(cfg.template)
+    if not tmpl.exists():
+        fail(f"template missing: {cfg.template}")
+    else:
+        try:
+            n = len(ParamXMLRenderer(tmpl).template_defaults)
+            ok(f"template parses: {n} parameters")
+        except Exception as e:  # noqa: BLE001
+            fail(f"template '{cfg.template}' failed to parse: {e}")
+
+    # --- priors CSV -------------------------------------------------------
+    pcsv = P(cfg.priors_csv)
+    if not pcsv.exists():
+        fail(f"priors_csv missing: {cfg.priors_csv}")
+    else:
+        try:
+            df = pd.read_csv(pcsv)
+            need = {"name", "median", "distribution", "dist_param2"}
+            missing = need - set(df.columns)
+            if missing:
+                fail(f"priors_csv missing columns: {', '.join(sorted(missing))}")
+            else:
+                ok(f"priors_csv parses: {len(df)} params"
+                   + ("" if "units" in df.columns else " (no 'units' column — sliders unit-less)"))
+        except Exception as e:  # noqa: BLE001
+            fail(f"priors_csv '{cfg.priors_csv}' failed to read: {e}")
+
+    # --- model_structure.json --------------------------------------------
+    msp = P(cfg.model_structure)
+    if not msp.exists():
+        fail(f"model_structure missing: {cfg.model_structure}")
+    else:
+        try:
+            ms = json.loads(msp.read_text())
+            nsp = len(ms.get("species", []))
+            nrx = len(ms.get("reactions", []))
+            if not nsp:
+                fail("model_structure has no 'species'")
+            elif not nrx:
+                warn("model_structure has no 'reactions' — diagram will be node-only")
+            else:
+                ok(f"model_structure parses: {nsp} species, "
+                   f"{len(ms.get('compartments', []))} compartments, {nrx} reactions")
+        except Exception as e:  # noqa: BLE001
+            fail(f"model_structure '{cfg.model_structure}' failed to parse: {e}")
+
+    # --- optional simulator inputs ---------------------------------------
+    for label, rel in (("drug_metadata", cfg.drug_metadata),
+                       ("healthy_state", cfg.healthy_state)):
+        if rel:
+            ok(f"{label}: {rel}") if P(rel).exists() \
+                else fail(f"{label} declared but missing: {rel}")
+
+    # --- submodel priors --------------------------------------------------
+    if cfg.submodel_priors:
+        smp = P(cfg.submodel_priors)
+        if not smp.exists():
+            fail(f"submodel_priors declared but missing: {cfg.submodel_priors} "
+                 "(the 'submodel' θ flavor will error)")
+        else:
+            try:
+                med, _ = load_submodel_medians(smp)
+                ok(f"submodel_priors parses: {len(med)} medians")
+            except Exception as e:  # noqa: BLE001
+                fail(f"submodel_priors '{cfg.submodel_priors}' failed to load: {e}")
+
+    # --- scenarios + calibration targets ---------------------------------
+    print()
+    for s in cfg.scenarios:
+        yp = P(s.yaml)
+        if not yp.exists():
+            fail(f"scenario '{s.id}': yaml missing ({s.yaml})")
+            continue
+        dirs, missing_dirs = [], []
+        for d in s.target_dirs:
+            (dirs if P(d).exists() else missing_dirs).append(P(d))
+        ntgt = 0
+        try:
+            if dirs:
+                tdf = load_calibration_targets(dirs)
+                ntgt = len(tdf)
+        except Exception as e:  # noqa: BLE001
+            warn(f"scenario '{s.id}': target load raised {type(e).__name__}: "
+                 f"{str(e)[:100]}")
+        ok(f"scenario '{s.id}': yaml ok, {ntgt} targets"
+           + (f" (t_end={s.t_end})" if s.t_end else ""))
+        for md in missing_dirs:
+            warn(f"scenario '{s.id}': target_dir missing "
+                 f"({md.relative_to(repo)}) — skipped")
+
+    # --- UI content -------------------------------------------------------
+    for label, path in (("glossary", cfg.glossary_path),
+                        ("interventions", cfg.interventions_path)):
+        if path is None:
+            continue
+        if not path.exists():
+            warn(f"{label} declared but missing: {path}")
+            continue
+        try:
+            json.loads(path.read_text())
+            ok(f"{label} parses: {path.name}")
+        except Exception as e:  # noqa: BLE001
+            fail(f"{label} '{path.name}' is not valid JSON: {e}")
+
+    # --- verdict ----------------------------------------------------------
+    print()
+    if fails:
+        print(f"\033[31m✗ {len(fails)} failure(s)\033[0m"
+              + (f", {len(warns)} warning(s)" if warns else "")
+              + " — fix the failures before serving.")
+        return 1
+    print(f"\033[32m✓ config is usable\033[0m"
+          + (f" ({len(warns)} warning(s))" if warns else "")
+          + f" — run: qsp-model-explorer --repo {repo}")
+    return 0
+
+
 def main():
     global DEFAULT_SRC, HOME, CFG, CACHE_ROOT, SCRATCH_ROOT
     ap = argparse.ArgumentParser(
@@ -848,6 +1011,9 @@ def main():
     ap.add_argument("--config", type=Path, default=None,
                     help="explorer.toml path (default: <repo>/explorer.toml or "
                          "<repo>/.model_explorer/explorer.toml)")
+    ap.add_argument("--check", action="store_true",
+                    help="validate the config + referenced files and exit "
+                         "(no server, no build)")
     ap.add_argument("--port", type=int, default=8765)
     args = ap.parse_args()
 
@@ -857,6 +1023,10 @@ def main():
     CFG = load_config(find_config(HOME, args.config))
     CACHE_ROOT = HOME / "cache/model_explorer"
     SCRATCH_ROOT = HOME.parent / f"{HOME.name}-explorer-refs"
+
+    if args.check:
+        raise SystemExit(run_check(HOME, CFG))
+
     print(f"[startup] model '{CFG.name}' at {HOME}")
     print(f"[startup] config: {CFG.config_path}")
 

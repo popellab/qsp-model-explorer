@@ -44,6 +44,39 @@ Then open http://localhost:8765/. Add other branches from the UI (they get a
 detached worktree, compile, and load) and set one as the Δ-baseline to diff two
 commits on the diagram.
 
+## Validate a config before serving
+
+When you first write an `explorer.toml` (or after moving files), dry-run it. `--check`
+verifies that every referenced file exists and actually loads — it parses the param
+template, the priors CSV, `model_structure.json`, each scenario's targets, the submodel
+priors, and the UI content — then exits **without booting the server or building the
+binary**:
+
+```bash
+qsp-model-explorer --repo /path/to/your/model --check
+```
+
+Missing required files or unparseable schemas are `[FAIL]` (exit code 1); optional
+gaps (a missing target dir, no `ode_system`, an absent binary that will be compiled on
+launch) are `[warn]` (exit 0). Sample output:
+
+```
+checking model 'QSPIO PDAC'
+
+  [ok]   binary present: cpp/sim/build/qsp_sim
+  [ok]   template parses: 719 parameters
+  [ok]   priors_csv parses: 264 params
+  [ok]   model_structure parses: 177 species, 11 compartments, 330 reactions
+  [ok]   submodel_priors parses: 172 medians
+  [ok]   scenario 'baseline_no_treatment': yaml ok, 27 targets (t_end=1.0)
+  [warn] scenario '...': target_dir missing (...) — skipped
+
+✓ config is usable (1 warning(s)) — run: qsp-model-explorer --repo ...
+```
+
+Because it exits non-zero on failure, it also works as a CI / pre-commit guard that a
+model repo's `explorer.toml` still points at real files.
+
 ## `explorer.toml`
 
 Put it at the model repo root, or under `.model_explorer/explorer.toml`, or pass
