@@ -11,7 +11,7 @@ tied to one model.
 
 ## Demo
 
-https://github.com/user-attachments/assets/bd8469e8-37a4-465a-ac2f-9f0b57170be6
+https://github.com/user-attachments/assets/a3f4c2d7-fb28-4d1e-954b-88ee46e922a4
 
 ## What's in the UI
 
